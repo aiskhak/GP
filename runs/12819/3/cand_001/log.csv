@@ -1,0 +1,89 @@
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp.i:39.1:
+The following occurred in the Problem 'MOOSE Problem' of type FEProblem.
+
+Using /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_out_cp/0002 for restart.[39m
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp.i:142.3:
+The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
+
+AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/3/cand_001/elem_id.csv[39m
+Currently Setting Up
+  Finished Initializing                                                                  [[33m  9.14 s[39m] [[33m  194 MB[39m]
+Finished Setting Up                                                                      [[33m 15.96 s[39m] [[33m  194 MB[39m]
+Framework Information:
+MOOSE Version:           git commit 28092e1647 on 2026-02-01
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Fri Apr 24 17:27:25 2026
+Executable Timestamp:    Fri Apr 24 11:33:36 2026
+
+Input File(s):
+  /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Outputs/out
+  # Checkpoints Kept:      2
+  Execute On:              FINAL 
+
+Parallelism:
+  Num Processors:          12
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 94585
+    Local:                 8057
+    Min/Max/Avg:           7678/8091/7882
+  Elems:                   
+    Total:                 23392
+    Local:                 1954
+    Min/Max/Avg:           1900/1968/1949
+  Num Subdomains:          1
+  Num Partitions:          12
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                70176
+  Num Local DOFs:          5862
+  Variables:               { "u" "v" "pressure" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Auxiliary System:
+  Num DOFs:                23392
+  Num Local DOFs:          1954
+  Variables:               "mixing_length_gp_aux_var" 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Steady
+  Solver Mode:             NEWTON 
+  PETSc Preconditioner:    lu mat_superlu_dist_fact: SamePattern  mat_superlu_dist_replacetinypivot: true 
+  MOOSE Preconditioner:    SMP (auto) 
+
+Performing automatic scaling calculation
+
+ 0 Nonlinear |R| = [32m1.549119e-04[39m
+Currently Executing    Finished Computing Jacobian                                                          [[33m  5.06 s[39m] [[33m  247 MB[39m]
+ 1 Nonlinear |R| = [32m9.749849e-07[39m
+  Finished Solving                                                                       [[33m 53.67 s[39m] [[33m  306 MB[39m]
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  u: [33m8.375872e-07[39m
+  Executing Final Objects
+    Finished Outputting                                                                  [[33m  5.43 s[39m] [[33m  307 MB[39m]
+  Finished Executing Final Objects                                                       [[33m  5.43 s[39m] [[33m  307 MB[39m]
+Finished Executing                                                                       [[33m 60.64 s[39m] [[33m  307 MB[39m]
+Finished Executing!!!

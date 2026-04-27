@@ -1,0 +1,80 @@
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/mixing_length/14000/3/tamu_2d_fv.i:37.1:
+The following occurred in the Problem 'MOOSE Problem' of type FEProblem.
+
+Using /homes/aiskhak/projects/GP/mixing_length/14000/3/tamu_2d_fv_out_cp/0044 for restart.[39m
+Finished Setting Up                                                                      [[33m  1.22 s[39m] [[33m  197 MB[39m]
+Framework Information:
+MOOSE Version:           git commit 28092e1647 on 2026-02-01
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Fri Apr 24 12:28:07 2026
+Executable Timestamp:    Fri Apr 24 11:33:36 2026
+
+Input File(s):
+  /homes/aiskhak/projects/GP/mixing_length/14000/3/tamu_2d_fv.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Outputs/out
+  # Checkpoints Kept:      2
+  Execute On:              FINAL 
+
+Parallelism:
+  Num Processors:          12
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 94585
+    Local:                 8057
+    Min/Max/Avg:           7678/8091/7882
+  Elems:                   
+    Total:                 23392
+    Local:                 1954
+    Min/Max/Avg:           1900/1968/1949
+  Num Subdomains:          1
+  Num Partitions:          12
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                70176
+  Num Local DOFs:          5862
+  Variables:               { "u" "v" "pressure" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Auxiliary System:
+  Num DOFs:                93568
+  Num Local DOFs:          7816
+  Variables:               { "mixing_length_aux_var" "eddy_viscosity_aux_var" "elvol_aux_var" "yw_aux_var" 
+                             } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Steady
+  Solver Mode:             NEWTON 
+  PETSc Preconditioner:    lu mat_superlu_dist_fact: SamePattern  mat_superlu_dist_replacetinypivot: true 
+  MOOSE Preconditioner:    SMP (auto) 
+
+Performing automatic scaling calculation
+
+ 0 Nonlinear |R| = [32m3.064704e-03[39m
+ 1 Nonlinear |R| = [32m1.566714e-03[39m
+ 2 Nonlinear |R| = [32m4.306828e-05[39m
+ 3 Nonlinear |R| = [32m2.216207e-07[39m
+Currently Executing
+  Finished Solving                                                                       [[33m 11.18 s[39m] [[33m  325 MB[39m]
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  u: [31m2.151629e-07[39m
+Finished Executing                                                                       [[33m 12.27 s[39m] [[33m  326 MB[39m]
+Finished Executing!!!
