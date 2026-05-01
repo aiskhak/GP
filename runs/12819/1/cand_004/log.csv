@@ -1,3 +1,4 @@
+Setting Up
 
 [36m
 *** Info ***
@@ -12,12 +13,15 @@ Using /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_out_cp/0002
 The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/1/cand_004/elem_id.csv[39m
+
+  Finished Initializing                                                                  [[33m  8.30 s[39m] [[33m  123 MB[39m]
+Finished Setting Up                                                                      [[33m 24.72 s[39m] [[33m  123 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Fri Apr 24 14:14:01 2026
+Current Time:            Thu Apr 30 22:44:02 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -71,11 +75,20 @@ Execution Information:
 
 Performing automatic scaling calculation
 
- 0 Nonlinear |R| = [32m4.957184e-04[39m
- 1 Nonlinear |R| = [32m7.813514e-05[39m
- 2 Nonlinear |R| = [32m4.613812e-07[39m
 Currently Executing
-  Finished Solving                                                                       [[33m  5.85 s[39m] [[33m  142 MB[39m]
+    Computing Automatic Scaling
+      Finished Computing Jacobian                                                        [[33m  5.59 s[39m] [[33m  132 MB[39m]
+    Finished Computing Automatic Scaling                                                 [[33m  5.72 s[39m] [[33m  132 MB[39m]
+ 0 Nonlinear |R| = [32m2.238899e-02[39m
+ 1 Nonlinear |R| = [32m1.329396e-02[39m
+ 2 Nonlinear |R| = [32m3.546730e-03[39m
+ 3 Nonlinear |R| = [32m2.498781e-04[39m
+ 4 Nonlinear |R| = [32m1.900378e-06[39m
+ 5 Nonlinear |R| = [32m1.450827e-10[39m
 [32m Solve Converged![39m
-Finished Executing                                                                       [[33m  6.80 s[39m] [[33m  151 MB[39m]
+  Finished Solving                                                                       [[33m138.29 s[39m] [[33m  149 MB[39m]
+
+Outlier Variable Residual Norms:
+  u: [33m1.207226e-10[39m
+Finished Executing                                                                       [[33m145.67 s[39m] [[33m  159 MB[39m]
 Finished Executing!!!

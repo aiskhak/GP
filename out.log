@@ -1,955 +1,802 @@
-Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/12819/3/mapped.csv
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/12819/1/mapped.csv
+
+===== Evaluating baseline mixing-length case =====
+Baseline dir: /homes/aiskhak/projects/GP/1_mixing_length/12819/1
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/12819/1/tamu_2d_fv_csv_vpp_0035.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777048804.9378252
+First 3 u values: [-0.32295584 -0.14330104 -0.03684582]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+baseline coordinate check: max |r_base-r_cg| = 5.000444502911705e-12
+baseline coordinate check: max |z_base-z_cg| = 5.000444502911705e-12
+Baseline mixing-length velocity MSE: 0.005968253502841541
 
 ===== Generation 0 =====
-lm_raw min/max = 0.0 2.950385227559395
-kappa_eff min/max = 0.5739688195995307 0.5739688195995307
-lm min/max = 0.0 0.01986533733190942
-lm_raw min/max = 0.0 1.053766251748095
-kappa_eff min/max = 0.205 0.41
-lm min/max = 0.0 0.01962747944503862
-lm_raw min/max = 0.0 2.10753250349619
+lm_raw min/max = 0.0 2.06417710590198
 kappa_eff min/max = 0.41 0.41
-lm min/max = 0.0 0.01981198877133831
-lm_raw min/max = 0.0 2.3436504803210534
-kappa_eff min/max = 0.4051584950083962 0.4633586259171788
-lm min/max = 0.0 0.019830770241484406
-lm_raw min/max = 0.0 1.7900665484692333
-kappa_eff min/max = 0.34824007869623463 0.41
-lm min/max = 0.0 0.019779013649891337
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run.sh
+lm min/max = 0.0 0.09537930607771021
+lm_raw min/max = 0.0 2.0917403519400586
+kappa_eff min/max = 0.41 0.41547478743141764
+lm min/max = 0.0 0.09543741575449469
+lm_raw min/max = 0.0 2.06417710590198
+kappa_eff min/max = 0.41 0.41
+lm min/max = 0.0 0.09537930607771021
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 2.014028631593865
+kappa_eff min/max = 0.4000391907227637 0.41
+lm min/max = 0.0 0.09526969509752546
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_000 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_001 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_002 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_004 with fv_app_run.sh
 Return code = 0
-Elapsed: 186.29 sec
+Elapsed: 36.29 sec
 has_err = False
 has_conv = False
 has_ss = False
 has_fin = True
 Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run_unsteady.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run_unsteady.sh
 Return code = 0
-Elapsed: 231.17 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 264.82 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 266.47 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 101.54 sec
+Elapsed: 37.47 sec
 has_err = False
 has_conv = True
-has_ss = True
+has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
+Return code = 0
+Elapsed: 37.48 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
+Return code = 0
+Elapsed: 37.56 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067223.0961711
-First 3 u values: [-0.16511053 -0.1153301  -0.08043059]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583321.463804
+First 3 u values: [-0.20101221 -0.11249843 -0.05573716]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = 0.7998479004855159 0.7998479004855159
-lm min/max = 0.0 0.01986533733190942
-Expression: add(0.2609624449125756, neg(add(-0.4716525234779937, -0.06723293209494663)))
-Velocity MSE: 0.010316496946686852
-Complexity penalty: 6.000000000000001e-05
-Fitness: 0.010376496946686851
+raw min/max = -0.0 -0.0
+lm min/max = 0.0 0.09537930607771021
+Expression: neg(protected_tanh(sub(yw, yw)))
+Velocity MSE: 0.00169835390377503
+Complexity penalty: 0.0
+Fitness: 0.00169835390377503
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583321.5598035
+First 3 u values: [-0.20093682 -0.11246154 -0.05572285]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = 0.0 0.026706280153256764
+lm min/max = 0.0 0.09543741575449469
+Expression: mul(add(sub(-0.22331735655854978, yw), add(-0.2855995674210835, yw)), mul(mul(yw, yw), mul(0.1269756024131301, -0.41328174736507817)))
+Velocity MSE: 0.0016988997575564226
+Complexity penalty: 0.0
+Fitness: 0.0016988997575564226
 Return code = 0
-Elapsed: 135.64 sec
+Elapsed: 38.25 sec
 has_err = False
 has_conv = True
-has_ss = True
+has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067293.9420383
-First 3 u values: [-0.15974218 -0.11427243 -0.08268445]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583321.472804
+First 3 u values: [-0.20127561 -0.11263037 -0.05579741]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.04858931354749388 -0.0
+lm min/max = 0.0 0.09526969509752546
+Expression: protected_tanh(mul(-0.04862760632246288, yw))
+Velocity MSE: 0.0016962081813954289
+Complexity penalty: 0.0
+Fitness: 0.0016962081813954289
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583322.263799
+First 3 u values: [-0.20101221 -0.11249843 -0.05573716]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
 raw min/max = 0.0 0.0
-lm min/max = 0.0 0.01981198877133831
-Expression: add(yw, neg(yw))
-Velocity MSE: 0.009991063910410745
-Complexity penalty: 4e-05
-Fitness: 0.010031063910410745
+lm min/max = 0.0 0.09537930607771021
+Expression: add(neg(yw), yw)
+Velocity MSE: 0.001698353903775029
+Complexity penalty: 0.0
+Fitness: 0.001698353903775029
 Return code = 0
-Elapsed: 258.8 sec
+Elapsed: 29.13 sec
 has_err = False
 has_conv = True
 has_ss = True
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_csv_vpp_0003.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_003/tamu_2d_fv_gp_csv_vpp_0034.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067334.5479643
-First 3 u values: [-0.15962625 -0.11436541 -0.08287245]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583349.5366216
+First 3 u values: [-0.20980916 -0.11800742 -0.06021841]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -1.0 -0.0
-lm min/max = 0.0 0.01962747944503862
-Expression: neg(yw)
-Velocity MSE: 0.00992886354986026
-Complexity penalty: 2e-05
-Fitness: 0.009948863549860259
-Return code = 0
-Elapsed: 459.37 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 201.46 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_csv_vpp_0003.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067358.3629212
-First 3 u values: [-0.15986418 -0.1143831  -0.08278588]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.30126790879885545 -0.0
-lm min/max = 0.0 0.019779013649891337
-Expression: mul(0.3955753946414917, protected_tanh(neg(yw)))
-Velocity MSE: 0.009923761261217877
-Complexity penalty: 5e-05
-Fitness: 0.009973761261217877
-Return code = 0
-Elapsed: 123.22 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_003/tamu_2d_fv_gp_csv_vpp_0003.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067475.719708
-First 3 u values: [-0.16194758 -0.11486742 -0.08205738]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.023617097520018518 0.2602859800837991
-lm min/max = 0.0 0.019830770241484406
-Expression: add(protected_tanh(sub(0.43916701894858656, yw)), mul(sub(yw, 0.4522444552911937), add(0.33757797566257286, yw)))
-Velocity MSE: 0.010113778795213467
-Complexity penalty: 0.00012000000000000002
-Fitness: 0.010233778795213467
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016114915784102473
+Complexity penalty: 0.0
+Fitness: 0.0016114915784102473
 
 --- Generation summary ---
-fitness = 0.00994886 | expr = neg(yw)
-fitness = 0.00997376 | expr = mul(0.3955753946414917, protected_tanh(neg(yw)))
-fitness = 0.01003106 | expr = add(yw, neg(yw))
-fitness = 0.01023378 | expr = add(protected_tanh(sub(0.43916701894858656, yw)), mul(sub(yw, 0.4522444552911937), add(0.33757797566257286, yw)))
-fitness = 0.01037650 | expr = add(0.2609624449125756, neg(add(-0.4716525234779937, -0.06723293209494663)))
+fitness = 0.00161149 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00169621 | expr = protected_tanh(mul(-0.04862760632246288, yw))
+fitness = 0.00169835 | expr = add(neg(yw), yw)
+fitness = 0.00169835 | expr = neg(protected_tanh(sub(yw, yw)))
+fitness = 0.00169890 | expr = mul(add(sub(-0.22331735655854978, yw), add(-0.2855995674210835, yw)), mul(mul(yw, yw), mul(0.1269756024131301, -0.41328174736507817)))
 
 ===== Generation 1 =====
-lm_raw min/max = 0.0 1.053766251748095
-kappa_eff min/max = 0.205 0.41
-lm min/max = 0.0 0.01962747944503862
-lm_raw min/max = 0.0 2.3989174680572485
-kappa_eff min/max = 0.4117188926576412 0.4666861176621706
-lm min/max = 0.0 0.01983463677232392
-lm_raw min/max = 0.0 1.7900665484692333
-kappa_eff min/max = 0.34824007869623463 0.41
-lm min/max = 0.0 0.019779013649891337
-lm_raw min/max = 0.0 2.2604047870415296
-kappa_eff min/max = 0.41 0.43973981950437924
-lm min/max = 0.0 0.019824592545028406
-lm_raw min/max = 0.0 1.3049902844214296
-kappa_eff min/max = 0.2538731980290682 0.41
-lm min/max = 0.0 0.01969811099394237
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run.sh
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 2.014028631593865
+kappa_eff min/max = 0.4000391907227637 0.41
+lm min/max = 0.0 0.09526969509752546
+lm_raw min/max = 0.0 3.0962656588529702
+kappa_eff min/max = 0.41 0.615
+lm min/max = 0.0 0.09687134892173242
+lm_raw min/max = 0.0 3.0962656588529702
+kappa_eff min/max = 0.44211111996258046 0.615
+lm min/max = 0.0 0.09687134892173242
+lm_raw min/max = 0.0 2.550798698499735
+kappa_eff min/max = 0.4004750513155021 0.5066558791852784
+lm min/max = 0.0 0.09622755209376718
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_000 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_002 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_001 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_004 with fv_app_run.sh
 Return code = 0
-Elapsed: 124.16 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 104.01 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067700.4773
-First 3 u values: [-0.15956025 -0.11423279 -0.0827055 ]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.7615941559557649 -0.0
-lm min/max = 0.0 0.01969811099394237
-Expression: mul(yw, protected_tanh(neg(yw)))
-Velocity MSE: 0.009961980675942998
-Complexity penalty: 5e-05
-Fitness: 0.010011980675942998
-Return code = 0
-Elapsed: 284.39 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 322.33 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 349.88 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 93.52 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067851.0380366
-First 3 u values: [-0.15984223 -0.11429257 -0.08264412]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = 0.008384842232396373 0.2765176471325398
-lm min/max = 0.0 0.01983463677232392
-Expression: mul(0.3955753946414917, protected_tanh(neg(protected_tanh(mul(add(0.16375780484398073, yw), sub(-0.12947733335425327, yw))))))
-Velocity MSE: 0.009989935549555873
-Complexity penalty: 0.00012000000000000002
-Fitness: 0.010109935549555873
-Return code = 0
-Elapsed: 417.14 sec
+Elapsed: 4.0 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067893.448968
-First 3 u values: [-0.15912108 -0.11410413 -0.08272531]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583353.7695942
+First 3 u values: [-0.20066892 -0.11235607 -0.05575857]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -1.0 -0.0
-lm min/max = 0.0 0.01962747944503862
-Expression: neg(yw)
-Velocity MSE: 0.010034823942647587
-Complexity penalty: 2e-05
-Fitness: 0.010054823942647586
+raw min/max = -0.046463164314623745 0.47149209358672434
+lm min/max = 0.0 0.09622755209376718
+Expression: protected_tanh(mul(protected_tanh(sub(yw, 0.43458075208619007)), yw))
+Velocity MSE: 0.0016990654187199192
+Complexity penalty: 0.0
+Fitness: 0.0016990654187199192
 Return code = 0
-Elapsed: 149.49 sec
+Elapsed: 4.13 sec
 has_err = False
 has_conv = True
-has_ss = True
+has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_003/tamu_2d_fv_gp_csv_vpp_0003.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777067975.7478352
-First 3 u values: [-0.15988332 -0.1143381  -0.08270167]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583354.088592
+First 3 u values: [-0.19583084 -0.10987252 -0.05446426]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = 0.0 0.14507229026526464
-lm min/max = 0.0 0.019824592545028406
-Expression: mul(protected_tanh(protected_tanh(0.14715616531930265)), yw)
-Velocity MSE: 0.010015209791699382
-Complexity penalty: 5e-05
-Fitness: 0.010065209791699382
+raw min/max = 0.0 1.1096382441793995
+lm min/max = 0.0 0.09687134892173242
+Expression: add(protected_tanh(yw), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0017468217407616
+Complexity penalty: 0.0
+Fitness: 0.0017468217407616
 Return code = 0
-Elapsed: 220.78 sec
+Elapsed: 4.3 sec
 has_err = False
 has_conv = True
-has_ss = True
+has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
+Return code = 0
+Elapsed: 4.32 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068019.5807643
-First 3 u values: [-0.15959704 -0.114266   -0.08274438]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583354.3175905
+First 3 u values: [-0.20127603 -0.11263056 -0.05579748]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.30126790879885545 -0.0
-lm min/max = 0.0 0.019779013649891337
-Expression: mul(0.3955753946414917, protected_tanh(neg(yw)))
-Velocity MSE: 0.009944555075898044
-Complexity penalty: 5e-05
-Fitness: 0.009994555075898044
+raw min/max = -0.04858931354749388 -0.0
+lm min/max = 0.0 0.09526969509752546
+Expression: protected_tanh(mul(-0.04862760632246288, yw))
+Velocity MSE: 0.0016962077863464247
+Complexity penalty: 0.0
+Fitness: 0.0016962077863464247
+Return code = 0
+Elapsed: 4.59 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583354.562589
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422332419
+Complexity penalty: 0.0
+Fitness: 0.0016093855422332419
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583354.2945907
+First 3 u values: [-0.19391844 -0.10857119 -0.05329812]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = 0.15663960957356357 1.1566396095735636
+lm min/max = 0.0 0.09687134892173242
+Expression: add(sub(add(0.4135318190058366, -0.22369516504031683), mul(0.24694268099046257, 0.1344321858773304)), yw)
+Velocity MSE: 0.0017614495403320567
+Complexity penalty: 0.0
+Fitness: 0.0017614495403320567
 
 --- Generation summary ---
-fitness = 0.00999456 | expr = mul(0.3955753946414917, protected_tanh(neg(yw)))
-fitness = 0.01001198 | expr = mul(yw, protected_tanh(neg(yw)))
-fitness = 0.01005482 | expr = neg(yw)
-fitness = 0.01006521 | expr = mul(protected_tanh(protected_tanh(0.14715616531930265)), yw)
-fitness = 0.01010994 | expr = mul(0.3955753946414917, protected_tanh(neg(protected_tanh(mul(add(0.16375780484398073, yw), sub(-0.12947733335425327, yw))))))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00169621 | expr = protected_tanh(mul(-0.04862760632246288, yw))
+fitness = 0.00169907 | expr = protected_tanh(mul(protected_tanh(sub(yw, 0.43458075208619007)), yw))
+fitness = 0.00174682 | expr = add(protected_tanh(yw), mul(0.34804408822363464, yw))
+fitness = 0.00176145 | expr = add(sub(add(0.4135318190058366, -0.22369516504031683), mul(0.24694268099046257, 0.1344321858773304)), yw)
 
 ===== Generation 2 =====
-lm_raw min/max = 0.0 1.7900665484692333
-kappa_eff min/max = 0.34824007869623463 0.41
-lm min/max = 0.0 0.019779013649891337
-lm_raw min/max = 0.0 1.3049902844214296
-kappa_eff min/max = 0.2538731980290682 0.41
-lm min/max = 0.0 0.01969811099394237
-lm_raw min/max = 0.0 2.205069597191254
-kappa_eff min/max = 0.41 0.42897489521449206
-lm min/max = 0.0 0.019820230342230676
-lm_raw min/max = 0.0 2.091647095512886
-kappa_eff min/max = 0.4069096480066855 0.41
-lm min/max = 0.0 0.01981057440855057
-lm_raw min/max = 0.0 2.0634290139136127
-kappa_eff min/max = 0.4014200940204435 0.41
-lm min/max = 0.0 0.01980800881751732
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run.sh
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 2.014028631593865
+kappa_eff min/max = 0.4000391907227637 0.41
+lm min/max = 0.0 0.09526969509752546
+lm_raw min/max = 0.0 1.6373568149235418
+kappa_eff min/max = 0.3252222361149133 0.41
+lm min/max = 0.0 0.09424412998291311
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 2.301225886712978
+kappa_eff min/max = 0.41 0.457084138204333
+lm min/max = 0.0 0.09583546052233806
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_000 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_001 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_002 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_004 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run.sh
 Return code = 0
-Elapsed: 129.53 sec
+Elapsed: 4.17 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068145.6785443
-First 3 u values: [-0.15953603 -0.11421358 -0.08268582]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.30126790879885545 -0.0
-lm min/max = 0.0 0.019779013649891337
-Expression: mul(0.3955753946414917, protected_tanh(neg(yw)))
-Velocity MSE: 0.010004097821079243
-Complexity penalty: 5e-05
-Fitness: 0.010054097821079242
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
 Return code = 0
-Elapsed: 173.5 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 96.86 sec
+Elapsed: 4.27 sec
 has_err = False
 has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068289.908284
-First 3 u values: [-0.15977667 -0.11429671 -0.08270254]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.015074887772265844 -0.0
-lm min/max = 0.0 0.01981057440855057
-Expression: mul(yw, -0.015074887772265844)
-Velocity MSE: 0.010037047674127683
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010067047674127683
-Return code = 0
-Elapsed: 313.57 sec
-has_err = False
-has_conv = False
 has_ss = False
 has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 84.03 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068417.2200675
-First 3 u values: [-0.15972803 -0.11427635 -0.08269603]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583358.870561
+First 3 u values: [-0.20127603 -0.11263056 -0.05579748]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.041853199900275584 -0.0
-lm min/max = 0.0 0.01980800881751732
-Expression: mul(yw, -0.041853199900275584)
-Velocity MSE: 0.00997741161081473
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010007411610814731
+raw min/max = -0.04858931354749388 -0.0
+lm min/max = 0.0 0.09526969509752546
+Expression: protected_tanh(mul(-0.04862760632246288, yw))
+Velocity MSE: 0.0016962077863464247
+Complexity penalty: 0.0
+Fitness: 0.0016962077863464247
 Return code = 0
-Elapsed: 461.98 sec
+Elapsed: 4.49 sec
 has_err = False
-has_conv = False
+has_conv = True
 has_ss = False
 has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run_unsteady.sh
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
 Return code = 0
-Elapsed: 76.24 sec
+Elapsed: 4.72 sec
 has_err = False
 has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068558.4458323
-First 3 u values: [-0.15953284 -0.1142204  -0.08270101]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.7615941559557649 -0.0
-lm min/max = 0.0 0.01969811099394237
-Expression: mul(yw, protected_tanh(neg(yw)))
-Velocity MSE: 0.009994554392388028
-Complexity penalty: 5e-05
-Fitness: 0.010044554392388027
-Return code = 0
-Elapsed: 548.27 sec
-has_err = False
-has_conv = False
 has_ss = False
 has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 46.03 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068614.3747344
-First 3 u values: [-0.15983223 -0.1143019  -0.08269242]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP mtime = 1777583359.1355593
+First 3 u values: [-0.19985225 -0.11191607 -0.05546825]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -6.241079278000923e-31 0.092560464460937
-lm min/max = 0.0 0.019820230342230676
-Expression: mul(0.3955753946414917, protected_tanh(neg(add(neg(yw), protected_tanh(yw)))))
-Velocity MSE: 0.009990658803257845
-Complexity penalty: 9e-05
-Fitness: 0.010080658803257845
+raw min/max = 0.0 0.22967872294796599
+lm min/max = 0.0 0.09583546052233806
+Expression: add(mul(yw, -0.11836536527566865), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0017081597160985642
+Complexity penalty: 0.0
+Fitness: 0.0017081597160985642
+Return code = 0
+Elapsed: 4.79 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583359.651556
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422663738
+Complexity penalty: 0.0
+Fitness: 0.0016093855422663738
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583359.0395598
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422332419
+Complexity penalty: 0.0
+Fitness: 0.0016093855422332419
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583359.7405553
+First 3 u values: [-0.20441844 -0.11420304 -0.05651998]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4135500677321302 0.0
+lm min/max = 0.0 0.09424412998291311
+Expression: add(neg(protected_tanh(yw)), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016716561507709943
+Complexity penalty: 0.0
+Fitness: 0.0016716561507709943
 
 --- Generation summary ---
-fitness = 0.01000741 | expr = mul(yw, -0.041853199900275584)
-fitness = 0.01004455 | expr = mul(yw, protected_tanh(neg(yw)))
-fitness = 0.01005410 | expr = mul(0.3955753946414917, protected_tanh(neg(yw)))
-fitness = 0.01006705 | expr = mul(yw, -0.015074887772265844)
-fitness = 0.01008066 | expr = mul(0.3955753946414917, protected_tanh(neg(add(neg(yw), protected_tanh(yw)))))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00167166 | expr = add(neg(protected_tanh(yw)), mul(0.34804408822363464, yw))
+fitness = 0.00169621 | expr = protected_tanh(mul(-0.04862760632246288, yw))
+fitness = 0.00170816 | expr = add(mul(yw, -0.11836536527566865), mul(0.34804408822363464, yw))
 
 ===== Generation 3 =====
-lm_raw min/max = 0.0 2.0634290139136127
-kappa_eff min/max = 0.4014200940204435 0.41
-lm min/max = 0.0 0.01980800881751732
-lm_raw min/max = 0.0 1.3049902844214296
-kappa_eff min/max = 0.2538731980290682 0.41
-lm min/max = 0.0 0.01969811099394237
-lm_raw min/max = 0.0 1.6960247980151637
-kappa_eff min/max = 0.3299451685953437 0.41
-lm min/max = 0.0 0.019766903135396027
-lm_raw min/max = 0.0 2.0193255243310357
-kappa_eff min/max = 0.392840188040887 0.41
-lm min/max = 0.0 0.019803856718690747
-lm_raw min/max = 0.0 2.106508971504633
-kappa_eff min/max = 0.4098008817819691 0.4098008817819691
-lm min/max = 0.0 0.019811898277712427
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run.sh
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 2.022999714238158
+kappa_eff min/max = 0.40182108427910795 0.40182108427910795
+lm min/max = 0.0 0.09528968377483343
+lm_raw min/max = 0.0 3.0962656588529702
+kappa_eff min/max = 0.41 0.615
+lm min/max = 0.0 0.09687134892173242
+lm_raw min/max = 0.0 3.0962656588529702
+kappa_eff min/max = 0.42690784411590593 0.615
+lm min/max = 0.0 0.09687134892173242
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_000 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_001 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_002 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_004 with fv_app_run.sh
 Return code = 0
-Elapsed: 136.11 sec
+Elapsed: 4.4 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068746.922496
-First 3 u values: [-0.15968455 -0.11425082 -0.082666  ]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.041853199900275584 -0.0
-lm min/max = 0.0 0.01980800881751732
-Expression: mul(yw, -0.041853199900275584)
-Velocity MSE: 0.009994311518994348
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010024311518994349
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
 Return code = 0
-Elapsed: 183.41 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 201.4 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 254.53 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 98.54 sec
+Elapsed: 4.43 sec
 has_err = False
 has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068894.0792317
-First 3 u values: [-0.15973257 -0.11428253 -0.08270372]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.08370639980055117 -0.0
-lm min/max = 0.0 0.019803856718690747
-Expression: mul(add(yw, yw), -0.041853199900275584)
-Velocity MSE: 0.0100536452611745
-Complexity penalty: 5e-05
-Fitness: 0.0101036452611745
-Return code = 0
-Elapsed: 90.95 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068906.0872102
-First 3 u values: [-0.15974811 -0.11428185 -0.08269624]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.000971308380638347 -0.000971308380638347
-lm min/max = 0.0 0.019811898277712427
-Expression: mul(mul(0.20262555272878524, -0.026228985829721108), add(-0.11344289523853013, 0.29620301118522363))
-Velocity MSE: 0.009994345486383888
-Complexity penalty: 7.000000000000001e-05
-Fitness: 0.010064345486383889
-Return code = 0
-Elapsed: 314.46 sec
-has_err = False
-has_conv = False
 has_ss = False
 has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 81.49 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068949.7471318
-First 3 u values: [-0.15953903 -0.11422379 -0.0827032 ]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583365.5715177
+First 3 u values: [-0.19671358 -0.11032817 -0.05470714]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.7615941559557649 -0.0
-lm min/max = 0.0 0.01969811099394237
-Expression: mul(yw, protected_tanh(neg(yw)))
-Velocity MSE: 0.010014735192355148
-Complexity penalty: 5e-05
-Fitness: 0.010064735192355147
+raw min/max = 0.0 1.0
+lm min/max = 0.0 0.09687134892173242
+Expression: yw
+Velocity MSE: 0.0017374608454241282
+Complexity penalty: 0.0
+Fitness: 0.0017374608454241282
 Return code = 0
-Elapsed: 43.23 sec
+Elapsed: 4.5 sec
 has_err = False
 has_conv = True
-has_ss = True
+has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777068973.5620892
-First 3 u values: [-0.15958254 -0.11423711 -0.08271069]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583365.6125174
+First 3 u values: [-0.20190623 -0.11303907 -0.05614374]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.3905113727056406 -0.0
-lm min/max = 0.0 0.019766903135396027
-Expression: mul(yw, -0.3905113727056406)
-Velocity MSE: 0.010001925037861162
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010031925037861163
+raw min/max = -0.03989714985800974 -0.03989714985800974
+lm min/max = 0.0 0.09528968377483343
+Expression: add(protected_tanh(-0.4927886656755933), 0.4165298060172561)
+Velocity MSE: 0.0016907693221137195
+Complexity penalty: 0.0
+Fitness: 0.0016907693221137195
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583365.660517
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422332419
+Complexity penalty: 0.0
+Fitness: 0.0016093855422332419
+Return code = 0
+Elapsed: 4.85 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583366.008515
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422358854
+Complexity penalty: 0.0
+Fitness: 0.0016093855422358854
+Return code = 0
+Elapsed: 5.26 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583366.457512
+First 3 u values: [-0.19598947 -0.1098099  -0.05423355]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = 0.08247728837027289 1.4305213765939075
+lm min/max = 0.0 0.09687134892173242
+Expression: add(add(protected_tanh(0.08266507274701185), mul(yw, yw)), mul(0.34804408822363464, yw))
+Velocity MSE: 0.001742312154271993
+Complexity penalty: 0.0
+Fitness: 0.001742312154271993
 
 --- Generation summary ---
-fitness = 0.01002431 | expr = mul(yw, -0.041853199900275584)
-fitness = 0.01003193 | expr = mul(yw, -0.3905113727056406)
-fitness = 0.01006435 | expr = mul(mul(0.20262555272878524, -0.026228985829721108), add(-0.11344289523853013, 0.29620301118522363))
-fitness = 0.01006474 | expr = mul(yw, protected_tanh(neg(yw)))
-fitness = 0.01010365 | expr = mul(add(yw, yw), -0.041853199900275584)
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00169077 | expr = add(protected_tanh(-0.4927886656755933), 0.4165298060172561)
+fitness = 0.00173746 | expr = yw
+fitness = 0.00174231 | expr = add(add(protected_tanh(0.08266507274701185), mul(yw, yw)), mul(0.34804408822363464, yw))
 
 ===== Generation 4 =====
-lm_raw min/max = 0.0 2.0634290139136127
-kappa_eff min/max = 0.4014200940204435 0.41
-lm min/max = 0.0 0.01980800881751732
-lm_raw min/max = 0.0 1.6960247980151637
-kappa_eff min/max = 0.3299451685953437 0.41
-lm min/max = 0.0 0.019766903135396027
-lm_raw min/max = 0.0 2.1117977447342224
-kappa_eff min/max = 0.41 0.4108297612989087
-lm min/max = 0.0 0.019812364938940365
-lm_raw min/max = 0.0 2.0944689170780544
-kappa_eff min/max = 0.4074586060131692 0.4074586060131692
-lm min/max = 0.0 0.019810827202627904
-lm_raw min/max = 0.0 2.0634290139136127
-kappa_eff min/max = 0.4014200940204435 0.41
-lm min/max = 0.0 0.01980800881751732
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run.sh
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 1.9347740118196903
+kappa_eff min/max = 0.3842971335056275 0.3842971335056275
+lm min/max = 0.0 0.09508544932168804
+lm_raw min/max = 0.0 1.960264173562661
+kappa_eff min/max = 0.38936015173441035 0.41
+lm min/max = 0.0 0.09514625351043807
+lm_raw min/max = 0.0 1.8096510422097052
+kappa_eff min/max = 0.35944441258676174 0.35944441258676174
+lm min/max = 0.0 0.09476344118429682
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_001 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_000 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_002 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_004 with fv_app_run.sh
 Return code = 0
-Elapsed: 40.3 sec
+Elapsed: 3.7 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069013.726017
-First 3 u values: [-0.15968455 -0.11425082 -0.082666  ]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583370.2304873
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.041853199900275584 -0.0
-lm min/max = 0.0 0.01980800881751732
-Expression: mul(yw, -0.041853199900275584)
-Velocity MSE: 0.009994311518994348
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010024311518994349
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422332419
+Complexity penalty: 0.0
+Fitness: 0.0016093855422332419
 Return code = 0
-Elapsed: 125.0 sec
+Return code = 0
+Elapsed: 4.07 sec
+Elapsed: 4.1 sec
 has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 194.83 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 88.88 sec
 has_err = False
 has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069187.2657056
-First 3 u values: [-0.15975639 -0.11428623 -0.08269697]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = 0.0 0.004047616092237471
-lm min/max = 0.0 0.019812364938940365
-Expression: mul(mul(0.20262555272878524, -0.026228985829721108), neg(protected_tanh(yw)))
-Velocity MSE: 0.010061974701633603
-Complexity penalty: 7.000000000000001e-05
-Fitness: 0.010131974701633604
-Return code = 0
-Elapsed: 61.43 sec
-has_err = False
 has_conv = True
-has_ss = True
+has_ss = False
+has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069228.5456314
-First 3 u values: [-0.15964721 -0.1142576  -0.08272924]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583370.2304873
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.012397043838198729 -0.012397043838198729
-lm min/max = 0.0 0.019810827202627904
-Expression: mul(0.29620301118522363, -0.041853199900275584)
-Velocity MSE: 0.009985391630393735
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010015391630393736
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422358854
+Complexity penalty: 0.0
+Fitness: 0.0016093855422358854
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583370.761484
+First 3 u values: [-0.20156549 -0.11277546 -0.05586339]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.10068218666141271 0.0
+lm min/max = 0.0 0.09514625351043807
+Expression: add(mul(yw, -0.44872627488504735), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016938824767677822
+Complexity penalty: 0.0
+Fitness: 0.0016938824767677822
 Return code = 0
-Elapsed: 587.37 sec
+Elapsed: 4.32 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069560.1030338
-First 3 u values: [-0.15968455 -0.11425082 -0.082666  ]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583370.9844825
+First 3 u values: [-0.20685981 -0.11601628 -0.05836688]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.041853199900275584 -0.0
-lm min/max = 0.0 0.01980800881751732
-Expression: mul(yw, -0.041853199900275584)
-Velocity MSE: 0.009994310386589
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010024310386589
+raw min/max = -0.24661262152799135 -0.24661262152799135
+lm min/max = 0.0 0.09476344118429682
+Expression: -0.24661262152799135
+Velocity MSE: 0.0016460865945212505
+Complexity penalty: 0.0
+Fitness: 0.0016460865945212505
 Return code = 0
-Elapsed: 634.79 sec
+Elapsed: 4.6 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069609.0769453
-First 3 u values: [-0.15951946 -0.11420895 -0.08268635]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583371.2824807
+First 3 u values: [-0.20388722 -0.11423354 -0.05703902]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.3905113727056406 -0.0
-lm min/max = 0.0 0.019766903135396027
-Expression: mul(yw, -0.3905113727056406)
-Velocity MSE: 0.010005643485376641
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010035643485376642
+raw min/max = -0.12537983655791474 -0.12537983655791474
+lm min/max = 0.0 0.09508544932168804
+Expression: add(protected_tanh(-0.4927886656755933), 0.3310471193173511)
+Velocity MSE: 0.001673378414881869
+Complexity penalty: 0.0
+Fitness: 0.001673378414881869
 
 --- Generation summary ---
-fitness = 0.01001539 | expr = mul(0.29620301118522363, -0.041853199900275584)
-fitness = 0.01002431 | expr = mul(yw, -0.041853199900275584)
-fitness = 0.01002431 | expr = mul(yw, -0.041853199900275584)
-fitness = 0.01003564 | expr = mul(yw, -0.3905113727056406)
-fitness = 0.01013197 | expr = mul(mul(0.20262555272878524, -0.026228985829721108), neg(protected_tanh(yw)))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00164609 | expr = -0.24661262152799135
+fitness = 0.00167338 | expr = add(protected_tanh(-0.4927886656755933), 0.3310471193173511)
+fitness = 0.00169388 | expr = add(mul(yw, -0.44872627488504735), mul(0.34804408822363464, yw))
 
 ===== Generation 5 =====
-lm_raw min/max = 0.0 2.0944689170780544
-kappa_eff min/max = 0.4074586060131692 0.4074586060131692
-lm min/max = 0.0 0.019810827202627904
-lm_raw min/max = 0.0 2.0634290139136127
-kappa_eff min/max = 0.4014200940204435 0.41
-lm min/max = 0.0 0.01980800881751732
-lm_raw min/max = 0.0 2.0634290139136127
-kappa_eff min/max = 0.4014200940204435 0.41
-lm min/max = 0.0 0.01980800881751732
-lm_raw min/max = 0.0 2.175964845417133
-kappa_eff min/max = 0.41 0.4233128481487438
-lm min/max = 0.0 0.019817847721544914
-lm_raw min/max = 0.0 2.419661240349342
-kappa_eff min/max = 0.41 0.4707216172929708
-lm min/max = 0.0 0.01983604281062287
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_004 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_001 with fv_app_run.sh
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run.sh
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 1.9523163888627293
+kappa_eff min/max = 0.3164324740455705 0.3877815121314156
+lm min/max = 0.0 0.09512745692902576
+lm_raw min/max = 0.0 2.520707021239842
+kappa_eff min/max = 0.42932984055947004 0.5006788786453151
+lm min/max = 0.0 0.09618423581157537
+lm_raw min/max = 0.0 1.757005128186296
+kappa_eff min/max = 0.3164324740455705 0.3489875459313369
+lm min/max = 0.0 0.09461498525328962
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_001 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_000 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_003 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_004 with fv_app_run.sh
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_002 with fv_app_run.sh
 Return code = 0
-Elapsed: 91.58 sec
+Elapsed: 3.73 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_001/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069700.9877777
-First 3 u values: [-0.15968585 -0.11425071 -0.08266604]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583375.0034566
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.041853199900275584 -0.0
-lm min/max = 0.0 0.01980800881751732
-Expression: mul(yw, -0.041853199900275584)
-Velocity MSE: 0.009994312106032925
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010024312106032926
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422358854
+Complexity penalty: 0.0
+Fitness: 0.0016093855422358854
 Return code = 0
-Elapsed: 92.28 sec
+Elapsed: 4.24 sec
 has_err = False
 has_conv = True
 has_ss = False
 has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069701.7887762
-First 3 u values: [-0.15982002 -0.11428399 -0.08264703]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = 0.0 0.29620301118522363
-lm min/max = 0.0 0.01983604281062287
-Expression: mul(0.29620301118522363, yw)
-Velocity MSE: 0.009985512640165893
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010015512640165893
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
 Return code = 0
-Elapsed: 118.6 sec
-has_err = False
-has_conv = False
-has_ss = False
-has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_002 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 54.56 sec
+Elapsed: 4.29 sec
 has_err = False
 has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
-VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777069783.033628
-First 3 u values: [-0.15967731 -0.1142432  -0.08267399]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
-coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
-coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.041853199900275584 -0.0
-lm min/max = 0.0 0.01980800881751732
-Expression: mul(yw, -0.041853199900275584)
-Velocity MSE: 0.009991573786517756
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010021573786517756
-Return code = 0
-Elapsed: 363.59 sec
-has_err = False
-has_conv = False
 has_ss = False
 has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_003 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 84.84 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_003/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777070058.012086
-First 3 u values: [-0.15978052 -0.1142919  -0.08269326]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583375.6614523
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = 0.0 0.0649407226767994
-lm min/max = 0.0 0.019817847721544914
-Expression: mul(yw, 0.0649407226767994)
-Velocity MSE: 0.010067144707366586
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.010097144707366586
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855422332419
+Complexity penalty: 0.0
+Fitness: 0.0016093855422332419
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583375.7364519
+First 3 u values: [-0.19739746 -0.11046896 -0.05443513]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = 0.09429190516814667 0.4423359933917813
+lm min/max = 0.0 0.09618423581157537
+Expression: add(mul(0.2995046593300813, 0.3148261712490704), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0017291496276061306
+Complexity penalty: 0.0
+Fitness: 0.0017291496276061306
 Return code = 0
-Elapsed: 485.83 sec
+Elapsed: 4.49 sec
 has_err = False
-has_conv = False
+has_conv = True
 has_ss = False
 has_fin = True
-Steady failed; trying unsteady fallback
-Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_000 with fv_app_run_unsteady.sh
-Return code = 0
-Elapsed: 42.47 sec
-has_err = False
-has_conv = True
-has_ss = True
-has_fin = True
-Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_csv_vpp_0002.csv
 VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
-VPP mtime = 1777070138.2269244
-First 3 u values: [-0.15964425 -0.1142518  -0.08272174]
-First 3 x/z values: [-10.30822468 -10.30782894 -10.3070777 ]
-First 3 y/r values: [0.03126089 0.09378162 0.15629924]
+VPP mtime = 1777583375.9354506
+First 3 u values: [-0.20982035 -0.11802893 -0.06022479]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
 coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
 coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
-raw min/max = -0.012397043838198729 -0.012397043838198729
-lm min/max = 0.0 0.019810827202627904
-Expression: mul(0.29620301118522363, -0.041853199900275584)
-Velocity MSE: 0.0099838433136224
-Complexity penalty: 3.0000000000000004e-05
-Fitness: 0.0100138433136224
+raw min/max = -0.4564269558752658 -0.10838286765163119
+lm min/max = 0.0 0.09512745692902576
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+Velocity MSE: 0.0016093855424005876
+Complexity penalty: 0.0
+Fitness: 0.0016093855424005876
+Return code = 0
+Elapsed: 5.32 sec
+has_err = False
+has_conv = True
+has_ss = False
+has_fin = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_004/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+VPP mtime = 1777583376.7514453
+First 3 u values: [-0.21200119 -0.1191196  -0.06073573]
+First 3 x/z values: [-10.23169931 -10.22580603 -10.21400256]
+First 3 y/r values: [0.12503062 0.37503063 0.62509228]
+coordinate check: max |r_res-r_cg| = 5.000444502911705e-12
+coordinate check: max |z_res-z_cg| = 5.000444502911705e-12
+raw min/max = -0.4564269558752658 -0.2976217271642102
+lm min/max = 0.0 0.09461498525328962
+Expression: add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, mul(mul(0.4562790579824927, yw), mul(yw, yw))))
+Velocity MSE: 0.0015919722832864298
+Complexity penalty: 0.0
+Fitness: 0.0015919722832864298
 
 --- Generation summary ---
-fitness = 0.01001384 | expr = mul(0.29620301118522363, -0.041853199900275584)
-fitness = 0.01001551 | expr = mul(0.29620301118522363, yw)
-fitness = 0.01002157 | expr = mul(yw, -0.041853199900275584)
-fitness = 0.01002431 | expr = mul(yw, -0.041853199900275584)
-fitness = 0.01009714 | expr = mul(yw, 0.0649407226767994)
+fitness = 0.00159197 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, mul(mul(0.4562790579824927, yw), mul(yw, yw))))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00160939 | expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, yw))
+fitness = 0.00172915 | expr = add(mul(0.2995046593300813, 0.3148261712490704), mul(0.34804408822363464, yw))
 
 ===== Final best =====
-Best fitness = 0.01001384
-Best expr = mul(0.29620301118522363, -0.041853199900275584)
+Best fitness = 0.00159197
+Best expr = add(protected_tanh(-0.4927886656755933), mul(0.34804408822363464, mul(mul(0.4562790579824927, yw), mul(yw, yw))))
+Baseline mixing-length velocity MSE = 0.00596825
+Best GP velocity MSE                = 0.00159197
+Improvement over baseline           = 4.37628122e-03

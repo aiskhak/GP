@@ -8,7 +8,7 @@ import subprocess
 from functools import partial
 
 import numpy as np
-from deap import base, creator, gp
+from deap import base, creator, gp, tools
 
 import shutil
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -17,8 +17,9 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 # ============================================================
 # USER SETTINGS
 # ============================================================
+RUN_TEMPLATE_FIRST = False 
 RE = "12819" #"3000" #"14000" #
-CG = "3"
+CG = "1"
 
 # same logic as your old script
 YW_WL = 0.2
@@ -37,9 +38,14 @@ TEMPLATE_DIR = os.path.join(CASE_ROOT, "template")
 
 # old workflow activated the moose env, cd'ed into the case folder,
 # then sourced fv_app_run.sh
-CMD_BAS = "cd "
 STEADY_RUN_SCRIPT = "fv_app_run.sh"
 UNSTEADY_RUN_SCRIPT = "fv_app_run_unsteady.sh"
+STEADY_INPUT_FILE = "tamu_2d_fv_gp.i"
+UNSTEADY_INPUT_FILE = "tamu_2d_fv_gp_unsteady.i"
+RESTART_LINE = "restart_file_base = tamu_2d_fv_gp_out_cp/LATEST"
+COMMENTED_RESTART_LINE = "#restart_file_base = tamu_2d_fv_gp_out_cp/LATEST"
+BASELINE_DIR = os.path.join(PROJECT_ROOT, "1_mixing_length", RE, CG)
+BASELINE_VPP_PATTERN = "tamu_2d_fv_csv_vpp_*.csv"
 
 # files used in the old workflow
 LOG_FILE = "log.csv"
@@ -52,7 +58,7 @@ VPP_PATTERN = "tamu_2d_fv_gp_csv_vpp_*.csv"
 MAPPED_FILE = os.path.join(PROJECT_ROOT, "2_mapped", RE, CG, "mapped.csv")
 
 # complexity penalty
-LAMBDA_SIZE = 1.0e-5
+LAMBDA_SIZE = 0.0 #1.0e-5
 
 # big penalty for invalid / diverged candidates
 BIG_PENALTY = 1.0e9
@@ -69,6 +75,39 @@ ELITE_COUNT = 2
 # ============================================================
 # SMALL UTILITIES
 # ============================================================
+def set_restart_flag(case_path, enable_restart):
+    for fname in (STEADY_INPUT_FILE, UNSTEADY_INPUT_FILE):
+        fpath = os.path.join(case_path, fname)
+
+        if not os.path.exists(fpath):
+            raise FileNotFoundError(f"Input file not found: {fpath}")
+
+        with open(fpath, "r") as f:
+            lines = f.readlines()
+
+        new_lines = []
+        found = False
+
+        for line in lines:
+            stripped = line.strip()
+
+            if stripped == RESTART_LINE or stripped == COMMENTED_RESTART_LINE:
+                found = True
+                indent = line[:len(line) - len(line.lstrip())]
+
+                if enable_restart:
+                    new_lines.append(indent + RESTART_LINE + "\n")
+                else:
+                    new_lines.append(indent + COMMENTED_RESTART_LINE + "\n")
+            else:
+                new_lines.append(line)
+
+        if not found:
+            raise RuntimeError(f"Restart line not found in {fpath}")
+
+        with open(fpath, "w") as f:
+            f.writelines(new_lines)
+
 def reset_candidate_folders(case_root, n_candidates):
     for name in os.listdir(case_root):
         path = os.path.join(case_root, name)
@@ -158,11 +197,6 @@ if not hasattr(creator, "Individual"):
 
 toolbox = base.Toolbox()
 toolbox.register("expr", gp.genHalfAndHalf, pset=pset, min_=1, max_=3)
-toolbox.register("individual", tools_init := partial(getattr(__import__("deap.tools", fromlist=["initIterate"]), "initIterate"),
-                                                     creator.Individual, None))
-# fix initIterate registration cleanly
-toolbox.unregister("individual")
-from deap import tools
 toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.expr)
 toolbox.register("compile", gp.compile, pset=pset)
 
@@ -181,7 +215,7 @@ def build_lm_from_yw_raw(raw, yw, z_cg, z_pos):
 
     kappa0 = 0.41
     alpha = 0.5
-    lm_cap = 0.02
+    lm_cap = 0.1
 
     kappa_eff = kappa0 * (1.0 + alpha * raw)
     kappa_eff = np.maximum(kappa_eff, 0.0)
@@ -242,7 +276,7 @@ def run_case(case_path, run_script):
     str_ss = "Steady-State Solution Achieved"
     str_fin = "Finished Executing!!!"
 
-    cmd = CMD_BAS + case_path + "; bash " + run_script
+    cmd = f'cd "{case_path}" && bash "{run_script}"'
     print("Running case in:", case_path, "with", run_script, flush=True)
 
     start = time.time()
@@ -257,7 +291,7 @@ def run_case(case_path, run_script):
         print("Log file not found", flush=True)
         return False
 
-    has_err = False
+    has_err = search_last(log_path, str_err)
     has_conv = search_last(log_path, str_conv)
     has_ss = search_last(log_path, str_ss)
     has_fin = search_last(log_path, str_fin)
@@ -406,21 +440,102 @@ def evaluate_candidate_worker(args):
 
     return cand_id, fit[0], str(individual)
 
+def initialize_template_from_population(population, r_cg, z_cg, yw):
+    print("\n===== Initializing template from average GP candidate =====", flush=True)
+
+    lm_list = []
+
+    yw_scale = np.max(np.abs(yw))
+    yw_n = yw / yw_scale
+
+    for ind in population:
+        func = toolbox.compile(expr=ind)
+        raw = func(yw_n)
+
+        if np.isscalar(raw):
+            raw = np.full_like(r_cg, raw, dtype=np.float64)
+
+        raw = np.asarray(raw, dtype=np.float64)
+
+        if raw.shape != r_cg.shape or np.any(~np.isfinite(raw)):
+            continue
+
+        lm, _ = build_lm_from_yw_raw(raw, yw, z_cg, Z_POS)
+        lm_list.append(lm)
+
+    if len(lm_list) == 0:
+        raise RuntimeError("No valid GP candidates for template initialization.")
+
+    lm_avg = np.mean(np.vstack(lm_list), axis=0)
+
+    clean_case_folder(TEMPLATE_DIR)
+    set_restart_flag(TEMPLATE_DIR, enable_restart=False)
+    save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(TEMPLATE_DIR, LM_FILE))
+
+    ok = run_case(TEMPLATE_DIR, STEADY_RUN_SCRIPT)
+
+    if not ok:
+        print("Template steady initialization failed; trying unsteady.", flush=True)
+        clean_case_folder(TEMPLATE_DIR)
+        set_restart_flag(TEMPLATE_DIR, enable_restart=False)
+        save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(TEMPLATE_DIR, LM_FILE))
+        ok = run_case(TEMPLATE_DIR, UNSTEADY_RUN_SCRIPT)
+
+    if not ok:
+        raise RuntimeError("Template initialization failed.")
+
+    set_restart_flag(TEMPLATE_DIR, enable_restart=True)
+
+    print("Template initialization finished successfully.", flush=True)
+
+def evaluate_baseline_mixing_length(r_cg, z_cg, yw, ur_les, uz_les):
+    print("\n===== Evaluating baseline mixing-length case =====", flush=True)
+    print("Baseline dir:", BASELINE_DIR, flush=True)
+
+    ur_base, uz_base, r_base, z_base = read_velocity_result(
+        BASELINE_DIR,
+        BASELINE_VPP_PATTERN
+    )
+
+    if r_base.size != r_cg.size:
+        raise ValueError(f"Baseline size mismatch: result has {r_base.size}, mapped has {r_cg.size}")
+
+    dr = np.max(np.abs(r_base - r_cg))
+    dz = np.max(np.abs(z_base - z_cg))
+
+    print("baseline coordinate check: max |r_base-r_cg| =", dr, flush=True)
+    print("baseline coordinate check: max |z_base-z_cg| =", dz, flush=True)
+
+    if dr > 1e-10 or dz > 1e-10:
+        raise ValueError("Baseline VPP row order does not match mapped.csv row order")
+
+    baseline_err = velocity_mse(ur_les, uz_les, ur_base, uz_base, z_base, yw, YW_WL)
+
+    print("Baseline mixing-length velocity MSE:", baseline_err, flush=True)
+    return baseline_err
+
 # ============================================================
 # MAIN: evaluate ONE DEAP candidate with real solver fitness
 # ============================================================
 def main():
-    random.seed(1)
-
-    reset_candidate_folders(CASE_ROOT, N_CANDIDATES)
+    random.seed(5)
 
     r_cg, z_cg, ur_les, uz_les, yw, nut = read_mapped(MAPPED_FILE)
+    baseline_err = evaluate_baseline_mixing_length(r_cg, z_cg, yw, ur_les, uz_les)
 
     population = [toolbox.individual() for _ in range(N_CANDIDATES)]
+
+    if RUN_TEMPLATE_FIRST:
+        initialize_template_from_population(population, r_cg, z_cg, yw)
+
+    reset_candidate_folders(CASE_ROOT, N_CANDIDATES)
 
     for gen in range(N_GENERATIONS):
         print(f"\n===== Generation {gen} =====", flush=True)
 
+        for ind in population:
+            if ind.fitness.valid:
+                del ind.fitness.values
         results = evaluate_population(population, r_cg, z_cg, yw, ur_les, uz_les)
 
         ranked = sorted(
@@ -457,6 +572,10 @@ def main():
     best = min(population, key=lambda ind: ind.fitness.values[0])
     print(f"Best fitness = {best.fitness.values[0]:.8f}", flush=True)
     print(f"Best expr = {best}", flush=True)
+
+    print(f"Baseline mixing-length velocity MSE = {baseline_err:.8f}", flush=True)
+    print(f"Best GP velocity MSE                = {best.fitness.values[0]:.8f}", flush=True)
+    print(f"Improvement over baseline           = {baseline_err - best.fitness.values[0]:.8e}", flush=True)
 
 if __name__ == "__main__":
     main()

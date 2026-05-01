@@ -1,3 +1,4 @@
+Setting Up
 
 [36m
 *** Info ***
@@ -12,12 +13,17 @@ Using /homes/aiskhak/projects/GP/runs/12819/1/cand_002/tamu_2d_fv_gp_out_cp/0002
 The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/1/cand_002/elem_id.csv[39m
+
+  Initializing
+    Finished Initializing Equation Systems                                               [[33m  7.09 s[39m] [[33m  120 MB[39m]
+  Finished Initializing                                                                  [[33m 10.29 s[39m] [[33m  122 MB[39m]
+Finished Setting Up                                                                      [[33m 25.21 s[39m] [[33m  122 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Fri Apr 24 14:14:02 2026
+Current Time:            Thu Apr 30 22:43:59 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -71,11 +77,20 @@ Execution Information:
 
 Performing automatic scaling calculation
 
- 0 Nonlinear |R| = [32m4.580657e-04[39m
- 1 Nonlinear |R| = [32m6.995518e-05[39m
- 2 Nonlinear |R| = [32m4.499697e-07[39m
-[32m Solve Converged![39m
 Currently Executing
-  Finished Solving                                                                       [[33m  6.74 s[39m] [[33m  149 MB[39m]
-Finished Executing                                                                       [[33m  7.69 s[39m] [[33m  151 MB[39m]
+    Computing Automatic Scaling
+      Finished Computing Jacobian                                                        [[33m  5.78 s[39m] [[33m  132 MB[39m]
+    Finished Computing Automatic Scaling                                                 [[33m  6.09 s[39m] [[33m  132 MB[39m]
+ 0 Nonlinear |R| = [32m2.407980e-07[39m
+  Finished Solving                                                                       [[33m 13.78 s[39m] [[33m  132 MB[39m]
+[32m Solve Converged![39m
+  Executing Final Objects
+    Finished Outputting                                                                  [[33m  5.10 s[39m] [[33m  146 MB[39m]
+  Finished Executing Final Objects                                                       [[33m  5.10 s[39m] [[33m  146 MB[39m]
+Finished Executing                                                                       [[33m 30.52 s[39m] [[33m  146 MB[39m]
+WARNING! There are options you set that were not used!
+WARNING! could be spelling mistake, etc!
+There are 2 unused database options. They are:
+Option left: name:-mat_superlu_dist_fact value: SamePattern source: code
+Option left: name:-mat_superlu_dist_replacetinypivot value: 1 source: code
 Finished Executing!!!
