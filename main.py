@@ -1,3 +1,4 @@
+# salloc -p ksu-mne-train.q --nodelist=warlock35 --nodes=1 --ntasks=128 --mem=700G --time=72:00:00
 import copy
 import os
 import fnmatch
@@ -13,22 +14,25 @@ from deap import base, creator, gp, tools
 import shutil
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
-
 # ============================================================
 # USER SETTINGS
 # ============================================================
-RUN_TEMPLATE_FIRST = False 
+RUN_TEMPLATE_FIRST = False
 RE = "12819" #"3000" #"14000" #
-CG = "1"
+CG = "4"
 
 # same logic as your old script
 YW_WL = 0.2
 TIME_MAX = 7000.0
 
-if CG == "4":
-    Z_POS = 3.0
-else:
-    Z_POS = 1.0e6
+#if CG == "4":
+#    Z_POS = 3.0
+#else:
+#    Z_POS = 1.0e6
+Z_POS = 1.0e6
+
+RANDOM_SEED = 2
+RESULTS_FILE = f"gp_results_RE{RE}_CG{CG}_seed{RANDOM_SEED}.csv"
 
 # paths: adjust if needed
 # old NN workflow used this root for solver runs
@@ -63,13 +67,12 @@ LAMBDA_SIZE = 0.0 #1.0e-5
 # big penalty for invalid / diverged candidates
 BIG_PENALTY = 1.0e9
 
-N_CANDIDATES = 5
+N_CANDIDATES = 10
 N_WORKERS = N_CANDIDATES
-
-N_GENERATIONS = 6
+N_GENERATIONS = 20
 TOURNAMENT_SIZE = 3
-MUTATION_PROB = 0.8
-CROSSOVER_PROB = 0.3
+MUTATION_PROB = 0.5
+CROSSOVER_PROB = 0.5
 ELITE_COUNT = 2
 
 # ============================================================
@@ -205,8 +208,8 @@ toolbox.register("mate", gp.cxOnePoint)
 toolbox.register("expr_mut", gp.genFull, min_=0, max_=2)
 toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
 
-toolbox.decorate("mate", gp.staticLimit(key=len, max_value=12))
-toolbox.decorate("mutate", gp.staticLimit(key=len, max_value=12))
+toolbox.decorate("mate", gp.staticLimit(key=len, max_value=18))
+toolbox.decorate("mutate", gp.staticLimit(key=len, max_value=18))
 toolbox.register("clone", copy.deepcopy)
 
 def build_lm_from_yw_raw(raw, yw, z_cg, z_pos):
@@ -518,10 +521,13 @@ def evaluate_baseline_mixing_length(r_cg, z_cg, yw, ur_les, uz_les):
 # MAIN: evaluate ONE DEAP candidate with real solver fitness
 # ============================================================
 def main():
-    random.seed(5)
+    random.seed(RANDOM_SEED)
+    np.random.seed(RANDOM_SEED)
 
     r_cg, z_cg, ur_les, uz_les, yw, nut = read_mapped(MAPPED_FILE)
     baseline_err = evaluate_baseline_mixing_length(r_cg, z_cg, yw, ur_les, uz_les)
+    with open(RESULTS_FILE, "w") as f:
+        f.write("seed,gen,rank,fitness,expr\n")
 
     population = [toolbox.individual() for _ in range(N_CANDIDATES)]
 
@@ -533,9 +539,6 @@ def main():
     for gen in range(N_GENERATIONS):
         print(f"\n===== Generation {gen} =====", flush=True)
 
-        for ind in population:
-            if ind.fitness.valid:
-                del ind.fitness.values
         results = evaluate_population(population, r_cg, z_cg, yw, ur_les, uz_les)
 
         ranked = sorted(
@@ -546,6 +549,10 @@ def main():
         print("\n--- Generation summary ---", flush=True)
         for fit, expr, _ in ranked:
             print(f"fitness = {fit:.8f} | expr = {expr}", flush=True)
+            
+        with open(RESULTS_FILE, "a") as f:
+            for rank, (fit, expr, _) in enumerate(ranked):
+                f.write(f'{RANDOM_SEED},{gen},{rank},{fit:.12e},"{expr}"\n')
 
         if gen == N_GENERATIONS - 1:
             break

@@ -12,15 +12,12 @@ Using /homes/aiskhak/projects/GP/runs/12819/3/cand_004/tamu_2d_fv_gp_out_cp/0002
 The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/3/cand_004/elem_id.csv[39m
-Currently Setting Up
-  Finished Initializing                                                                  [[33m  9.25 s[39m] [[33m  191 MB[39m]
-Finished Setting Up                                                                      [[33m 16.06 s[39m] [[33m  192 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Fri Apr 24 17:27:25 2026
+Current Time:            Fri May  1 13:10:43 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -33,7 +30,7 @@ Checkpoint:
   Execute On:              FINAL 
 
 Parallelism:
-  Num Processors:          12
+  Num Processors:          8
   Num Threads:             1
 
 Mesh: 
@@ -42,26 +39,26 @@ Mesh:
   Spatial Dimension:       2
   Nodes:                   
     Total:                 94585
-    Local:                 8057
-    Min/Max/Avg:           7678/8091/7882
+    Local:                 11967
+    Min/Max/Avg:           11594/12065/11823
   Elems:                   
     Total:                 23392
-    Local:                 1954
-    Min/Max/Avg:           1900/1968/1949
+    Local:                 2924
+    Min/Max/Avg:           2924/2924/2924
   Num Subdomains:          1
-  Num Partitions:          12
+  Num Partitions:          8
   Partitioner:             metis
 
 Nonlinear System:
   Num DOFs:                70176
-  Num Local DOFs:          5862
+  Num Local DOFs:          8772
   Variables:               { "u" "v" "pressure" } 
   Finite Element Types:    "MONOMIAL" 
   Approximation Orders:    "CONSTANT" 
 
 Auxiliary System:
   Num DOFs:                23392
-  Num Local DOFs:          1954
+  Num Local DOFs:          2924
   Variables:               "mixing_length_gp_aux_var" 
   Finite Element Types:    "MONOMIAL" 
   Approximation Orders:    "CONSTANT" 
@@ -74,13 +71,16 @@ Execution Information:
 
 Performing automatic scaling calculation
 
- 0 Nonlinear |R| = [32m1.492194e-04[39m
-Currently Executing    Finished Computing Jacobian                                                          [[33m  5.03 s[39m] [[33m  245 MB[39m]
- 1 Nonlinear |R| = [32m9.745647e-07[39m
-  Finished Solving                                                                       [[33m 54.49 s[39m] [[33m  303 MB[39m]
+ 0 Nonlinear |R| = [32m1.221260e-02[39m
+ 1 Nonlinear |R| = [32m2.873939e-03[39m
+ 2 Nonlinear |R| = [32m1.340042e-04[39m
+ 3 Nonlinear |R| = [32m1.294411e-06[39m
+ 4 Nonlinear |R| = [32m4.102483e-10[39m
 [32m Solve Converged![39m
-  Executing Final Objects
-    Finished Outputting                                                                  [[33m  5.43 s[39m] [[33m  305 MB[39m]
-  Finished Executing Final Objects                                                       [[33m  5.43 s[39m] [[33m  305 MB[39m]
-Finished Executing                                                                       [[33m 61.34 s[39m] [[33m  305 MB[39m]
+Currently Executing
+  Finished Solving                                                                       [[33m 16.82 s[39m] [[33m  381 MB[39m]
+
+Outlier Variable Residual Norms:
+  u: [31m4.037770e-10[39m
+Finished Executing                                                                       [[33m 17.89 s[39m] [[33m  382 MB[39m]
 Finished Executing!!!

@@ -12,13 +12,12 @@ Using /homes/aiskhak/projects/GP/runs/12819/2/cand_002/tamu_2d_fv_gp_out_cp/0002
 The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/2/cand_002/elem_id.csv[39m
-Finished Setting Up                                                                      [[33m  5.67 s[39m] [[33m  136 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Fri Apr 24 14:44:28 2026
+Current Time:            Fri May  1 11:47:11 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -72,13 +71,10 @@ Execution Information:
 
 Performing automatic scaling calculation
 
- 0 Nonlinear |R| = [32m1.156743e-03[39m
- 1 Nonlinear |R| = [32m1.049210e-05[39m
- 2 Nonlinear |R| = [32m2.855959e-08[39m
+ 0 Nonlinear |R| = [32m1.051687e-01[39m
+ 1 Nonlinear |R| = [32m1.755860e-02[39m
+ 2 Nonlinear |R| = [32m2.732093e-03[39m
+ 3 Nonlinear |R| = [32m1.658115e-04[39m
+ 4 Nonlinear |R| = [32m2.725970e-07[39m
 [32m Solve Converged![39m
-  Finished Solving                                                                       [[33m 28.20 s[39m] [[33m  227 MB[39m]
-
-Outlier Variable Residual Norms:
-  u: [31m2.826790e-08[39m
-Finished Executing                                                                       [[33m 30.43 s[39m] [[33m  229 MB[39m]
 Finished Executing!!!

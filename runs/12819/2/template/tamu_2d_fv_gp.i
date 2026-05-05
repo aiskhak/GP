@@ -221,7 +221,7 @@ velocity_interp_method = 'rc'
   petsc_options_iname = '-ksp_type -pc_type -pc_factor_mat_solver_package'
   petsc_options_value = 'preonly lu       superlu_dist'
   automatic_scaling   = true
-  nl_max_its          = 100
+  nl_max_its          = 20
 []
 
 [Outputs]

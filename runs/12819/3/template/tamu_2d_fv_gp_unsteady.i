@@ -239,25 +239,25 @@ velocity_interp_method = 'rc'
   type = Transient
   [./TimeStepper]
     type = IterationAdaptiveDT
-    dt = 50
-    growth_factor = 2.0
-    optimal_iterations = 6
-    linear_iteration_ratio = 100
-    cutback_factor = 0.5
-    cutback_factor_at_failure = 0.5
+    growth_factor = 1.25
+    optimal_iterations = 8
+    linear_iteration_ratio = 150
+    dt = 0.5
+    cutback_factor = 0.75
+    cutback_factor_at_failure = 0.75
   [../]
-  dtmin = 1e-4
-  dtmax = 2000
-  nl_rel_tol = 1e-4
-  nl_abs_tol = 1e-4
-  nl_max_its = 20
-  l_tol = 1e-4
-  l_max_its = 50
+  dtmin = 1e-6
+  dtmax = 200
+  nl_rel_tol = 1e-6
+  nl_abs_tol = 1e-6
+  nl_max_its = 50
+  l_tol = 1e-5
+  l_max_its = 100
   start_time = 0
   end_time  = 10000
-  num_steps = 200
+  num_steps = 10000
   steady_state_detection = true
-  steady_state_tolerance = 1.e-4
+  steady_state_tolerance = 1.e-6
 []
 
 [Outputs]
