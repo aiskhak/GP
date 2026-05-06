@@ -13,14 +13,14 @@ The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVa
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/4/cand_003/elem_id.csv[39m
 Currently Setting Up
-  Finished Initializing                                                                  [[33m  2.16 s[39m] [[33m  396 MB[39m]
-Finished Setting Up                                                                      [[33m  5.08 s[39m] [[33m  396 MB[39m]
+  Finished Initializing                                                                  [[33m  4.08 s[39m] [[33m  390 MB[39m]
+Finished Setting Up                                                                      [[33m  8.51 s[39m] [[33m  390 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Sat May  2 09:46:32 2026
+Current Time:            Tue May  5 12:06:57 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -77,16 +77,19 @@ Performing automatic scaling calculation
 Currently Executing
     Computing Automatic Scaling
       Computing Jacobian
-        Finished Computing Rhie-Chow coefficients                                        [[33m  0.35 s[39m] [[33m  524 MB[39m]
-      Finished Computing Jacobian                                                        [[33m  0.79 s[39m] [[33m  510 MB[39m]
-    Finished Computing Automatic Scaling                                                 [[33m  0.80 s[39m] [[33m  510 MB[39m]
- 0 Nonlinear |R| = [32m2.677329e-04[39m
- 1 Nonlinear |R| = [32m4.002360e-06[39m
- 2 Nonlinear |R| = [32m9.472367e-10[39m
+        Finished Computing Rhie-Chow coefficients                                        [[33m  0.39 s[39m] [[33m  519 MB[39m]
+      Finished Computing Jacobian                                                        [[33m  0.87 s[39m] [[33m  506 MB[39m]
+    Finished Computing Automatic Scaling                                                 [[33m  0.89 s[39m] [[33m  506 MB[39m]
+ 0 Nonlinear |R| = [32m1.521453e-02[39m
+ 1 Nonlinear |R| = [32m1.062728e-02[39m
+ 2 Nonlinear |R| = [32m6.379163e-03[39m
+ 3 Nonlinear |R| = [32m7.344280e-04[39m
+ 4 Nonlinear |R| = [32m2.063530e-05[39m
+ 5 Nonlinear |R| = [32m3.094564e-08[39m
 [32m Solve Converged![39m
-  Finished Solving                                                                       [[33m 32.10 s[39m] [[33m  906 MB[39m]
+  Finished Solving                                                                       [[33m105.98 s[39m] [[33m  848 MB[39m]
 
 Outlier Variable Residual Norms:
-  u: [31m9.006631e-10[39m
-Finished Executing                                                                       [[33m 35.28 s[39m] [[33m  906 MB[39m]
+  u: [33m2.750406e-08[39m
+Finished Executing                                                                       [[33m109.19 s[39m] [[33m  848 MB[39m]
 Finished Executing!!!

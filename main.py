@@ -17,9 +17,12 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 # ============================================================
 # USER SETTINGS
 # ============================================================
-RUN_TEMPLATE_FIRST = False
-RE = "12819" #"3000" #"14000" #
-CG = "4"
+RUN_TEMPLATE_FIRST = True
+
+RE = "10622" #"12819" #"3000" #"14000" #
+CG = "3"
+RANDOM_SEED = 1
+RESULTS_FILE = f"gp_results_RE{RE}_CG{CG}_seed{RANDOM_SEED}.csv"
 
 # same logic as your old script
 YW_WL = 0.2
@@ -30,9 +33,6 @@ TIME_MAX = 7000.0
 #else:
 #    Z_POS = 1.0e6
 Z_POS = 1.0e6
-
-RANDOM_SEED = 2
-RESULTS_FILE = f"gp_results_RE{RE}_CG{CG}_seed{RANDOM_SEED}.csv"
 
 # paths: adjust if needed
 # old NN workflow used this root for solver runs

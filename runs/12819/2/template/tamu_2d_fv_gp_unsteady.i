@@ -262,11 +262,11 @@ velocity_interp_method = 'rc'
 
 [Outputs]
   print_linear_residuals = false
-  [exodus]
-    type = Exodus
-    execute_on = FINAL
-	file_base = tamu_2d_fv_gp_out
-  []
+#  [exodus]
+#    type = Exodus
+#    execute_on = FINAL
+#	file_base = tamu_2d_fv_gp_out
+#  []
   [./csv]
     type = CSV
 	execute_on = FINAL

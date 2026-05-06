@@ -17,7 +17,7 @@ MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Fri May  1 11:47:11 2026
+Current Time:            Tue May  5 12:06:35 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -71,8 +71,11 @@ Execution Information:
 
 Performing automatic scaling calculation
 
- 0 Nonlinear |R| = [32m3.137270e-08[39m
+ 0 Nonlinear |R| = [32m2.631232e-07[39m
 [32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  v: [31m2.506647e-07[39m
 WARNING! There are options you set that were not used!
 WARNING! could be spelling mistake, etc!
 There are 2 unused database options. They are:

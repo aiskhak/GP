@@ -17,7 +17,7 @@ MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Fri May  1 11:17:46 2026
+Current Time:            Tue May  5 12:06:34 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -71,12 +71,12 @@ Execution Information:
 
 Performing automatic scaling calculation
 
- 0 Nonlinear |R| = [32m6.764137e-03[39m
- 1 Nonlinear |R| = [32m1.561427e-03[39m
- 2 Nonlinear |R| = [32m9.357054e-05[39m
- 3 Nonlinear |R| = [32m4.542600e-07[39m
+ 0 Nonlinear |R| = [32m7.951092e-03[39m
+ 1 Nonlinear |R| = [32m5.896375e-04[39m
+ 2 Nonlinear |R| = [32m8.964243e-06[39m
+ 3 Nonlinear |R| = [32m5.139078e-09[39m
 [32m Solve Converged![39m
 
 Outlier Variable Residual Norms:
-  u: [31m4.391928e-07[39m
+  v: [31m4.648529e-09[39m
 Finished Executing!!!

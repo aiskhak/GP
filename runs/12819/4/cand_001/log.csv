@@ -13,14 +13,14 @@ The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVa
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/12819/4/cand_001/elem_id.csv[39m
 Currently Setting Up
-  Finished Initializing                                                                  [[33m  2.24 s[39m] [[33m  398 MB[39m]
-Finished Setting Up                                                                      [[33m  5.00 s[39m] [[33m  398 MB[39m]
+  Finished Initializing                                                                  [[33m  3.72 s[39m] [[33m  392 MB[39m]
+Finished Setting Up                                                                      [[33m  7.54 s[39m] [[33m  392 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Sat May  2 09:46:37 2026
+Current Time:            Tue May  5 12:06:55 2026
 Executable Timestamp:    Fri Apr 24 11:33:36 2026
 
 Input File(s):
@@ -77,22 +77,18 @@ Performing automatic scaling calculation
 Currently Executing
     Computing Automatic Scaling
       Computing Jacobian
-        Finished Computing Rhie-Chow coefficients                                        [[33m  0.36 s[39m] [[33m  527 MB[39m]
-      Finished Computing Jacobian                                                        [[33m  0.81 s[39m] [[33m  514 MB[39m]
-    Finished Computing Automatic Scaling                                                 [[33m  0.82 s[39m] [[33m  514 MB[39m]
- 0 Nonlinear |R| = [32m4.208081e-07[39m
-  Finished Solving                                                                       [[33m  1.31 s[39m] [[33m  522 MB[39m]
+        Finished Computing Rhie-Chow coefficients                                        [[33m  0.42 s[39m] [[33m  523 MB[39m]
+      Finished Computing Jacobian                                                        [[33m  0.90 s[39m] [[33m  508 MB[39m]
+    Finished Computing Automatic Scaling                                                 [[33m  0.92 s[39m] [[33m  508 MB[39m]
+ 0 Nonlinear |R| = [32m8.014367e-03[39m
+ 1 Nonlinear |R| = [32m5.199343e-03[39m
+ 2 Nonlinear |R| = [32m5.980287e-04[39m
+ 3 Nonlinear |R| = [32m1.573005e-05[39m
+ 4 Nonlinear |R| = [32m1.856606e-08[39m
+  Finished Solving                                                                       [[33m 85.51 s[39m] [[33m  852 MB[39m]
 [32m Solve Converged![39m
 
 Outlier Variable Residual Norms:
-  u: [31m4.007219e-07[39m
-  Executing Final Objects
-    Finished Outputting                                                                  [[33m  2.36 s[39m] [[33m  638 MB[39m]
-  Finished Executing Final Objects                                                       [[33m  2.36 s[39m] [[33m  638 MB[39m]
-Finished Executing                                                                       [[33m  4.04 s[39m] [[33m  638 MB[39m]
-WARNING! There are options you set that were not used!
-WARNING! could be spelling mistake, etc!
-There are 2 unused database options. They are:
-Option left: name:-mat_superlu_dist_fact value: SamePattern source: code
-Option left: name:-mat_superlu_dist_replacetinypivot value: 1 source: code
+  u: [33m1.575970e-08[39m
+Finished Executing                                                                       [[33m 89.46 s[39m] [[33m  852 MB[39m]
 Finished Executing!!!
