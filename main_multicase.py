@@ -1,4 +1,19 @@
+# python -u main_multicase.py 2>&1 | tee gp_run_CG1234_asymLogCeff_etaH_etaY_allDome_train6Re_test2Re_seed3.log
+
 # salloc -p ksu-mne-train.q --nodelist=warlock35 --nodes=1 --ntasks=128 --mem=700G --time=72:00:00
+
+# CHECK FILES
+'''
+for RE in 3000 3413 5963 7912 9000 10622 12819 14000; do
+  for CG in 1 2 3 4; do
+    echo "Checking RE=$RE CG=$CG"
+    ls runs/$RE/$CG/template >/dev/null || echo "missing template"
+    ls 2_mapped/$RE/$CG/mapped.csv >/dev/null || echo "missing mapped"
+    ls 1_mixing_length/$RE/$CG/tamu_2d_fv_csv_vpp_*.csv >/dev/null || echo "missing baseline"
+  done
+done
+'''
+
 import copy
 import os
 import fnmatch
@@ -12,6 +27,8 @@ import numpy as np
 from deap import base, creator, gp, tools
 
 import shutil
+import json
+import platform
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # ============================================================
@@ -19,31 +36,34 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 # ============================================================
 RUN_TEMPLATE_FIRST = False
 
-CASES = [
-    {"RE": "12819", "CG": "1", "np": 4},
-    {"RE": "12819", "CG": "2", "np": 4},
-    {"RE": "12819", "CG": "3", "np": 8},
-    {"RE": "12819", "CG": "4", "np": 12},
-]
+RE_LIST = ["3000", "3413", "5963", "7912", "9000", "10622", "12819", "14000"]
+TEST_RE_LIST = ["5963", "12819"]
 
-RANDOM_SEED = 1
-RESULTS_FILE = "gp_results_RE12819_RANDOMCG_seed1.csv"
+CASES = []
+for RE in RE_LIST:
+    CASES += [
+        {"RE": RE, "CG": "1", "np": 4},
+        {"RE": RE, "CG": "2", "np": 4},
+        {"RE": RE, "CG": "3", "np": 8},
+        {"RE": RE, "CG": "4", "np": 12},
+    ]
+
+RANDOM_SEED = 3
+RUN_TAG = f"CG1234_asymLogCeff_etaH_etaY_allDome_train6Re_test2Re_seed{RANDOM_SEED}"
+
+RESULTS_FILE = f"gp_results_{RUN_TAG}.csv"
+DETAILS_FILE = f"gp_results_{RUN_TAG}_details.csv"
+METADATA_FILE = f"gp_results_{RUN_TAG}_metadata.json"
+FINAL_BEST_FILE = f"gp_results_{RUN_TAG}_final_best.json"
 CORE_LIMIT = 127
+SOLVER_TIMEOUT = 2700.0  # seconds
 
 # One stochastic mini-batch per generation.
 # Select random cases so that:
 # N_CANDIDATES * sum(np_case) <= CORE_LIMIT
-CASES_PER_GENERATION = None
 
 # same logic as your old script
-YW_WL = 0.2
-TIME_MAX = 7000.0
-
-#if CG == "4":
-#    Z_POS = 3.0
-#else:
-#    Z_POS = 1.0e6
-Z_POS = 1.0e6
+YW_WL = 0.0
 
 # paths: adjust if needed
 # old NN workflow used this root for solver runs
@@ -66,29 +86,191 @@ RESTART_LINE = "restart_file_base = tamu_2d_fv_gp_out_cp/LATEST"
 COMMENTED_RESTART_LINE = "#restart_file_base = tamu_2d_fv_gp_out_cp/LATEST"
 BASELINE_VPP_PATTERN = "tamu_2d_fv_csv_vpp_*.csv"
 VPP_PATTERN = "tamu_2d_fv_gp_csv_vpp_*.csv"
+ELV_PATTERN = "tamu_2d_fv_csv_elv_*.csv"
+WALL_CELL_SUMMARY_FILE = os.path.join(
+    PROJECT_ROOT,
+    "3_wall_cells",
+    "wall_cells_median_summary.csv",
+)
 
 # files used in the old workflow
 LOG_FILE = "log.csv"
 LM_FILE = "lm_pred.csv"
-EID_FILE = "elem_id.csv"
 
 # complexity penalty
-LAMBDA_SIZE = 0.0 #1.0e-5
+LAMBDA_SIZE = 1.0e-5
+KAPPA0 = 0.41
+
+C_EFF_MIN_FACTOR = 0.05
+C_EFF_MAX_FACTOR = 2.0
+
+C_EFF_MIN = C_EFF_MIN_FACTOR * KAPPA0
+C_EFF_MAX = C_EFF_MAX_FACTOR * KAPPA0
+
+LAMBDA_RAW = 1.0e-6
 
 # big penalty for invalid / diverged candidates
 BIG_PENALTY = 1.0e9
 
+FITNESS_CACHE_FILE = f"gp_results_{RUN_TAG}_fitness_cache.json"
+USE_FITNESS_CACHE = True
+
 N_CANDIDATES = 10
-N_WORKERS = None
 N_GENERATIONS = 20
 TOURNAMENT_SIZE = 3
-MUTATION_PROB = 0.5
-CROSSOVER_PROB = 0.5
+MUTATION_PROB = 0.6
+CROSSOVER_PROB = 0.4
 ELITE_COUNT = 2
 
 # ============================================================
 # SMALL UTILITIES
 # ============================================================
+def write_metadata_file(case_data, train_case_data, test_case_data):
+    metadata = {
+        "random_seed": RANDOM_SEED,
+        "re_list": RE_LIST,
+        "data_split": {
+            "test_re_list": TEST_RE_LIST,
+            "training_cases": [
+                f"RE{case['RE']}_CG{case['CG']}" for case in train_case_data
+            ],
+            "test_cases": [
+                f"RE{case['RE']}_CG{case['CG']}" for case in test_case_data
+            ],
+        },
+        "cases": [
+            {
+                "RE": case["RE"],
+                "CG": case["CG"],
+                "np": case["np"],
+                "mapped_file": case["mapped_file"],
+                "baseline_dir": case["baseline_dir"],
+                "baseline_err": case["baseline_err"],
+                "L_outer": case["L_outer"],
+                "h_wall": case["h_wall"],
+                "eta_h_scalar": case["eta_h_scalar"],
+                "eta_h_min": float(np.min(case["eta_h"])),
+                "eta_h_max": float(np.max(case["eta_h"])),
+                "eta_y_min": float(np.min(case["eta_y"])),
+                "eta_y_max": float(np.max(case["eta_y"])),
+                "yw_min": float(np.min(case["yw"])),
+                "yw_max": float(np.max(case["yw"])),
+                "n_points": int(case["yw"].size),
+            }
+            for case in case_data
+        ],
+        "gp_settings": {
+            "n_candidates": N_CANDIDATES,
+            "n_generations": N_GENERATIONS,
+            "tournament_size": TOURNAMENT_SIZE,
+            "mutation_prob": MUTATION_PROB,
+            "crossover_prob": CROSSOVER_PROB,
+            "elite_count": ELITE_COUNT,
+            "lambda_size": LAMBDA_SIZE,
+            "lambda_raw": LAMBDA_RAW,
+            "kappa0": KAPPA0,
+            "C_eff_min_factor": C_EFF_MIN_FACTOR,
+            "C_eff_max_factor": C_EFF_MAX_FACTOR,
+            "C_eff_min": C_EFF_MIN,
+            "C_eff_max": C_EFF_MAX,
+            "max_tree_size": 24,
+            "primitive_set": [
+                "protected_div",
+                "add",
+                "sub",
+                "mul",
+                "neg",
+                "protected_tanh",
+            ],
+            "ephemeral_constant_range": [-0.5, 0.5],
+        },
+        "closure_mapping": {
+            "input_variables": {
+                "eta_h": "h_wall(CG)/L_outer",
+                "eta_y": "yw/L_outer",
+            },
+            "h_wall": "median corrected wall distance of first near-wall cell band for each CG",
+            "L_outer": "max(yw) for each case",
+            "raw": "GP expression evaluated using eta_h and eta_y",
+            "coefficient_mapping": (
+                "C_eff = KAPPA0*exp(log_factor), where "
+                "t=tanh(raw), log_factor=log(C_EFF_MIN_FACTOR)*(-t) for t<0 "
+                "and log(C_EFF_MAX_FACTOR)*t for t>=0"
+            ),
+            "C_eff_bounds": [C_EFF_MIN, C_EFF_MAX],
+            "C_eff_neutral": "raw = 0 gives C_eff = KAPPA0",
+            "kappa0": KAPPA0,
+            "C_eff_min_factor": C_EFF_MIN_FACTOR,
+            "C_eff_max_factor": C_EFF_MAX_FACTOR,
+            "lm": "C_eff*yw",
+        },
+        "fitness_definition": {
+            "quantity": "velocity MSE",
+            "normalization": "candidate fitness / baseline mixing-length MSE",
+            "region": "z < 0 and yw > 0; effectively all dome cells because corrected yw is positive",
+            "yw_wall_cutoff": YW_WL,
+            "big_penalty": BIG_PENALTY,
+        },
+        "execution": {
+            "core_limit": CORE_LIMIT,
+            "solver_timeout": SOLVER_TIMEOUT,
+            "steady_run_script": STEADY_RUN_SCRIPT,
+            "unsteady_run_script": UNSTEADY_RUN_SCRIPT,
+            "python_version": platform.python_version(),
+            "working_directory": PROJECT_ROOT,
+        },
+    }
+
+    with open(METADATA_FILE, "w") as f:
+        json.dump(metadata, f, indent=2)
+
+def latest_file(folder, pattern):
+    files = fnmatch.filter(os.listdir(folder), pattern)
+    files = [os.path.join(folder, f) for f in files]
+    files.sort(key=lambda x: os.path.getmtime(x))
+
+    if len(files) == 0:
+        raise FileNotFoundError(f"No file found in {folder} with pattern {pattern}")
+
+    return files[-1]
+
+def read_h_wall_by_cg(summary_file):
+    """
+    Read characteristic first-wall-cell size for each CG from
+    3_wall_cells/wall_cells_median_summary.csv.
+
+    Uses yw_wall_median as h_wall(CG).
+    """
+    if not os.path.isfile(summary_file):
+        raise FileNotFoundError(f"Wall-cell summary file not found: {summary_file}")
+
+    data = np.genfromtxt(summary_file, delimiter=",", names=True, dtype=None, encoding=None)
+
+    required = ["CG", "yw_wall_median"]
+    for name in required:
+        if name not in data.dtype.names:
+            raise RuntimeError(
+                f"Required column '{name}' not found in {summary_file}. "
+                f"Available columns: {data.dtype.names}"
+            )
+
+    h_wall_by_cg = {}
+
+    for row in np.atleast_1d(data):
+        cg = str(row["CG"])
+        h_wall = float(row["yw_wall_median"])
+
+        if h_wall <= 0.0 or not np.isfinite(h_wall):
+            raise ValueError(f"Invalid h_wall for CG={cg}: {h_wall}")
+
+        h_wall_by_cg[cg] = h_wall
+
+    print("Read wall-cell median sizes:", flush=True)
+    for cg in sorted(h_wall_by_cg.keys(), key=lambda x: int(x)):
+        print(f"  CG{cg}: h_wall = {h_wall_by_cg[cg]:.12e}", flush=True)
+
+    return h_wall_by_cg
+
 def set_restart_flag(case_path, enable_restart):
     for fname in (STEADY_INPUT_FILE, UNSTEADY_INPUT_FILE):
         fpath = os.path.join(case_path, fname)
@@ -152,17 +334,16 @@ def protected_tanh(x):
     return np.tanh(x)
 
 def protected_div(left, right):
-    if np.isscalar(right):
-        if abs(right) < 1e-6:
-            return 1.0
-        return left / right
+    left = np.asarray(left, dtype=np.float64)
+    right = np.asarray(right, dtype=np.float64)
 
-    out = np.ones_like(left, dtype=np.float64)
+    left, right = np.broadcast_arrays(left, right)
 
-    # IMPORTANT: avoid division when left ≈ right
-    mask = (np.abs(right) > 1e-6) & (np.abs(left - right) > 1e-6)
+    out = np.ones_like(right, dtype=np.float64)
 
+    mask = np.abs(right) > 1e-6
     out[mask] = left[mask] / right[mask]
+
     return out
 
 # ============================================================
@@ -192,9 +373,11 @@ def read_mapped(mapped_file):
 # ============================================================
 # GP SETUP
 # ============================================================
-pset = gp.PrimitiveSet("MAIN", 1)
-pset.renameArguments(ARG0="yw")
+pset = gp.PrimitiveSet("MAIN", 2)
+pset.renameArguments(ARG0="eta_h")
+pset.renameArguments(ARG1="eta_y")
 
+pset.addPrimitive(protected_div, 2)
 pset.addPrimitive(operator.add, 2)
 pset.addPrimitive(operator.sub, 2)
 pset.addPrimitive(operator.mul, 2)
@@ -219,52 +402,36 @@ toolbox.register("mate", gp.cxOnePoint)
 toolbox.register("expr_mut", gp.genFull, min_=0, max_=2)
 toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
 
-toolbox.decorate("mate", gp.staticLimit(key=len, max_value=18))
-toolbox.decorate("mutate", gp.staticLimit(key=len, max_value=18))
+toolbox.decorate("mate", gp.staticLimit(key=len, max_value=24))
+toolbox.decorate("mutate", gp.staticLimit(key=len, max_value=24))
 toolbox.register("clone", copy.deepcopy)
 
-def build_lm_from_yw_raw(raw, yw, z_cg, z_pos):
+def build_lm_from_yw_raw(raw, yw):
     raw = np.asarray(raw, dtype=np.float64).copy()
-    raw = np.clip(raw, -1.0, 1.0)
 
-    kappa0 = 0.41
-    alpha = 0.5
-    lm_cap = 0.1
+    if np.any(~np.isfinite(raw)):
+        raise ValueError("Non-finite raw closure values")
 
-    kappa_eff = kappa0 * (1.0 + alpha * raw)
-    kappa_eff = np.maximum(kappa_eff, 0.0)
-    kappa_eff = np.minimum(kappa_eff, 1.2)
+    raw_min = float(np.min(raw))
+    raw_max = float(np.max(raw))
 
-    lm_raw = kappa_eff * yw
-    lm = lm_raw / (1.0 + lm_raw / lm_cap)
+    t = np.tanh(raw)
 
-    lm[z_cg > z_pos] = 0.0
-    lm = np.maximum(lm, 0.0)
+    log_factor = np.where(
+        t < 0.0,
+        np.log(C_EFF_MIN_FACTOR) * (-t),  # t=-1 -> log(0.05)
+        np.log(C_EFF_MAX_FACTOR) * t,     # t=+1 -> log(2.0)
+    )
 
-    print("lm_raw min/max =", np.min(lm_raw), np.max(lm_raw), flush=True)
-    return lm, kappa_eff
+    C_eff = KAPPA0 * np.exp(log_factor)
 
-def make_core_limited_batches(tasks, core_limit):
-    batches = []
-    current = []
-    current_cores = 0
+    lm = C_eff * yw
 
-    for task in tasks:
-        _, _, case = task
-        np_ranks = case["np"]
+    print("raw min/max =", raw_min, raw_max, flush=True)
+    print("C_eff min/max =", np.min(C_eff), np.max(C_eff), flush=True)
+    print("lm min/max =", np.min(lm), np.max(lm), flush=True)
 
-        if current and current_cores + np_ranks > core_limit:
-            batches.append(current)
-            current = []
-            current_cores = 0
-
-        current.append(task)
-        current_cores += np_ranks
-
-    if current:
-        batches.append(current)
-
-    return batches
+    return lm, C_eff
 
 def select_random_case_batch(case_data):
     shuffled = list(case_data)
@@ -293,50 +460,31 @@ def select_random_case_batch(case_data):
 
     return selected, used_cores
 
-def evaluate_population(population, selected_cases):
-    tasks = []
+def make_cache_key(individual, case):
+    return f"RE{case['RE']}_CG{case['CG']}__{str(individual)}"
 
-    for case in selected_cases:
-        for cand_id, individual in enumerate(population):
-            tasks.append((cand_id, individual, case))
 
-    batch_cores = sum(task[2]["np"] for task in tasks)
+def load_fitness_cache():
+    if not USE_FITNESS_CACHE:
+        return {}
 
-    if batch_cores > CORE_LIMIT:
-        raise RuntimeError(
-            f"Selected batch uses {batch_cores} cores, "
-            f"which exceeds CORE_LIMIT={CORE_LIMIT}"
-        )
+    if not os.path.isfile(FITNESS_CACHE_FILE):
+        return {}
 
-    random.shuffle(tasks)
+    with open(FITNESS_CACHE_FILE, "r") as f:
+        return json.load(f)
 
-    candidate_norm_errors = {cand_id: [] for cand_id in range(len(population))}
-    results = []
 
-    print(
-        f"\n===== Running one stochastic batch with "
-        f"{len(tasks)} tasks, {batch_cores} MPI ranks =====",
-        flush=True,
-    )
+def save_fitness_cache(cache):
+    if not USE_FITNESS_CACHE:
+        return
 
-    with ProcessPoolExecutor(max_workers=len(tasks)) as ex:
-        futures = [
-            ex.submit(evaluate_candidate_case_worker, task)
-            for task in tasks
-        ]
+    tmp_file = FITNESS_CACHE_FILE + ".tmp"
 
-        for fut in as_completed(futures):
-            cand_id, RE, CG, raw_fit, norm_fit, expr = fut.result()
-            candidate_norm_errors[cand_id].append(norm_fit)
-            results.append((cand_id, RE, CG, raw_fit, norm_fit, expr))
+    with open(tmp_file, "w") as f:
+        json.dump(cache, f, indent=2)
 
-    for cand_id in range(len(population)):
-        errs = candidate_norm_errors[cand_id]
-        population[cand_id].fitness.values = (
-            float(np.mean(errs)) if errs else BIG_PENALTY,
-        )
-
-    return results
+    os.replace(tmp_file, FITNESS_CACHE_FILE)
 
 def save_lm_csv(z_cg, r_cg, lm, out_file):
     arr = np.column_stack((z_cg, r_cg, lm))
@@ -369,17 +517,30 @@ def run_case(case_path, run_script):
     cmd = f'cd "{case_path}" && bash "{run_script}"'
     print("Running case in:", case_path, "with", run_script, flush=True)
 
-    start = time.time()
-    ret = subprocess.call(cmd, shell=True, executable="/bin/bash")
-    elapsed = time.time() - start
+    solver_start = time.time()
+
+    try:
+        ret = subprocess.call(
+            cmd,
+            shell=True,
+            executable="/bin/bash",
+            timeout=SOLVER_TIMEOUT,
+        )
+    except subprocess.TimeoutExpired:
+        solver_elapsed = time.time() - solver_start
+        print("Solver timed out", flush=True)
+        print("Elapsed:", round(solver_elapsed, 2), "sec", flush=True)
+        return False, solver_elapsed
+
+    solver_elapsed = time.time() - solver_start
 
     print("Return code =", ret, flush=True)
-    print("Elapsed:", round(elapsed, 2), "sec", flush=True)
+    print("Elapsed:", round(solver_elapsed, 2), "sec", flush=True)
 
     log_path = os.path.join(case_path, LOG_FILE)
     if not os.path.exists(log_path):
         print("Log file not found", flush=True)
-        return False
+        return False, solver_elapsed
 
     has_err = search_last(log_path, str_err)
     has_conv = search_last(log_path, str_conv)
@@ -392,7 +553,7 @@ def run_case(case_path, run_script):
     print("has_fin =", has_fin, flush=True)
 
     is_done = (has_conv or has_ss) and has_fin
-    return is_done and not has_err
+    return is_done and not has_err, solver_elapsed
 
 def read_velocity_result(case_path, vpp_pattern):
     files = fnmatch.filter(os.listdir(case_path), vpp_pattern)
@@ -437,33 +598,36 @@ def velocity_mse(ur_les, uz_les, ur_cg, uz_cg, z_cg, yw, yw_wl):
     v_mse = (uz_les[dome] - uz_cg[dome]) ** 2
     return u_mse[keep].mean() + v_mse[keep].mean()
 
-def evaluate_individual(individual, r_cg, z_cg, yw, ur_les, uz_les, case_path):
+def evaluate_individual(individual, r_cg, z_cg, yw, eta_h, eta_y, ur_les, uz_les, case_path):
     """
     One GP candidate -> lm_pred.csv -> solver -> velocity-based fitness
     """
     func = toolbox.compile(expr=individual)
 
     try:
-        yw_scale = np.max(np.abs(yw))
-        yw_n = yw / yw_scale
-
-        raw = func(yw_n)
-
-        if np.isscalar(raw):
-            raw = np.full_like(r_cg, raw, dtype=np.float64)
+        raw = func(eta_h, eta_y)
 
         raw = np.asarray(raw, dtype=np.float64)
 
+        # Constant GP expressions may return either a Python scalar
+        # or a 0-D NumPy array. Broadcast them to all cells.
+        if raw.shape == ():
+            raw = np.full_like(r_cg, float(raw), dtype=np.float64)
+
         if raw.shape != r_cg.shape:
-            print("Invalid shape from candidate", flush=True)
-            return BIG_PENALTY,
+            print(
+                f"Invalid shape from candidate: raw.shape={raw.shape}, "
+                f"expected={r_cg.shape}",
+                flush=True,
+            )
+            return BIG_PENALTY, "failed", np.nan, np.nan, np.nan
 
         if np.any(~np.isfinite(raw)):
             print("Non-finite values from candidate", flush=True)
-            return BIG_PENALTY,
+            return BIG_PENALTY, "failed", np.nan, np.nan, np.nan
 
-        lm, kappa_eff = build_lm_from_yw_raw(raw, yw, z_cg, Z_POS)
-        print("kappa_eff min/max =", np.min(kappa_eff), np.max(kappa_eff), flush=True)
+        lm, C_eff = build_lm_from_yw_raw(raw, yw)
+        print("C_eff min/max =", np.min(C_eff), np.max(C_eff), flush=True)
         print("lm min/max =", np.min(lm), np.max(lm), flush=True)
 
         clean_case_folder(case_path)
@@ -471,7 +635,12 @@ def evaluate_individual(individual, r_cg, z_cg, yw, ur_les, uz_les, case_path):
         lm_path = os.path.join(case_path, LM_FILE)
         save_lm_csv(z_cg, r_cg, lm, lm_path)
 
-        ok = run_case(case_path, STEADY_RUN_SCRIPT)
+        run_mode = "steady"
+
+        steady_elapsed = 0.0
+        unsteady_elapsed = 0.0
+
+        ok, steady_elapsed = run_case(case_path, STEADY_RUN_SCRIPT)
 
         if not ok:
             print("Steady failed; trying unsteady fallback", flush=True)
@@ -481,11 +650,14 @@ def evaluate_individual(individual, r_cg, z_cg, yw, ur_les, uz_les, case_path):
             lm_path = os.path.join(case_path, LM_FILE)
             save_lm_csv(z_cg, r_cg, lm, lm_path)
 
-            ok = run_case(case_path, UNSTEADY_RUN_SCRIPT)
+            run_mode = "unsteady_fallback"
+            ok, unsteady_elapsed = run_case(case_path, UNSTEADY_RUN_SCRIPT)
+
+        total_solver_elapsed = steady_elapsed + unsteady_elapsed
 
         if not ok:
             print("Both steady and unsteady fallback failed for candidate", flush=True)
-            return BIG_PENALTY,
+            return BIG_PENALTY, "failed", steady_elapsed, unsteady_elapsed, total_solver_elapsed
 
         ur_cg, uz_cg, r_res, z_res = read_velocity_result(case_path, VPP_PATTERN)
 
@@ -505,7 +677,8 @@ def evaluate_individual(individual, r_cg, z_cg, yw, ur_les, uz_les, case_path):
         vel_err = velocity_mse(ur_les, uz_les, ur_cg, uz_cg, z_res, yw, YW_WL)
 
         complexity_penalty = LAMBDA_SIZE * len(individual)
-        fitness = vel_err + complexity_penalty
+        raw_penalty = LAMBDA_RAW * float(np.mean(raw**2))
+        fitness = vel_err + complexity_penalty + raw_penalty
 
         print("raw min/max =", np.min(raw), np.max(raw), flush=True)
         print("lm min/max =", np.min(lm), np.max(lm), flush=True)
@@ -513,13 +686,14 @@ def evaluate_individual(individual, r_cg, z_cg, yw, ur_les, uz_les, case_path):
         print("Expression:", individual, flush=True)
         print("Velocity MSE:", vel_err, flush=True)
         print("Complexity penalty:", complexity_penalty, flush=True)
+        print("Raw penalty:", raw_penalty, flush=True)
         print("Fitness:", fitness, flush=True)
 
-        return fitness,
+        return fitness, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed
 
     except Exception as e:
         print("Exception during evaluation:", e, flush=True)
-        return BIG_PENALTY,
+        return BIG_PENALTY, "failed", np.nan, np.nan, np.nan
 
 def evaluate_candidate_case_worker(args):
     cand_id, individual, case = args
@@ -533,38 +707,55 @@ def evaluate_candidate_case_worker(args):
     )
     print("Expression:", individual, flush=True)
 
-    fit = evaluate_individual(
+    fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed = evaluate_individual(
         individual,
         case["r_cg"],
         case["z_cg"],
         case["yw"],
+        case["eta_h"],
+        case["eta_y"],
         case["ur_les"],
         case["uz_les"],
         case_path,
-    )[0]
+    )
 
     if case["baseline_err"] <= 0.0 or not np.isfinite(case["baseline_err"]):
         norm_fit = BIG_PENALTY
     else:
         norm_fit = fit / case["baseline_err"]
 
-    return cand_id, case["RE"], case["CG"], fit, norm_fit, str(individual)
+    tree_size = len(individual)
+    tree_height = individual.height
+
+    return (
+        cand_id,
+        case["RE"],
+        case["CG"],
+        fit,
+        norm_fit,
+        run_mode,
+        steady_elapsed,
+        unsteady_elapsed,
+        total_solver_elapsed,
+        tree_size,
+        tree_height,
+        str(individual),
+    )
 
 def initialize_template_from_population(population, case):
     print("\n===== Initializing template from average GP candidate =====", flush=True)
     r_cg = case["r_cg"]
     z_cg = case["z_cg"]
     yw = case["yw"]
+    eta_h = case["eta_h"]
+    eta_y = case["eta_y"]
     template_dir = case["template_dir"]
 
     lm_list = []
 
-    yw_scale = np.max(np.abs(yw))
-    yw_n = yw / yw_scale
-
     for ind in population:
         func = toolbox.compile(expr=ind)
-        raw = func(yw_n)
+        raw = func(eta_h, eta_y)
 
         if np.isscalar(raw):
             raw = np.full_like(r_cg, raw, dtype=np.float64)
@@ -574,7 +765,7 @@ def initialize_template_from_population(population, case):
         if raw.shape != r_cg.shape or np.any(~np.isfinite(raw)):
             continue
 
-        lm, _ = build_lm_from_yw_raw(raw, yw, z_cg, Z_POS)
+        lm, _ = build_lm_from_yw_raw(raw, yw)
         lm_list.append(lm)
 
     if len(lm_list) == 0:
@@ -583,17 +774,20 @@ def initialize_template_from_population(population, case):
     lm_avg = np.mean(np.vstack(lm_list), axis=0)
 
     clean_case_folder(template_dir)
-    set_restart_flag(template_dir, enable_restart=False)
+    set_restart_flag(template_dir, enable_restart=True)
     save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(template_dir, LM_FILE))
 
-    ok = run_case(template_dir, STEADY_RUN_SCRIPT)
+    #ok = run_case(template_dir, STEADY_RUN_SCRIPT)
 
-    if not ok:
-        print("Template steady initialization failed; trying unsteady.", flush=True)
-        clean_case_folder(template_dir)
-        set_restart_flag(template_dir, enable_restart=False)
-        save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(template_dir, LM_FILE))
-        ok = run_case(template_dir, UNSTEADY_RUN_SCRIPT)
+    #if not ok:
+    #    print("Template steady initialization failed; trying unsteady.", flush=True)
+    #    clean_case_folder(template_dir)
+    #    set_restart_flag(template_dir, enable_restart=False)
+    #    save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(template_dir, LM_FILE))
+    #    ok = run_case(template_dir, UNSTEADY_RUN_SCRIPT)
+
+    print("Skipping steady initialization; running unsteady directly.", flush=True)
+    ok, _ = run_case(template_dir, UNSTEADY_RUN_SCRIPT)
 
     if not ok:
         raise RuntimeError("Template initialization failed.")
@@ -601,6 +795,209 @@ def initialize_template_from_population(population, case):
     set_restart_flag(template_dir, enable_restart=True)
 
     print("Template initialization finished successfully.", flush=True)
+
+def evaluate_population(population, selected_cases):
+    fitness_cache = load_fitness_cache()
+
+    tasks = []
+    cached_results = []
+    pending_by_key = {}
+
+    for case in selected_cases:
+        for cand_id, individual in enumerate(population):
+            cache_key = make_cache_key(individual, case)
+
+            if cache_key in fitness_cache:
+                item = fitness_cache[cache_key]
+
+                cached_results.append(
+                    (
+                        cand_id,
+                        case["RE"],
+                        case["CG"],
+                        item["raw_fit"],
+                        item["norm_fit"],
+                        item["run_mode"],
+                        item.get("steady_elapsed", item.get("solver_elapsed", 0.0)),
+                        item.get("unsteady_elapsed", 0.0),
+                        item.get("total_solver_elapsed", item.get("solver_elapsed", 0.0)),
+                        item["tree_size"],
+                        item["tree_height"],
+                        str(individual),
+                    )
+                )
+
+            elif cache_key in pending_by_key:
+                pending_by_key[cache_key]["duplicate_cand_ids"].append(cand_id)
+
+            else:
+                tasks.append((cand_id, individual, case))
+
+                pending_by_key[cache_key] = {
+                    "primary_cand_id": cand_id,
+                    "duplicate_cand_ids": [],
+                    "case": case,
+                    "individual": individual,
+                }
+
+    batch_cores = sum(task[2]["np"] for task in tasks)
+
+    if batch_cores > CORE_LIMIT:
+        raise RuntimeError(
+            f"Selected batch uses {batch_cores} cores, "
+            f"which exceeds CORE_LIMIT={CORE_LIMIT}"
+        )
+
+    random.shuffle(tasks)
+
+    candidate_norm_errors = {cand_id: [] for cand_id in range(len(population))}
+    results = []
+
+    for r in cached_results:
+        cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr = r
+        candidate_norm_errors[cand_id].append(norm_fit)
+        results.append(r)
+
+    if cached_results:
+        print(f"Used {len(cached_results)} cached evaluations", flush=True)
+
+    n_duplicates = sum(
+        len(item["duplicate_cand_ids"])
+        for item in pending_by_key.values()
+    )
+
+    if n_duplicates:
+        print(f"Skipped {n_duplicates} duplicate in-batch evaluations", flush=True)
+
+    print(
+        f"\n===== Running one stochastic batch with "
+        f"{len(tasks)} unique tasks, {batch_cores} MPI ranks =====",
+        flush=True,
+    )
+
+    if tasks:
+        with ProcessPoolExecutor(max_workers=len(tasks)) as ex:
+            futures = [
+                ex.submit(evaluate_candidate_case_worker, task)
+                for task in tasks
+            ]
+
+            for fut in as_completed(futures):
+                (
+                    cand_id,
+                    RE,
+                    CG,
+                    raw_fit,
+                    norm_fit,
+                    run_mode,
+                    steady_elapsed,
+                    unsteady_elapsed,
+                    total_solver_elapsed,
+                    tree_size,
+                    tree_height,
+                    expr,
+                ) = fut.result()
+
+                candidate_norm_errors[cand_id].append(norm_fit)
+                results.append(
+                    (
+                        cand_id,
+                        RE,
+                        CG,
+                        raw_fit,
+                        norm_fit,
+                        run_mode,
+                        steady_elapsed,
+                        unsteady_elapsed,
+                        total_solver_elapsed,
+                        tree_size,
+                        tree_height,
+                        expr,
+                    )
+                )
+
+                case_match = next(
+                    case for case in selected_cases
+                    if case["RE"] == RE and case["CG"] == CG
+                )
+
+                individual = population[cand_id]
+                cache_key = make_cache_key(individual, case_match)
+
+                duplicate_cand_ids = pending_by_key.get(cache_key, {}).get(
+                    "duplicate_cand_ids",
+                    [],
+                )
+
+                for dup_cand_id in duplicate_cand_ids:
+                    candidate_norm_errors[dup_cand_id].append(norm_fit)
+                    results.append(
+                        (
+                            dup_cand_id,
+                            RE,
+                            CG,
+                            raw_fit,
+                            norm_fit,
+                            run_mode,
+                            steady_elapsed,
+                            unsteady_elapsed,
+                            total_solver_elapsed,
+                            tree_size,
+                            tree_height,
+                            expr,
+                        )
+                    )
+
+                    if run_mode != "failed" and np.isfinite(raw_fit) and raw_fit < BIG_PENALTY:
+                        primary_case_path = os.path.join(
+                            case_match["case_root"],
+                            f"cand_{cand_id:03d}",
+                        )
+                        duplicate_case_path = os.path.join(
+                            case_match["case_root"],
+                            f"cand_{dup_cand_id:03d}",
+                        )
+
+                        primary_cp = os.path.join(primary_case_path, "tamu_2d_fv_gp_out_cp")
+                        duplicate_cp = os.path.join(duplicate_case_path, "tamu_2d_fv_gp_out_cp")
+
+                        if os.path.isdir(primary_cp):
+                            if os.path.exists(duplicate_cp):
+                                shutil.rmtree(duplicate_cp)
+                            shutil.copytree(primary_cp, duplicate_cp)
+
+                        primary_lm = os.path.join(primary_case_path, LM_FILE)
+                        duplicate_lm = os.path.join(duplicate_case_path, LM_FILE)
+
+                        if os.path.isfile(primary_lm):
+                            shutil.copy2(primary_lm, duplicate_lm)
+
+                if run_mode != "failed" and np.isfinite(raw_fit) and raw_fit < BIG_PENALTY:
+                    fitness_cache[cache_key] = {
+                        "RE": RE,
+                        "CG": CG,
+                        "expr": str(individual),
+                        "raw_fit": float(raw_fit),
+                        "norm_fit": float(norm_fit),
+                        "run_mode": run_mode,
+                        "steady_elapsed": float(steady_elapsed) if np.isfinite(steady_elapsed) else -1.0,
+                        "unsteady_elapsed": float(unsteady_elapsed) if np.isfinite(unsteady_elapsed) else -1.0,
+                        "total_solver_elapsed": float(total_solver_elapsed) if np.isfinite(total_solver_elapsed) else -1.0,
+                        "tree_size": int(tree_size),
+                        "tree_height": int(tree_height),
+                    }
+
+                    save_fitness_cache(fitness_cache)
+    else:
+        print("All evaluations in this batch were loaded from cache", flush=True)
+
+    for cand_id in range(len(population)):
+        errs = candidate_norm_errors[cand_id]
+        population[cand_id].fitness.values = (
+            float(np.mean(errs)) if errs else BIG_PENALTY,
+        )
+
+    return results
 
 def evaluate_baseline_mixing_length(case):
     print("\n===== Evaluating baseline mixing-length case =====", flush=True)
@@ -652,6 +1049,35 @@ def evaluate_baseline_mixing_length(case):
 
     return baseline_err
 
+
+def make_case_batches_for_population(case_data, population_size, core_limit):
+    batches = []
+    current = []
+    current_cores = 0
+
+    for case in case_data:
+        needed = population_size * case["np"]
+
+        if current and current_cores + needed > core_limit:
+            batches.append(current)
+            current = []
+            current_cores = 0
+
+        if needed > core_limit:
+            raise RuntimeError(
+                f"Single case RE={case['RE']}, CG={case['CG']} requires "
+                f"{needed} cores for population_size={population_size}, "
+                f"which exceeds CORE_LIMIT={core_limit}"
+            )
+
+        current.append(case)
+        current_cores += needed
+
+    if current:
+        batches.append(current)
+
+    return batches
+
 # ============================================================
 # MAIN: evaluate ONE DEAP candidate with real solver fitness
 # ============================================================
@@ -661,7 +1087,11 @@ def main():
 
     print("\n===== Loading all available cases =====", flush=True)
 
+    h_wall_by_cg = read_h_wall_by_cg(WALL_CELL_SUMMARY_FILE)
+
     case_data = []
+    train_case_data = []
+    test_case_data = []
 
     for case in CASES:
         RE = case["RE"]
@@ -673,6 +1103,24 @@ def main():
         print(f"\n===== Preparing RE={RE}, CG={CG}, np={np_ranks} =====", flush=True)
 
         r_cg, z_cg, ur_les, uz_les, yw, nut = read_mapped(mapped_file)
+
+        if CG not in h_wall_by_cg:
+            raise KeyError(f"No h_wall value found for CG={CG}")
+
+        h_wall = h_wall_by_cg[CG]
+
+        L_outer = np.max(yw)
+        if L_outer <= 0.0 or not np.isfinite(L_outer):
+            raise ValueError(f"Invalid L_outer for RE={RE}, CG={CG}")
+
+        eta_h_scalar = h_wall / L_outer
+        eta_h = np.full_like(yw, eta_h_scalar, dtype=np.float64)
+        eta_y = yw / L_outer
+
+        print(f"h_wall = {h_wall:.12e}", flush=True)
+        print(f"L_outer = {L_outer:.12e}", flush=True)
+        print(f"eta_h = {eta_h_scalar:.12e}", flush=True)
+        print(f"eta_y min/max = {eta_y.min():.12e}, {eta_y.max():.12e}", flush=True)
 
         case_entry = {
             "RE": RE,
@@ -688,13 +1136,42 @@ def main():
             "uz_les": uz_les,
             "yw": yw,
             "nut": nut,
+            "h_wall": float(h_wall),
+            "L_outer": float(L_outer),
+            "eta_h": eta_h,
+            "eta_y": eta_y,
+            "eta_h_scalar": float(eta_h_scalar),
+            "eta_h_min": float(np.min(eta_h)),
+            "eta_h_max": float(np.max(eta_h)),
+            "eta_y_min": float(np.min(eta_y)),
+            "eta_y_max": float(np.max(eta_y)),
         }
 
         case_entry["baseline_err"] = evaluate_baseline_mixing_length(case_entry)
         case_data.append(case_entry)
 
+        if RE in TEST_RE_LIST:
+            test_case_data.append(case_entry)
+        else:
+            train_case_data.append(case_entry)
+
+    if len(train_case_data) == 0:
+        raise RuntimeError("No training cases selected.")
+
+    if len(test_case_data) == 0:
+        raise RuntimeError("No test cases selected.")
+
+    write_metadata_file(case_data, train_case_data, test_case_data)
+
     with open(RESULTS_FILE, "w") as f:
-        f.write("seed,gen,rank,fitness,cases,expr\n")
+        f.write("seed,gen,rank,norm_fitness,cases,expr\n")
+
+    with open(DETAILS_FILE, "w") as f:
+        f.write(
+            "seed,gen,cand_id,RE,CG,raw_fitness,baseline_fitness,"
+            "norm_fitness,run_mode,steady_elapsed,unsteady_elapsed,"
+            "total_solver_elapsed,tree_size,tree_height,expr\n"
+        )
 
     population = [toolbox.individual() for _ in range(N_CANDIDATES)]
 
@@ -713,7 +1190,7 @@ def main():
     for gen in range(N_GENERATIONS):
         print(f"\n===== Generation {gen} =====", flush=True)
 
-        selected_cases, batch_cores = select_random_case_batch(case_data)
+        selected_cases, batch_cores = select_random_case_batch(train_case_data)
 
         selected_case_names = [
             f"RE{case['RE']}_CG{case['CG']}"
@@ -724,6 +1201,21 @@ def main():
         print("Selected batch cores:", batch_cores, flush=True)
 
         results = evaluate_population(population, selected_cases)
+        
+        with open(DETAILS_FILE, "a") as f:
+            for cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in results:
+                baseline_fit = next(
+                    case["baseline_err"]
+                    for case in selected_cases
+                    if case["RE"] == RE and case["CG"] == CG
+                )
+
+                f.write(
+                    f'{RANDOM_SEED},{gen},{cand_id},{RE},{CG},'
+                    f'{raw_fit:.12e},{baseline_fit:.12e},{norm_fit:.12e},'
+                    f'{run_mode},{steady_elapsed:.6e},{unsteady_elapsed:.6e},'
+                    f'{total_solver_elapsed:.6e},{tree_size},{tree_height},"{expr}"\n'
+                )
 
         ranked = sorted(
             [(ind.fitness.values[0], str(ind), ind) for ind in population],
@@ -768,10 +1260,204 @@ def main():
 
     print("\n===== Final best =====", flush=True)
 
-    best = min(population, key=lambda ind: ind.fitness.values[0])
+    # ------------------------------------------------------------
+    # Evaluate final population on all training cases.
+    # This avoids selecting the final best candidate from only the
+    # last stochastic mini-batch.
+    # ------------------------------------------------------------
+    print("\n===== Evaluating final population on all training cases =====", flush=True)
 
-    print(f"Best sampled normalized fitness = {best.fitness.values[0]:.8f}", flush=True)
+    final_training_results = []
+
+    train_case_batches = make_case_batches_for_population(
+        train_case_data,
+        population_size=len(population),
+        core_limit=CORE_LIMIT,
+    )
+
+    for ib, case_batch in enumerate(train_case_batches):
+        print(
+            f"\n===== Final training population batch {ib+1}/{len(train_case_batches)} =====",
+            flush=True,
+        )
+
+        batch_results = evaluate_population(population, case_batch)
+        final_training_results.extend(batch_results)
+
+    final_train_scores = {}
+    for cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in final_training_results:
+        final_train_scores.setdefault(cand_id, []).append(norm_fit)
+
+    TOP_K_FINAL = 2
+
+    top_cand_ids = sorted(
+        final_train_scores.keys(),
+        key=lambda cid: np.mean(final_train_scores[cid]),
+    )[:TOP_K_FINAL]
+
+    best_cand_id = top_cand_ids[0]
+    best = population[best_cand_id]
+    best_train_mean_normalized_fitness = float(np.mean(final_train_scores[best_cand_id]))
+
+    print("Top final candidate IDs:", top_cand_ids, flush=True)
+    for cid in top_cand_ids:
+        print(
+            f"  cand_id={cid}: train mean normalized fitness = "
+            f"{np.mean(final_train_scores[cid]):.8f}",
+            flush=True,
+        )
+
+    # Save full-training evaluation for later inspection.
+    FINAL_TRAIN_EVAL_FILE = f"gp_results_{RUN_TAG}_final_train_eval.csv"
+
+    with open(FINAL_TRAIN_EVAL_FILE, "w") as f:
+        f.write(
+            "seed,RE,CG,cand_id,raw_fitness,baseline_fitness,"
+            "norm_fitness,run_mode,steady_elapsed,unsteady_elapsed,"
+            "total_solver_elapsed,tree_size,tree_height,expr\n"
+        )
+
+        for cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in final_training_results:
+            baseline_fit = next(
+                case["baseline_err"]
+                for case in case_data
+                if case["RE"] == RE and case["CG"] == CG
+            )
+
+            f.write(
+                f'{RANDOM_SEED},{RE},{CG},{cand_id},'
+                f'{raw_fit:.12e},{baseline_fit:.12e},{norm_fit:.12e},'
+                f'{run_mode},{steady_elapsed:.6e},{unsteady_elapsed:.6e},'
+                f'{total_solver_elapsed:.6e},{tree_size},{tree_height},"{expr}"\n'
+            )
+
+    # ------------------------------------------------------------
+    # Evaluate only the top final training candidates on held-out
+    # test cases. Test performance is reported separately and is
+    # not used to select the candidates.
+    # ------------------------------------------------------------
+    print("\n===== Evaluating top final candidates on held-out test cases =====", flush=True)
+
+    top_population = [population[cid] for cid in top_cand_ids]
+
+    final_population_results = []
+
+    final_case_batches = make_case_batches_for_population(
+        test_case_data,
+        population_size=len(top_population),
+        core_limit=CORE_LIMIT,
+    )
+
+    for ib, case_batch in enumerate(final_case_batches):
+        print(
+            f"\n===== Final test batch {ib+1}/{len(final_case_batches)} =====",
+            flush=True,
+        )
+
+        batch_results = evaluate_population(top_population, case_batch)
+
+        # evaluate_population uses local candidate IDs 0,1,...
+        # Convert them back to the original population candidate IDs.
+        for local_cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in batch_results:
+            original_cand_id = top_cand_ids[local_cand_id]
+            final_population_results.append(
+                (
+                    original_cand_id,
+                    RE,
+                    CG,
+                    raw_fit,
+                    norm_fit,
+                    run_mode,
+                    steady_elapsed,
+                    unsteady_elapsed,
+                    total_solver_elapsed,
+                    tree_size,
+                    tree_height,
+                    expr,
+                )
+            )
+
+    final_scores = {}
+    for cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in final_population_results:
+        final_scores.setdefault(cand_id, []).append(norm_fit)
+
+    best_test_mean_normalized_fitness = float(np.mean(final_scores[best_cand_id]))
+
+    final_results = final_population_results
+
+    FINAL_EVAL_FILE = f"gp_results_{RUN_TAG}_final_eval.csv"
+
+    with open(FINAL_EVAL_FILE, "w") as f:
+        f.write("seed,RE,CG,cand_id,raw_fitness,baseline_fitness,norm_fitness,run_mode,steady_elapsed,unsteady_elapsed,total_solver_elapsed,tree_size,tree_height,expr\n")
+
+        for cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in final_results:
+            baseline_fit = next(
+                case["baseline_err"]
+                for case in case_data
+                if case["RE"] == RE and case["CG"] == CG
+            )
+
+            f.write(
+                f'{RANDOM_SEED},{RE},{CG},{cand_id},'
+                f'{raw_fit:.12e},{baseline_fit:.12e},{norm_fit:.12e},'
+                f'{run_mode},{steady_elapsed:.6e},{unsteady_elapsed:.6e},'
+                f'{total_solver_elapsed:.6e},{tree_size},{tree_height},"{expr}"\n'
+            )
+
+    final_best = {
+        "seed": RANDOM_SEED,
+        "best_train_mean_normalized_fitness": best_train_mean_normalized_fitness,
+        "best_test_mean_normalized_fitness": best_test_mean_normalized_fitness,
+        "best_cand_id": int(best_cand_id),
+        "top_cand_ids": [int(cid) for cid in top_cand_ids],
+        "top_expressions": {
+            str(cid): str(population[cid]) for cid in top_cand_ids
+        },
+        "top_train_mean_normalized_fitness": {
+            str(cid): float(np.mean(final_train_scores[cid])) for cid in top_cand_ids
+        },
+        "top_test_mean_normalized_fitness": {
+            str(cid): float(np.mean(final_scores[cid])) for cid in top_cand_ids
+        },
+        "tree_size": int(len(best)),
+        "tree_height": int(best.height),
+        "best_expression": str(best),
+        "input_variables": ["eta_h", "eta_y"],
+        "closure_definition": {
+            "eta_h": "h_wall(CG)/L_outer",
+            "eta_y": "yw/L_outer",
+            "h_wall": "median corrected wall distance of first near-wall cell band for each CG",
+            "raw": "GP expression evaluated using eta_h and eta_y",
+            "C_eff": (
+                "KAPPA0*exp(log_factor), where "
+                "t=tanh(raw), log_factor=log(C_EFF_MIN_FACTOR)*(-t) for t<0 "
+                "and log(C_EFF_MAX_FACTOR)*t for t>=0"
+            ),
+            "C_eff_bounds": [C_EFF_MIN, C_EFF_MAX],
+            "C_eff_neutral": "raw = 0 gives C_eff = KAPPA0",
+            "lm": "C_eff*yw",
+            "KAPPA0": KAPPA0,
+            "C_EFF_MIN_FACTOR": C_EFF_MIN_FACTOR,
+            "C_EFF_MAX_FACTOR": C_EFF_MAX_FACTOR,
+            "C_EFF_MIN": C_EFF_MIN,
+            "C_EFF_MAX": C_EFF_MAX,
+        },
+        "test_re_list": TEST_RE_LIST,
+        "training_cases": [
+            f"RE{case['RE']}_CG{case['CG']}" for case in train_case_data
+        ],
+        "test_cases": [
+            f"RE{case['RE']}_CG{case['CG']}" for case in test_case_data
+        ],
+    }
+
+    with open(FINAL_BEST_FILE, "w") as f:
+        json.dump(final_best, f, indent=2)
+
+    print(f"Best training mean normalized fitness = {best_train_mean_normalized_fitness:.8f}", flush=True)
+    print(f"Held-out test mean normalized fitness = {best_test_mean_normalized_fitness:.8f}", flush=True)
     print(f"Best expr = {best}", flush=True)
+    print(f"Final best saved to {FINAL_BEST_FILE}", flush=True)
 
     print("\n===== Baselines =====", flush=True)
     for case in case_data:

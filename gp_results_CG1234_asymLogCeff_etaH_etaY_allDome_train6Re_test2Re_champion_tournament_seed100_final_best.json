@@ -1,0 +1,87 @@
+{
+  "seed": 100,
+  "best_train_mean_normalized_fitness": 0.4868127389456293,
+  "best_test_mean_normalized_fitness": 0.4021442520635655,
+  "best_cand_id": 0,
+  "top_cand_ids": [
+    0,
+    1
+  ],
+  "top_expressions": {
+    "0": "sub(-0.37901541435676955, protected_div(eta_y, 0.33314395947154063))",
+    "1": "sub(-0.37901541435676955, protected_div(eta_y, 0.33314395947154063))"
+  },
+  "top_train_mean_normalized_fitness": {
+    "0": 0.4868127389456293,
+    "1": 0.4868127389456293
+  },
+  "top_test_mean_normalized_fitness": {
+    "0": 0.4021442520635655,
+    "1": 0.4021442520635655
+  },
+  "tree_size": 5,
+  "tree_height": 2,
+  "best_expression": "sub(-0.37901541435676955, protected_div(eta_y, 0.33314395947154063))",
+  "input_variables": [
+    "eta_h",
+    "eta_y"
+  ],
+  "closure_definition": {
+    "eta_h": "h_wall(CG)/L_outer",
+    "eta_y": "yw/L_outer",
+    "h_wall": "median corrected wall distance of first near-wall cell band for each CG",
+    "raw": "GP expression evaluated using eta_h and eta_y",
+    "C_eff": "KAPPA0*exp(log_factor), where t=tanh(raw), log_factor=log(C_EFF_MIN_FACTOR)*(-t) for t<0 and log(C_EFF_MAX_FACTOR)*t for t>=0",
+    "C_eff_bounds": [
+      0.0205,
+      0.82
+    ],
+    "C_eff_neutral": "raw = 0 gives C_eff = KAPPA0",
+    "lm": "C_eff*yw",
+    "KAPPA0": 0.41,
+    "C_EFF_MIN_FACTOR": 0.05,
+    "C_EFF_MAX_FACTOR": 2.0,
+    "C_EFF_MIN": 0.0205,
+    "C_EFF_MAX": 0.82
+  },
+  "test_re_list": [
+    "5963",
+    "12819"
+  ],
+  "training_cases": [
+    "RE3000_CG1",
+    "RE3000_CG2",
+    "RE3000_CG3",
+    "RE3000_CG4",
+    "RE3413_CG1",
+    "RE3413_CG2",
+    "RE3413_CG3",
+    "RE3413_CG4",
+    "RE7912_CG1",
+    "RE7912_CG2",
+    "RE7912_CG3",
+    "RE7912_CG4",
+    "RE9000_CG1",
+    "RE9000_CG2",
+    "RE9000_CG3",
+    "RE9000_CG4",
+    "RE10622_CG1",
+    "RE10622_CG2",
+    "RE10622_CG3",
+    "RE10622_CG4",
+    "RE14000_CG1",
+    "RE14000_CG2",
+    "RE14000_CG3",
+    "RE14000_CG4"
+  ],
+  "test_cases": [
+    "RE5963_CG1",
+    "RE5963_CG2",
+    "RE5963_CG3",
+    "RE5963_CG4",
+    "RE12819_CG1",
+    "RE12819_CG2",
+    "RE12819_CG3",
+    "RE12819_CG4"
+  ]
+}

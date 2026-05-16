@@ -6,8 +6,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=21
 ##SBATCH --nodelist=warlock34
-#SBATCH --time=0-24:00:00
-#SBATCH --mem=32G
+#SBATCH --time=0-20:00:00
+#SBATCH --mem=100G
 
 module purge
 

@@ -1,0 +1,185 @@
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/14000/4/template/tamu_2d_fv_gp_unsteady.i:39.1:
+The following occurred in the Problem 'MOOSE Problem' of type FEProblem.
+
+Using /homes/aiskhak/projects/GP/runs/14000/4/template/tamu_2d_fv_gp_out_cp/0047 for restart.[39m
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/14000/4/template/tamu_2d_fv_gp_unsteady.i:154.3:
+The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
+
+AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/14000/4/template/elem_id.csv[39m
+Currently Setting Up
+  Finished Initializing                                                                  [[33m  2.58 s[39m] [[33m  401 MB[39m]
+Finished Setting Up                                                                      [[33m  5.61 s[39m] [[33m  401 MB[39m]
+Framework Information:
+MOOSE Version:           git commit 28092e1647 on 2026-02-01
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Fri May  8 14:56:49 2026
+Executable Timestamp:    Fri Apr 24 11:33:36 2026
+
+Input File(s):
+  /homes/aiskhak/projects/GP/runs/14000/4/template/tamu_2d_fv_gp_unsteady.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Outputs/out
+  # Checkpoints Kept:      2
+  Execute On:              FINAL 
+
+Parallelism:
+  Num Processors:          12
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 376305
+    Local:                 31761
+    Min/Max/Avg:           31012/31761/31358
+  Elems:                   
+    Total:                 93568
+    Local:                 7815
+    Min/Max/Avg:           7570/7827/7797
+  Num Subdomains:          1
+  Num Partitions:          12
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                280704
+  Num Local DOFs:          23445
+  Variables:               { "u" "v" "pressure" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Auxiliary System:
+  Num DOFs:                93568
+  Num Local DOFs:          7815
+  Variables:               "mixing_length_gp_aux_var" 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Transient
+  TimeStepper:             IterationAdaptiveDT
+  TimeIntegrator(s):       ImplicitEuler
+  Solver Mode:             Preconditioned JFNK 
+  MOOSE Preconditioner:    SMP 
+
+Time Step 0, time = 0
+
+Time Step 1, time = 0.5, dt = 0.5
+ 0 Nonlinear |R| = [32m1.825014e-02[39m
+ 1 Nonlinear |R| = [32m2.120458e-04[39m
+ 2 Nonlinear |R| = [32m3.357803e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 26.52 s[39m] [[33m  732 MB[39m]
+
+Outlier Variable Residual Norms:
+  v: [33m2.936678e-08[39m
+Steady-State Relative Differential Norm: 0.000298533
+
+Time Step 2, time = 1.125, dt = 0.625
+ 0 Nonlinear |R| = [32m3.270639e-03[39m
+ 1 Nonlinear |R| = [32m1.137821e-05[39m
+ 2 Nonlinear |R| = [32m2.897003e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 27.95 s[39m] [[33m  749 MB[39m]
+Steady-State Relative Differential Norm: 9.30381e-05
+
+Time Step 3, time = 1.90625, dt = 0.78125
+ 0 Nonlinear |R| = [32m2.769706e-03[39m
+ 1 Nonlinear |R| = [32m4.602960e-06[39m
+ 2 Nonlinear |R| = [32m2.870776e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 27.40 s[39m] [[33m  749 MB[39m]
+Steady-State Relative Differential Norm: 1.95639e-05
+
+Time Step 4, time = 2.88281, dt = 0.976562
+ 0 Nonlinear |R| = [32m2.486925e-03[39m
+ 1 Nonlinear |R| = [32m5.031963e-06[39m
+ 2 Nonlinear |R| = [32m2.873974e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 27.99 s[39m] [[33m  750 MB[39m]
+Steady-State Relative Differential Norm: 1.47937e-05
+
+Time Step 5, time = 4.10352, dt = 1.2207
+ 0 Nonlinear |R| = [32m2.248035e-03[39m
+ 1 Nonlinear |R| = [32m4.353033e-06[39m
+ 2 Nonlinear |R| = [32m2.894584e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 28.41 s[39m] [[33m  750 MB[39m]
+Steady-State Relative Differential Norm: 1.10992e-05
+
+Time Step 6, time = 5.62939, dt = 1.52588
+ 0 Nonlinear |R| = [32m2.017082e-03[39m
+ 1 Nonlinear |R| = [32m4.142480e-06[39m
+ 2 Nonlinear |R| = [32m2.932300e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 27.88 s[39m] [[33m  750 MB[39m]
+Steady-State Relative Differential Norm: 8.34485e-06
+
+Time Step 7, time = 7.53674, dt = 1.90735
+ 0 Nonlinear |R| = [32m1.789109e-03[39m
+ 1 Nonlinear |R| = [32m3.333300e-06[39m
+ 2 Nonlinear |R| = [32m2.991249e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 28.40 s[39m] [[33m  707 MB[39m]
+Steady-State Relative Differential Norm: 6.23844e-06
+
+Time Step 8, time = 9.92093, dt = 2.38419
+ 0 Nonlinear |R| = [32m1.567500e-03[39m
+ 1 Nonlinear |R| = [32m3.069785e-06[39m
+ 2 Nonlinear |R| = [32m3.069291e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 28.30 s[39m] [[33m  735 MB[39m]
+Steady-State Relative Differential Norm: 4.57182e-06
+
+Time Step 9, time = 12.9012, dt = 2.98023
+ 0 Nonlinear |R| = [32m1.357107e-03[39m
+ 1 Nonlinear |R| = [32m2.370649e-06[39m
+ 2 Nonlinear |R| = [32m3.158693e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 27.09 s[39m] [[33m  748 MB[39m]
+Steady-State Relative Differential Norm: 3.25546e-06
+
+Time Step 10, time = 16.6265, dt = 3.72529
+ 0 Nonlinear |R| = [32m1.162059e-03[39m
+ 1 Nonlinear |R| = [32m1.820344e-06[39m
+ 2 Nonlinear |R| = [32m3.255830e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 26.07 s[39m] [[33m  748 MB[39m]
+Steady-State Relative Differential Norm: 2.29444e-06
+
+Time Step 11, time = 21.2831, dt = 4.65661
+ 0 Nonlinear |R| = [32m9.851445e-04[39m
+ 1 Nonlinear |R| = [32m1.687100e-06[39m
+ 2 Nonlinear |R| = [32m3.367994e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 26.40 s[39m] [[33m  752 MB[39m]
+Steady-State Relative Differential Norm: 1.68191e-06
+
+Time Step 12, time = 27.1038, dt = 5.82077
+ 0 Nonlinear |R| = [32m8.277609e-04[39m
+ 1 Nonlinear |R| = [32m1.349854e-06[39m
+ 2 Nonlinear |R| = [32m3.509112e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 27.38 s[39m] [[33m  752 MB[39m]
+Steady-State Relative Differential Norm: 1.27615e-06
+
+Time Step 13, time = 34.3798, dt = 7.27596
+ 0 Nonlinear |R| = [32m6.901017e-04[39m
+ 1 Nonlinear |R| = [32m6.707599e-07[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 14.46 s[39m] [[33m  752 MB[39m]
+Steady-State Relative Differential Norm: 9.91864e-07
+Steady-State Solution Achieved at time: 34.3798
+Finished Executing                                                                       [[33m348.94 s[39m] [[33m  753 MB[39m]
+Finished Executing!!!

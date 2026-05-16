@@ -1,4 +1,4 @@
-# salloc -p ksu-mne-train.q --nodelist=warlock35 --nodes=1 --ntasks=128 --mem=700G --time=72:00:00
+# salloc -p ksu-mne-train.q --nodelist=warlock36 --nodes=1 --ntasks=128 --mem=700G --time=72:00:00
 import copy
 import os
 import fnmatch
@@ -19,8 +19,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 # ============================================================
 RUN_TEMPLATE_FIRST = True
 
-RE = "10622" #"12819" #"3000" #"14000" #
-CG = "3"
+RE = "3000" #"5963" "7912" "9000" "10622" "12819" "14000"
+CG = "4"
 RANDOM_SEED = 1
 RESULTS_FILE = f"gp_results_RE{RE}_CG{CG}_seed{RANDOM_SEED}.csv"
 
@@ -472,17 +472,20 @@ def initialize_template_from_population(population, r_cg, z_cg, yw):
     lm_avg = np.mean(np.vstack(lm_list), axis=0)
 
     clean_case_folder(TEMPLATE_DIR)
-    set_restart_flag(TEMPLATE_DIR, enable_restart=False)
+    set_restart_flag(TEMPLATE_DIR, enable_restart=True)
     save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(TEMPLATE_DIR, LM_FILE))
 
-    ok = run_case(TEMPLATE_DIR, STEADY_RUN_SCRIPT)
+    #ok = run_case(TEMPLATE_DIR, STEADY_RUN_SCRIPT)
 
-    if not ok:
-        print("Template steady initialization failed; trying unsteady.", flush=True)
-        clean_case_folder(TEMPLATE_DIR)
-        set_restart_flag(TEMPLATE_DIR, enable_restart=False)
-        save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(TEMPLATE_DIR, LM_FILE))
-        ok = run_case(TEMPLATE_DIR, UNSTEADY_RUN_SCRIPT)
+    #if not ok:
+    #    print("Template steady initialization failed; trying unsteady.", flush=True)
+    #    clean_case_folder(TEMPLATE_DIR)
+    #    set_restart_flag(TEMPLATE_DIR, enable_restart=False)
+    #    save_lm_csv(z_cg, r_cg, lm_avg, os.path.join(TEMPLATE_DIR, LM_FILE))
+    #    ok = run_case(TEMPLATE_DIR, UNSTEADY_RUN_SCRIPT)
+
+    print("Skipping steady initialization; running unsteady directly.", flush=True)
+    ok = run_case(TEMPLATE_DIR, UNSTEADY_RUN_SCRIPT)
 
     if not ok:
         raise RuntimeError("Template initialization failed.")
