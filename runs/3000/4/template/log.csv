@@ -13,15 +13,15 @@ The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVa
 
 AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/3000/4/template/elem_id.csv[39m
 Currently Setting Up
-  Finished Initializing                                                                  [[33m  2.66 s[39m] [[33m  398 MB[39m]
-Finished Setting Up                                                                      [[33m  6.12 s[39m] [[33m  398 MB[39m]
+  Finished Initializing                                                                  [[33m  2.89 s[39m] [[33m  396 MB[39m]
+Finished Setting Up                                                                      [[33m  6.41 s[39m] [[33m  396 MB[39m]
 Framework Information:
 MOOSE Version:           git commit 28092e1647 on 2026-02-01
 LibMesh Version:         
 PETSc Version:           3.24.3
 SLEPc Version:           3.24.0
-Current Time:            Tue May 12 09:31:02 2026
-Executable Timestamp:    Fri Apr 24 11:33:36 2026
+Current Time:            Sat May 16 19:45:36 2026
+Executable Timestamp:    Tue May 12 15:56:39 2026
 
 Input File(s):
   /homes/aiskhak/projects/GP/runs/3000/4/template/tamu_2d_fv_gp_unsteady.i
@@ -76,19 +76,67 @@ Execution Information:
 Time Step 0, time = 0
 
 Time Step 1, time = 0.5, dt = 0.5
-Currently Executing    Finished Computing Residual                                                          [[33m  0.78 s[39m] [[33m  517 MB[39m]
  0 Nonlinear |R| = [32m2.874963e-04[39m
-[mpiexec@icr-clymene] Sending Ctrl-C to processes as requested
-[mpiexec@icr-clymene] Press Ctrl-C again to force abort
+ 1 Nonlinear |R| = [32m7.197647e-08[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 18.22 s[39m] [[33m  688 MB[39m]
+Steady-State Relative Differential Norm: 5.20968e-05
 
-===================================================================================
-=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
-=   PID 2058455 RUNNING AT warlock37
-=   EXIT CODE: 2
-=   CLEANING UP REMAINING PROCESSES
-=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
-===================================================================================
-YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Interrupt (signal 2)
-This typically refers to a problem with your application.
-Please see the FAQ page for debugging suggestions
+Time Step 2, time = 1.125, dt = 0.625
+ 0 Nonlinear |R| = [32m6.882305e-05[39m
+ 1 Nonlinear |R| = [32m3.305797e-09[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 13.55 s[39m] [[33m  739 MB[39m]
+Steady-State Relative Differential Norm: 4.17036e-06
+
+Time Step 3, time = 1.90625, dt = 0.78125
+ 0 Nonlinear |R| = [32m5.596875e-05[39m
+ 1 Nonlinear |R| = [32m2.802878e-09[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 14.93 s[39m] [[33m  739 MB[39m]
+Steady-State Relative Differential Norm: 5.73267e-06
+
+Time Step 4, time = 2.88281, dt = 0.976562
+ 0 Nonlinear |R| = [32m4.561648e-05[39m
+ 1 Nonlinear |R| = [32m1.855492e-09[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 15.90 s[39m] [[33m  700 MB[39m]
+Steady-State Relative Differential Norm: 5.32425e-06
+
+Time Step 5, time = 4.10352, dt = 1.2207
+ 0 Nonlinear |R| = [32m3.707229e-05[39m
+ 1 Nonlinear |R| = [32m1.206476e-09[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 16.36 s[39m] [[33m  716 MB[39m]
+Steady-State Relative Differential Norm: 3.85731e-06
+
+Time Step 6, time = 5.62939, dt = 1.52588
+ 0 Nonlinear |R| = [32m3.006989e-05[39m
+ 1 Nonlinear |R| = [32m7.883927e-10[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 16.23 s[39m] [[33m  733 MB[39m]
+Steady-State Relative Differential Norm: 2.54934e-06
+
+Time Step 7, time = 7.53674, dt = 1.90735
+ 0 Nonlinear |R| = [32m2.436360e-05[39m
+ 1 Nonlinear |R| = [32m5.095865e-10[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 16.58 s[39m] [[33m  733 MB[39m]
+Steady-State Relative Differential Norm: 1.67208e-06
+
+Time Step 8, time = 9.92093, dt = 2.38419
+ 0 Nonlinear |R| = [32m1.973723e-05[39m
+ 1 Nonlinear |R| = [32m8.739539e-10[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 14.94 s[39m] [[33m  744 MB[39m]
+Steady-State Relative Differential Norm: 1.13472e-06
+
+Time Step 9, time = 12.9012, dt = 2.98023
+ 0 Nonlinear |R| = [32m1.600433e-05[39m
+ 1 Nonlinear |R| = [32m1.095013e-09[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m 16.47 s[39m] [[33m  700 MB[39m]
+Steady-State Relative Differential Norm: 8.19217e-07
+Steady-State Solution Achieved at time: 12.9012
+Finished Executing                                                                       [[33m147.63 s[39m] [[33m  701 MB[39m]
 Finished Executing!!!
