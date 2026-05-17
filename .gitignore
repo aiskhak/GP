@@ -1,0 +1,16 @@
+*_cp/
+
+# MOOSE checkpoint/restart folders
+*_cp/
+*_out_cp/
+*_gp_out_cp/
+
+# MOOSE checkpoint/restart folders
+*_cp/
+*_out_cp/
+*_gp_out_cp/
+
+# MOOSE checkpoint/restart folders
+*_cp/
+*_out_cp/
+*_gp_out_cp/
