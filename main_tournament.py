@@ -1,4 +1,4 @@
-# python -u main_tournament.py 2>&1 | tee gp_run_CG1234_asymLogCeff_etaH_etaY_allDome_train6Re_test2Re_champion_tournament_seed100.log
+# python -u main_tournament.py 2>&1 | tee gp_run_CG1234_asymLogCeff_etaH_etaY_allDome_train6Re_test2Re_champion_tournament_10seeds_seed200.log
 
 # salloc -p ksu-mne-train.q --nodelist=warlock35 --nodes=1 --ntasks=128 --mem=700G --time=72:00:00
 
@@ -48,8 +48,8 @@ for RE in RE_LIST:
         {"RE": RE, "CG": "4", "np": 12},
     ]
 
-RANDOM_SEED = 100
-RUN_TAG = "CG1234_asymLogCeff_etaH_etaY_allDome_train6Re_test2Re_champion_tournament_seed100"
+RANDOM_SEED = 200
+RUN_TAG = "CG1234_asymLogCeff_etaH_etaY_allDome_train6Re_test2Re_champion_tournament_10seeds_seed200"
 
 RESULTS_FILE = f"gp_results_{RUN_TAG}.csv"
 DETAILS_FILE = f"gp_results_{RUN_TAG}_details.csv"
@@ -116,34 +116,42 @@ FITNESS_CACHE_FILE = f"gp_results_{RUN_TAG}_fitness_cache.json"
 USE_FITNESS_CACHE = True
 
 N_CANDIDATES = 10
-N_GENERATIONS = 30
+N_GENERATIONS = 100
 TOURNAMENT_SIZE = 3
 MUTATION_PROB = 0.6
 CROSSOVER_PROB = 0.4
-ELITE_COUNT = 2
+ELITE_COUNT = 4
 
 CHAMPION_EXPR_STRINGS = [
-    # seed 6
+    # seed 6: best overall
     "sub(-0.37901541435676955, protected_div(eta_y, 0.33314395947154063))",
-    "sub(eta_h, protected_div(eta_y, 0.33314395947154063))",
+
+    # seed 6 simplified
+    "sub(-0.38, mul(3.0, eta_y))",
+
+    # seed 7: new strong candidate
+    "sub(eta_y, protected_div(eta_y, 0.1297762159749819))",
+
+    # seed 7 simplified: approximately -6.70 eta_y
+    "mul(-6.7, eta_y)",
 
     # seed 3
     "add(eta_h, sub(protected_div(eta_y, -0.18867695249518834), 0.33347711999614726))",
 
     # seed 4
     "sub(-0.41338404990671096, sub(add(eta_y, eta_y), sub(protected_tanh(mul(0.3809913094372004, eta_h)), eta_y)))",
-    "sub(-0.41338404990671096, sub(add(eta_h, eta_y), sub(protected_tanh(mul(0.3809913094372004, eta_h)), eta_y)))",
+
+    # seed 8: approximately -0.386 - 2 eta_y
+    "neg(sub(0.38592740083515376, neg(add(eta_y, eta_y))))",
 
     # seed 5
     "neg(protected_div(sub(eta_y, eta_h), protected_tanh(protected_tanh(0.13585021784260087))))",
 
-    # seed 1
-    "add(mul(0.12305820209505292, neg(protected_div(eta_y, eta_h))), eta_y)",
-    "add(mul(protected_tanh(neg(-0.13421276731405263)), neg(protected_div(eta_y, eta_h))), eta_y)",
+    # simple variant around seed 3/7 family
+    "sub(-0.333, mul(5.3, eta_y))",
 
-    # hand-simplified variants from seed 6 / seed 3 structure
-    "sub(-0.38, mul(3.0, eta_y))",
-    "sub(-0.33, mul(5.0, eta_y))",
+    # diversity candidate from seed 1
+    "add(mul(0.12305820209505292, neg(protected_div(eta_y, eta_h))), eta_y)",
 ]
 
 # ============================================================
@@ -1102,6 +1110,36 @@ def make_case_batches_for_population(case_data, population_size, core_limit):
 
     return batches
 
+def select_top_unique_candidate_ids(population, final_train_scores, top_k):
+    """
+    Select top candidates by full-training score, but do not return
+    duplicate symbolic expressions.
+    """
+    ranked_ids = sorted(
+        final_train_scores.keys(),
+        key=lambda cid: np.mean(final_train_scores[cid]),
+    )
+
+    selected_ids = []
+    seen_expr = set()
+
+    for cid in ranked_ids:
+        expr = str(population[cid])
+
+        if expr in seen_expr:
+            continue
+
+        selected_ids.append(cid)
+        seen_expr.add(expr)
+
+        if len(selected_ids) >= top_k:
+            break
+
+    if len(selected_ids) == 0:
+        raise RuntimeError("No unique final candidates were selected.")
+
+    return selected_ids
+
 # ============================================================
 # MAIN: evaluate ONE DEAP candidate with real solver fitness
 # ============================================================
@@ -1325,22 +1363,23 @@ def main():
     for cand_id, RE, CG, raw_fit, norm_fit, run_mode, steady_elapsed, unsteady_elapsed, total_solver_elapsed, tree_size, tree_height, expr in final_training_results:
         final_train_scores.setdefault(cand_id, []).append(norm_fit)
 
-    TOP_K_FINAL = 2
+    TOP_K_FINAL = 5
 
-    top_cand_ids = sorted(
-        final_train_scores.keys(),
-        key=lambda cid: np.mean(final_train_scores[cid]),
-    )[:TOP_K_FINAL]
+    top_cand_ids = select_top_unique_candidate_ids(
+        population,
+        final_train_scores,
+        TOP_K_FINAL,
+    )
 
     best_cand_id = top_cand_ids[0]
     best = population[best_cand_id]
     best_train_mean_normalized_fitness = float(np.mean(final_train_scores[best_cand_id]))
 
-    print("Top final candidate IDs:", top_cand_ids, flush=True)
+    print("Top final unique candidate IDs:", top_cand_ids, flush=True)
     for cid in top_cand_ids:
         print(
             f"  cand_id={cid}: train mean normalized fitness = "
-            f"{np.mean(final_train_scores[cid]):.8f}",
+            f"{np.mean(final_train_scores[cid]):.8f} | expr = {population[cid]}",
             flush=True,
         )
 
