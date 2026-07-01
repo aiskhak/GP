@@ -1,6 +1,8 @@
 # global parameters
 mu    = 3.333333e-3	# 1/3000
 mesh  = '../../../../mesh/TAMU_2D_RANS_2.msh'
+csv_f = 'lm_pred.csv'
+csv_f_elem = 'elem_id.csv'
 
 rho = 1
 advected_interp_method = 'upwind'
@@ -57,58 +59,12 @@ velocity_interp_method = 'rc'
     family = MONOMIAL
     fv     = true
   []
-
-  [yw_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [dudx_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dudy_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dvdx_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dvdy_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [strain_factor_raw_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_factor_clipped_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_factor_clip_delta_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_invariant_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
 []
 
 [Functions]
   [./u_in]
     type = ParsedFunction
-    expression = -1*(8/7)*(1-y/0.5)^(1/7)
+    expression = -1*(60/49)*(1-y/0.5)^(1/7)
   [../]
 []
 
@@ -129,18 +85,14 @@ velocity_interp_method = 'rc'
     velocity_interp_method = ${velocity_interp_method}
     rho = ${rho}
   []
+
+
   [u_viscosity]
     type = INSFVMomentumDiffusion
     variable = u
-    mu = ${mu}
+    mu = mu_eff
     momentum_component = 'x'
-  []
-  [u_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress_gp
-    variable = u
-    rho = ${rho}
-    mixing_length_gp = mixing_length_gp_aux_var
-    momentum_component = 'x'
+    complete_expansion = true
     u = u
     v = v
   []
@@ -159,21 +111,26 @@ velocity_interp_method = 'rc'
     velocity_interp_method = ${velocity_interp_method}
     rho = ${rho}
   []
+
+
   [v_viscosity]
     type = INSFVMomentumDiffusion
     variable = v
-    mu = ${mu}
+    mu = mu_eff
     momentum_component = 'y'
-  []
-  [v_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress_gp
-    variable = v
-    rho = ${rho}
-    mixing_length_gp = mixing_length_gp_aux_var
-    momentum_component = 'y'
+    complete_expansion = true
     u = u
     v = v
   []
+
+  [v_viscosity_rz]
+    type = INSFVMomentumViscousSourceRZ
+    variable = v
+    mu = mu_eff
+    momentum_component = 'y'
+    complete_expansion = true
+  []
+
   [v_pressure]
     type = INSFVMomentumPressure
     variable = v
@@ -183,148 +140,28 @@ velocity_interp_method = 'rc'
 []
 
 [AuxKernels]
-  [yw_aux_ker]
-    type = WallDistanceAux
-    walls = 'wall'
-    variable = yw_aux_var
-    execute_on = 'INITIAL'
-  []
-
-  [dudx_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dudx_aux_var
-    functor = grad_u
-    component = 0
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
-  [dudy_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dudy_aux_var
-    functor = grad_u
-    component = 1
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
-  [dvdx_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dvdx_aux_var
-    functor = grad_v
-    component = 0
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
-  [dvdy_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dvdy_aux_var
-    functor = grad_v
-    component = 1
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
   [mixing_length_gp_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
+    type = AuxVarFromCSVFile
     variable = mixing_length_gp_aux_var
-    output_quantity = mixing_length
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL NONLINEAR FINAL'
+    file_name = ${csv_f}
+    elem_id_file_name = ${csv_f_elem}
+    use_mapping = true
+    header = true
   []
+[]
 
-  [strain_factor_raw_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_raw_aux_var
-    output_quantity = strain_factor_raw
 
-    expression_file = closure_expr.txt
 
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
-  [strain_factor_clipped_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_clipped_aux_var
-    output_quantity = strain_factor_clipped
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
-  [strain_factor_clip_delta_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_clip_delta_aux_var
-    output_quantity = strain_factor_clip_delta
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL NONLINEAR FINAL'
-  []
-
-  [strain_invariant_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_invariant_aux_var
-    output_quantity = strain_invariant
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL NONLINEAR FINAL'
+[FunctorMaterials]
+  [mixing_length_viscosity]
+    type = INSFVMixingLengthEffectiveViscosityFunctorMaterialRZ
+    property_name = mu_eff
+    turbulent_viscosity_property_name = mu_t
+    molecular_viscosity = ${mu}
+    rho = ${rho}
+    mixing_length = mixing_length_gp_aux_var
+    u = u
+    v = v
   []
 []
 
@@ -365,7 +202,7 @@ velocity_interp_method = 'rc'
     variable = u
     u        = u
     v        = v
-    mu       = ${mu}
+    mu       = mu_eff
     momentum_component = x
   []
   [axis-v]
@@ -374,7 +211,7 @@ velocity_interp_method = 'rc'
     variable = v
     u        = u
     v        = v
-    mu       = ${mu}
+    mu       = mu_eff
     momentum_component = y
   []
   [axis-p]
@@ -384,24 +221,10 @@ velocity_interp_method = 'rc'
   []
 []
 
-[FunctorMaterials]
-  [grad_u_mat]
-    type = ADGenericFunctorGradientMaterial
-    prop_names = 'grad_u'
-    prop_values = 'u'
-  []
-
-  [grad_v_mat]
-    type = ADGenericFunctorGradientMaterial
-    prop_names = 'grad_v'
-    prop_values = 'v'
-  []
-[]
-
 [VectorPostprocessors]
   [vpp]
     type = ElementValueSampler
-    variable = 'u v strain_factor_raw_aux_var strain_factor_clipped_aux_var'
+    variable = 'u v'
     sort_by = x
   []
 []

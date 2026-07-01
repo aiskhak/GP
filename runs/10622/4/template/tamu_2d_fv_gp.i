@@ -64,7 +64,7 @@ velocity_interp_method = 'rc'
 [Functions]
   [./u_in]
     type = ParsedFunction
-    expression = -1*(8/7)*(1-y/0.5)^(1/7)
+    expression = -1*(60/49)*(1-y/0.5)^(1/7)
   [../]
 []
 
@@ -85,18 +85,14 @@ velocity_interp_method = 'rc'
     velocity_interp_method = ${velocity_interp_method}
     rho = ${rho}
   []
+
+
   [u_viscosity]
     type = INSFVMomentumDiffusion
     variable = u
-    mu = ${mu}
+    mu = mu_eff
     momentum_component = 'x'
-  []
-  [u_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress_gp
-    variable = u
-    rho = ${rho}
-    mixing_length_gp = mixing_length_gp_aux_var
-    momentum_component = 'x'
+    complete_expansion = true
     u = u
     v = v
   []
@@ -115,21 +111,26 @@ velocity_interp_method = 'rc'
     velocity_interp_method = ${velocity_interp_method}
     rho = ${rho}
   []
+
+
   [v_viscosity]
     type = INSFVMomentumDiffusion
     variable = v
-    mu = ${mu}
+    mu = mu_eff
     momentum_component = 'y'
-  []
-  [v_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress_gp
-    variable = v
-    rho = ${rho}
-    mixing_length_gp = mixing_length_gp_aux_var
-    momentum_component = 'y'
+    complete_expansion = true
     u = u
     v = v
   []
+
+  [v_viscosity_rz]
+    type = INSFVMomentumViscousSourceRZ
+    variable = v
+    mu = mu_eff
+    momentum_component = 'y'
+    complete_expansion = true
+  []
+
   [v_pressure]
     type = INSFVMomentumPressure
     variable = v
@@ -146,6 +147,21 @@ velocity_interp_method = 'rc'
     elem_id_file_name = ${csv_f_elem}
     use_mapping = true
     header = true
+  []
+[]
+
+
+
+[FunctorMaterials]
+  [mixing_length_viscosity]
+    type = INSFVMixingLengthEffectiveViscosityFunctorMaterialRZ
+    property_name = mu_eff
+    turbulent_viscosity_property_name = mu_t
+    molecular_viscosity = ${mu}
+    rho = ${rho}
+    mixing_length = mixing_length_gp_aux_var
+    u = u
+    v = v
   []
 []
 
@@ -186,7 +202,7 @@ velocity_interp_method = 'rc'
     variable = u
     u        = u
     v        = v
-    mu       = ${mu}
+    mu       = mu_eff
     momentum_component = x
   []
   [axis-v]
@@ -195,7 +211,7 @@ velocity_interp_method = 'rc'
     variable = v
     u        = u
     v        = v
-    mu       = ${mu}
+    mu       = mu_eff
     momentum_component = y
   []
   [axis-p]
