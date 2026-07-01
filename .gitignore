@@ -69,3 +69,6 @@ proj*.out
 proj*.err
 build.log
 *.dat
+
+# Keep exact MiGaDome interpolation target points
+!0_data_les/migadome/interpolation/nek/moose_cell_centers.dat
