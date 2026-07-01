@@ -36,7 +36,7 @@ velocity_interp_method = 'rc'
 
 [Problem]
   fv_bcs_integrity_check = false
-  restart_file_base = tamu_2d_fv_gp_out_cp/LATEST
+  #restart_file_base = tamu_2d_fv_gp_out_cp/LATEST
 []
 
 [Variables]
@@ -57,51 +57,9 @@ velocity_interp_method = 'rc'
     family = MONOMIAL
     fv     = true
   []
-
   [yw_aux_var]
-    order  = CONSTANT
+    order = CONSTANT
     family = MONOMIAL
-    fv     = true
-  []
-
-  [dudx_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dudy_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dvdx_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dvdy_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [strain_factor_raw_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_factor_clipped_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_factor_clip_delta_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_invariant_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
   []
 []
 
@@ -202,141 +160,33 @@ velocity_interp_method = 'rc'
     execute_on = 'INITIAL'
   []
 
-  [dudx_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dudx_aux_var
-    functor = grad_u
-    component = 0
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [dudy_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dudy_aux_var
-    functor = grad_u
-    component = 1
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [dvdx_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dvdx_aux_var
-    functor = grad_v
-    component = 0
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [dvdy_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dvdy_aux_var
-    functor = grad_v
-    component = 1
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
   [mixing_length_gp_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
+    type = FunctionalKappaMixingLengthAux
     variable = mixing_length_gp_aux_var
-    output_quantity = mixing_length
-
-    expression_file = closure_expr.txt
-
     wall_distance = yw_aux_var
+    eta_y_scale_pp = eta_y_scale_pp
 
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
+    kappa0 = 0.41
 
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
+    C1 = 0.0
+    C2 = -4.3
+    C3 = -0.12
 
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
+    eta_h = 0.0
+
+    C_eff_min_factor = 0.05
+    C_eff_max_factor = 2.0
+
+    execute_on = 'TIMESTEP_BEGIN'
   []
+[]
 
-  [strain_factor_raw_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_raw_aux_var
-    output_quantity = strain_factor_raw
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_factor_clipped_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_clipped_aux_var
-    output_quantity = strain_factor_clipped
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_factor_clip_delta_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_clip_delta_aux_var
-    output_quantity = strain_factor_clip_delta
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_invariant_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_invariant_aux_var
-    output_quantity = strain_invariant
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
+[Postprocessors]
+  [eta_y_scale_pp]
+    type = ElementExtremeValue
+    variable = yw_aux_var
+    value_type = max
+    execute_on = 'INITIAL'
   []
 []
 
@@ -396,24 +246,10 @@ velocity_interp_method = 'rc'
   []
 []
 
-[FunctorMaterials]
-  [grad_u_mat]
-    type = ADGenericFunctorGradientMaterial
-    prop_names = 'grad_u'
-    prop_values = 'u'
-  []
-
-  [grad_v_mat]
-    type = ADGenericFunctorGradientMaterial
-    prop_names = 'grad_v'
-    prop_values = 'v'
-  []
-[]
-
 [VectorPostprocessors]
   [vpp]
     type = ElementValueSampler
-    variable = 'u v strain_factor_raw_aux_var strain_factor_clipped_aux_var'
+    variable = 'u v mixing_length_gp_aux_var yw_aux_var'
     sort_by = x
   []
 []
@@ -455,11 +291,11 @@ velocity_interp_method = 'rc'
 
 [Outputs]
   print_linear_residuals = false
-#  [exodus]
-#    type = Exodus
-#    execute_on = FINAL
-#	file_base = tamu_2d_fv_gp_out
-#  []
+  [exodus]
+    type = Exodus
+    execute_on = FINAL
+	file_base = tamu_2d_fv_gp_out
+  []
   [./csv]
     type = CSV
 	execute_on = FINAL

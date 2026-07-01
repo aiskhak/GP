@@ -1,0 +1,28 @@
+===== CSV verification run: wall-only candidate =====
+PROJECT_ROOT = /homes/aiskhak/projects/GP
+RE = 3000, CG = 1
+Candidate: raw = -4.3*eta_y + -0.12
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3000/1/mapped.csv
+L_outer = 5.134754163210e+00
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.420000000000e+00, -2.023404064857e-01
+C_eff min/max = 2.051779299877e-02, 2.254590558055e-01
+lm min/max = 2.216827450814e-02, 1.053538230203e-01
+Copying template to: /homes/aiskhak/projects/GP/runs/3000/1/cand_000
+Wrote: /homes/aiskhak/projects/GP/runs/3000/1/cand_000/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3000/1/cand_000
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 29.25 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+
+===== Done =====
+run_mode = steady
+steady_elapsed = 29.25 sec
+unsteady_elapsed = 0.00 sec
+candidate folder = /homes/aiskhak/projects/GP/runs/3000/1/cand_000
+lm file = /homes/aiskhak/projects/GP/runs/3000/1/cand_000/lm_pred.csv
+latest VPP = /homes/aiskhak/projects/GP/runs/3000/1/cand_000/tamu_2d_fv_gp_csv_vpp_0002.csv

@@ -1,0 +1,1748 @@
+===== CSV wall-grid candidate: all cases =====
+PROJECT_ROOT = /homes/aiskhak/projects/GP
+Candidate: raw = -1.1*eta_h + -4.8*eta_y + -0.12
+Summary file: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+Read wall-cell median sizes:
+  CG1: h_wall = 1.169313396896e-01
+  CG2: h_wall = 5.840956861085e-02
+  CG3: h_wall = 2.920598672452e-02
+  CG4: h_wall = 1.460326482625e-02
+
+================================================================================
+Running RE=3000, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3000/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3000/1/tamu_2d_fv_csv_vpp_0031.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 5.613223789299e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3000/1/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3000/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3000/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3000/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 27.58 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3000/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 3.847807639897e-03
+Normalized MSE = 6.854897977223e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+
+================================================================================
+Running RE=3000, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3000/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3000/2/tamu_2d_fv_csv_vpp_0032.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.445277931580e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3000/2/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3000/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3000/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3000/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 12.17 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3000/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 3.326652737523e-03
+Normalized MSE = 7.483565231975e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+
+================================================================================
+Running RE=3000, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3000/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3000/3/tamu_2d_fv_csv_vpp_0034.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.334390120744e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3000/3/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3000/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3000/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3000/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 25.57 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3000/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 3.200983667516e-03
+Normalized MSE = 7.385084356381e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+
+================================================================================
+Running RE=3000, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3000/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3000/4/tamu_2d_fv_csv_vpp_0034.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.383864604310e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3000/4/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3000/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3000/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3000/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 95.00 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3000/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 3.177728827467e-03
+Normalized MSE = 7.248692909775e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+
+================================================================================
+Running RE=3413, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3413/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3413/1/tamu_2d_fv_csv_vpp_0027.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 5.622854058183e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3413/1/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3413/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3413/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3413/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 6.51 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3413/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 3.514535998374e-03
+Normalized MSE = 6.250448548027e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+
+================================================================================
+Running RE=3413, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3413/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3413/2/tamu_2d_fv_csv_vpp_0028.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.275355679717e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3413/2/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3413/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3413/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3413/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 13.12 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3413/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 3.035181844300e-03
+Normalized MSE = 7.099249914338e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+
+================================================================================
+Running RE=3413, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3413/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3413/3/tamu_2d_fv_csv_vpp_0029.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.096869085198e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3413/3/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3413/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3413/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3413/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 25.89 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3413/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 2.908744157838e-03
+Normalized MSE = 7.099919712707e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+
+================================================================================
+Running RE=3413, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/3413/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/3413/4/tamu_2d_fv_csv_vpp_0029.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.165692733051e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/3413/4/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/3413/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/3413/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/3413/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 99.26 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/3413/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 2.890198060187e-03
+Normalized MSE = 6.938097083485e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+
+================================================================================
+Running RE=5963, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/5963/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/5963/1/tamu_2d_fv_csv_vpp_0030.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 7.553101839935e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/5963/1/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/5963/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/5963/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/5963/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 11.28 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/5963/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.708591316970e-03
+Normalized MSE = 2.262105494111e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+
+================================================================================
+Running RE=5963, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/5963/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/5963/2/tamu_2d_fv_csv_vpp_0032.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.337895645074e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/5963/2/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/5963/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/5963/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/5963/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 16.82 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/5963/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.062295460662e-03
+Normalized MSE = 2.448872788971e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+
+================================================================================
+Running RE=5963, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/5963/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/5963/3/tamu_2d_fv_csv_vpp_0035.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.628049149470e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/5963/3/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/5963/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/5963/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/5963/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 45.86 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/5963/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 9.401597007803e-04
+Normalized MSE = 3.577405319722e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+
+================================================================================
+Running RE=5963, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/5963/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/5963/4/tamu_2d_fv_csv_vpp_0036.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.846593276407e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/5963/4/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/5963/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/5963/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/5963/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 142.12 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/5963/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.013005802063e-03
+Normalized MSE = 3.558660137572e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+
+================================================================================
+Running RE=7912, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/7912/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/7912/1/tamu_2d_fv_csv_vpp_0030.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 7.557140212005e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/7912/1/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/7912/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/7912/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/7912/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 10.12 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/7912/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.566160923218e-03
+Normalized MSE = 2.072425387490e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+
+================================================================================
+Running RE=7912, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/7912/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/7912/2/tamu_2d_fv_csv_vpp_0033.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 4.283789054665e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/7912/2/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/7912/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/7912/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/7912/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 21.84 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/7912/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 9.525985173846e-04
+Normalized MSE = 2.223728818643e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+
+================================================================================
+Running RE=7912, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/7912/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/7912/3/tamu_2d_fv_csv_vpp_0037.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.467821406222e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/7912/3/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/7912/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/7912/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/7912/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 54.68 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/7912/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 9.119056820604e-04
+Normalized MSE = 3.695185071988e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+
+================================================================================
+Running RE=7912, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/7912/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/7912/4/tamu_2d_fv_csv_vpp_0038.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.730734009626e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/7912/4/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/7912/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/7912/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/7912/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 165.31 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/7912/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.058048981123e-03
+Normalized MSE = 3.874595538757e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+
+================================================================================
+Running RE=9000, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/9000/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/9000/1/tamu_2d_fv_csv_vpp_0030.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 7.241755659244e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/9000/1/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/9000/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/9000/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/9000/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 8.47 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/9000/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.536607600862e-03
+Normalized MSE = 2.121871647106e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+
+================================================================================
+Running RE=9000, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/9000/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/9000/2/tamu_2d_fv_csv_vpp_0033.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 3.926572842165e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/9000/2/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/9000/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/9000/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/9000/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 18.01 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/9000/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 8.603880215125e-04
+Normalized MSE = 2.191193328374e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+
+================================================================================
+Running RE=9000, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/9000/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/9000/3/tamu_2d_fv_csv_vpp_0038.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.082884618582e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/9000/3/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/9000/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/9000/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/9000/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 51.22 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/9000/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 7.858464896309e-04
+Normalized MSE = 3.772875763834e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+
+================================================================================
+Running RE=9000, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/9000/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/9000/4/tamu_2d_fv_csv_vpp_0039.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.300459696269e-03
+Removing existing candidate folder: /homes/aiskhak/projects/GP/runs/9000/4/cand_wall_grid
+Copying template to: /homes/aiskhak/projects/GP/runs/9000/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/9000/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/9000/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 168.25 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/9000/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 8.990145803620e-04
+Normalized MSE = 3.907977965535e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+
+================================================================================
+Running RE=10622, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/10622/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/10622/1/tamu_2d_fv_csv_vpp_0030.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 6.962481823879e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/10622/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/10622/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/10622/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 10.34 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/10622/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.212533585031e-03
+Normalized MSE = 1.741524955760e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+
+================================================================================
+Running RE=10622, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/10622/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/10622/2/tamu_2d_fv_csv_vpp_0033.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 3.715522351893e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/10622/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/10622/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/10622/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 20.80 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/10622/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 6.839780819070e-04
+Normalized MSE = 1.840866551532e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+
+================================================================================
+Running RE=10622, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/10622/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/10622/3/tamu_2d_fv_csv_vpp_0038.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 1.988478373301e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/10622/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/10622/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/10622/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 55.00 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/10622/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 7.970310792572e-04
+Normalized MSE = 4.008246154240e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+
+================================================================================
+Running RE=10622, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/10622/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/10622/4/tamu_2d_fv_csv_vpp_0040.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 2.288470353234e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/10622/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/10622/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/10622/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 160.39 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/10622/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.057777124684e-03
+Normalized MSE = 4.622201564417e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+
+================================================================================
+Running RE=12819, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/12819/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/12819/1/tamu_2d_fv_csv_vpp_0031.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 6.314340253344e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/12819/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/12819/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/12819/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 9.62 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.119588317793e-03
+Normalized MSE = 1.773088355826e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+
+================================================================================
+Running RE=12819, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/12819/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/12819/2/tamu_2d_fv_csv_vpp_0033.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 3.136535694967e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/12819/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/12819/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/12819/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 24.55 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 6.237000024081e-04
+Normalized MSE = 1.988499615703e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+
+================================================================================
+Running RE=12819, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/12819/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/12819/3/tamu_2d_fv_csv_vpp_0040.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 1.627184971095e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/12819/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/12819/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/12819/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 60.33 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 8.101470827564e-04
+Normalized MSE = 4.978825991807e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+RE=12819, CG=3, status=ok, mode=steady, norm=0.4978825991806764
+
+================================================================================
+Running RE=12819, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/12819/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/12819/4/tamu_2d_fv_csv_vpp_0050.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 1.865564874703e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/12819/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/12819/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/12819/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 178.28 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/12819/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.097227071734e-03
+Normalized MSE = 5.881473684525e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+RE=12819, CG=3, status=ok, mode=steady, norm=0.4978825991806764
+RE=12819, CG=4, status=ok, mode=steady, norm=0.588147368452485
+
+================================================================================
+Running RE=14000, CG=1
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/14000/1/mapped.csv
+L_outer = 5.134754163210e+00
+h_wall = 1.169313396896e-01
+eta_h = 2.277252931160e-02
+eta_y min/max = 1.914893174085e-02, 1.000000000000e+00
+raw min/max = -4.945049782243e+00, -2.369646545988e-01
+C_eff min/max = 2.050622465246e-02, 2.042347067197e-01
+lm min/max = 2.008138917497e-02, 1.052944224059e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/14000/1/tamu_2d_fv_csv_vpp_0030.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 6.793782047853e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/14000/1/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/14000/1/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/14000/1/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 11.94 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/14000/1/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.344119971500e-03
+Normalized MSE = 1.978456126547e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+RE=12819, CG=3, status=ok, mode=steady, norm=0.4978825991806764
+RE=12819, CG=4, status=ok, mode=steady, norm=0.588147368452485
+RE=14000, CG=1, status=ok, mode=steady, norm=0.19784561265473136
+
+================================================================================
+Running RE=14000, CG=2
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/14000/2/mapped.csv
+L_outer = 5.162529156024e+00
+h_wall = 5.840956861085e-02
+eta_h = 1.131413825386e-02
+eta_y min/max = 9.604984814158e-03, 1.000000000000e+00
+raw min/max = -4.932445552079e+00, -1.785494791872e-01
+C_eff min/max = 2.050638357734e-02, 2.415033170222e-01
+lm min/max = 1.197518689423e-02, 1.058648031027e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/14000/2/tamu_2d_fv_csv_vpp_0034.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 3.417888838214e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/14000/2/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/14000/2/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/14000/2/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 24.28 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/14000/2/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 7.180368111049e-04
+Normalized MSE = 2.100819672884e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+RE=12819, CG=3, status=ok, mode=steady, norm=0.4978825991806764
+RE=12819, CG=4, status=ok, mode=steady, norm=0.588147368452485
+RE=14000, CG=1, status=ok, mode=steady, norm=0.19784561265473136
+RE=14000, CG=2, status=ok, mode=steady, norm=0.2100819672883718
+
+================================================================================
+Running RE=14000, CG=3
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/14000/3/mapped.csv
+L_outer = 5.165356380906e+00
+h_wall = 2.920598672452e-02
+eta_h = 5.654205551524e-03
+eta_y min/max = 4.820015672100e-03, 1.000000000000e+00
+raw min/max = -4.926219626107e+00, -1.493557013328e-01
+C_eff min/max = 2.050646357005e-02, 2.629660671110e-01
+lm min/max = 6.547092129704e-03, 1.059231924514e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/14000/3/tamu_2d_fv_csv_vpp_0040.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 1.690850093292e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/14000/3/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/14000/3/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/14000/3/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 70.60 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/14000/3/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 8.185950512996e-04
+Normalized MSE = 4.841322448081e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+RE=12819, CG=3, status=ok, mode=steady, norm=0.4978825991806764
+RE=12819, CG=4, status=ok, mode=steady, norm=0.588147368452485
+RE=14000, CG=1, status=ok, mode=steady, norm=0.19784561265473136
+RE=14000, CG=2, status=ok, mode=steady, norm=0.2100819672883718
+RE=14000, CG=3, status=ok, mode=steady, norm=0.4841322448081015
+
+================================================================================
+Running RE=14000, CG=4
+================================================================================
+Reading mapped file: /homes/aiskhak/projects/GP/2_mapped/14000/4/mapped.csv
+L_outer = 5.177364498584e+00
+h_wall = 1.460326482625e-02
+eta_h = 2.820598169251e-03
+eta_y min/max = 2.409401404074e-03, 1.000000000000e+00
+raw min/max = -4.923102657986e+00, -1.346677847257e-01
+C_eff min/max = 2.050650399366e-02, 2.745544906189e-01
+lm min/max = 3.424888615747e-03, 1.061696457668e-01
+Using VPP file: /homes/aiskhak/projects/GP/1_mixing_length/14000/4/tamu_2d_fv_csv_vpp_0051.csv
+VPP columns: ('eddy_viscosity_aux_var', 'id', 'u', 'v', 'x', 'y', 'z')
+baseline: max |r_res-r_mapped| = 5.000444502912e-12
+baseline: max |z_res-z_mapped| = 5.000444502912e-12
+Baseline MSE = 1.884042478923e-03
+Copying template to: /homes/aiskhak/projects/GP/runs/14000/4/cand_wall_grid
+Wrote: /homes/aiskhak/projects/GP/runs/14000/4/cand_wall_grid/lm_pred.csv
+Running case in: /homes/aiskhak/projects/GP/runs/14000/4/cand_wall_grid
+Using script: fv_app_run.sh
+Return code = 0
+Elapsed = 177.33 sec
+has_err  = False
+has_conv = True
+has_ss   = False
+has_fin  = True
+Using VPP file: /homes/aiskhak/projects/GP/runs/14000/4/cand_wall_grid/tamu_2d_fv_gp_csv_vpp_0002.csv
+VPP columns: ('id', 'u', 'v', 'x', 'y', 'z')
+candidate: max |r_res-r_mapped| = 5.000444502912e-12
+candidate: max |z_res-z_mapped| = 5.000444502912e-12
+Candidate MSE = 1.049429612943e-03
+Normalized MSE = 5.570095285447e-01
+
+Wrote summary: /homes/aiskhak/projects/GP/csv_wall_grid_candidate_results/csv_wall_grid_candidate_all_cases_summary.csv
+
+Current completed results:
+RE= 3000, CG=1, status=ok, mode=steady, norm=0.6854897977223168
+RE= 3000, CG=2, status=ok, mode=steady, norm=0.7483565231974668
+RE= 3000, CG=3, status=ok, mode=steady, norm=0.7385084356381153
+RE= 3000, CG=4, status=ok, mode=steady, norm=0.7248692909775224
+RE= 3413, CG=1, status=ok, mode=steady, norm=0.6250448548027168
+RE= 3413, CG=2, status=ok, mode=steady, norm=0.7099249914338326
+RE= 3413, CG=3, status=ok, mode=steady, norm=0.7099919712706514
+RE= 3413, CG=4, status=ok, mode=steady, norm=0.693809708348524
+RE= 5963, CG=1, status=ok, mode=steady, norm=0.22621054941111002
+RE= 5963, CG=2, status=ok, mode=steady, norm=0.24488727889711534
+RE= 5963, CG=3, status=ok, mode=steady, norm=0.35774053197216815
+RE= 5963, CG=4, status=ok, mode=steady, norm=0.35586601375724275
+RE= 7912, CG=1, status=ok, mode=steady, norm=0.20724253874903797
+RE= 7912, CG=2, status=ok, mode=steady, norm=0.22237288186432153
+RE= 7912, CG=3, status=ok, mode=steady, norm=0.36951850719879037
+RE= 7912, CG=4, status=ok, mode=steady, norm=0.3874595538756811
+RE= 9000, CG=1, status=ok, mode=steady, norm=0.21218716471061153
+RE= 9000, CG=2, status=ok, mode=steady, norm=0.2191193328374004
+RE= 9000, CG=3, status=ok, mode=steady, norm=0.3772875763833905
+RE= 9000, CG=4, status=ok, mode=steady, norm=0.3907977965535282
+RE=10622, CG=1, status=ok, mode=steady, norm=0.1741524955759813
+RE=10622, CG=2, status=ok, mode=steady, norm=0.18408665515319653
+RE=10622, CG=3, status=ok, mode=steady, norm=0.40082461542395775
+RE=10622, CG=4, status=ok, mode=steady, norm=0.46222015644167797
+RE=12819, CG=1, status=ok, mode=steady, norm=0.17730883558257937
+RE=12819, CG=2, status=ok, mode=steady, norm=0.19884996157029372
+RE=12819, CG=3, status=ok, mode=steady, norm=0.4978825991806764
+RE=12819, CG=4, status=ok, mode=steady, norm=0.588147368452485
+RE=14000, CG=1, status=ok, mode=steady, norm=0.19784561265473136
+RE=14000, CG=2, status=ok, mode=steady, norm=0.2100819672883718
+RE=14000, CG=3, status=ok, mode=steady, norm=0.4841322448081015
+RE=14000, CG=4, status=ok, mode=steady, norm=0.5570095285446599
+
+===== Final summary =====
+Completed OK: 32 / 32
+Mean normalized MSE = 4.168508543837e-01
+Min normalized MSE  = 1.741524955760e-01
+Max normalized MSE  = 7.483565231975e-01
+===== Done =====

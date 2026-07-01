@@ -1,8 +1,6 @@
 # global parameters
 mu    = 3.333333e-3	# 1/3000
 mesh  = '../../../../mesh/TAMU_2D_RANS_3.msh'
-csv_f = 'lm_pred.csv'
-csv_f_elem = 'elem_id.csv'
 
 rho = 1
 advected_interp_method = 'upwind'
@@ -55,6 +53,52 @@ velocity_interp_method = 'rc'
 
 [AuxVariables]
   [mixing_length_gp_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  [yw_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  [dudx_aux_var]
+    type = MooseVariableFVReal
+  []
+
+  [dudy_aux_var]
+    type = MooseVariableFVReal
+  []
+
+  [dvdx_aux_var]
+    type = MooseVariableFVReal
+  []
+
+  [dvdy_aux_var]
+    type = MooseVariableFVReal
+  []
+
+  [strain_factor_raw_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  [strain_factor_clipped_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  [strain_factor_clip_delta_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  [strain_invariant_aux_var]
     order  = CONSTANT
     family = MONOMIAL
     fv     = true
@@ -139,13 +183,148 @@ velocity_interp_method = 'rc'
 []
 
 [AuxKernels]
+  [yw_aux_ker]
+    type = WallDistanceAux
+    walls = 'wall'
+    variable = yw_aux_var
+    execute_on = 'INITIAL'
+  []
+
+  [dudx_aux_ker]
+    type = ADFunctorVectorElementalAux
+    variable = dudx_aux_var
+    functor = grad_u
+    component = 0
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [dudy_aux_ker]
+    type = ADFunctorVectorElementalAux
+    variable = dudy_aux_var
+    functor = grad_u
+    component = 1
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [dvdx_aux_ker]
+    type = ADFunctorVectorElementalAux
+    variable = dvdx_aux_var
+    functor = grad_v
+    component = 0
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [dvdy_aux_ker]
+    type = ADFunctorVectorElementalAux
+    variable = dvdy_aux_var
+    functor = grad_v
+    component = 1
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
   [mixing_length_gp_aux_ker]
-    type = AuxVarFromCSVFile
+    type = DynamicStrainGPBlendedMixingLengthAux
     variable = mixing_length_gp_aux_var
-    file_name = ${csv_f}
-    elem_id_file_name = ${csv_f_elem}
-    use_mapping = true
-    header = true
+    output_quantity = mixing_length
+
+    expression_file = closure_expr.txt
+
+    wall_distance = yw_aux_var
+
+    dudx = dudx_aux_var
+    dudy = dudy_aux_var
+    dvdx = dvdx_aux_var
+    dvdy = dvdy_aux_var
+
+    kappa = 0.41
+    kappa_cap = 0.09
+    delta0 = 1.0
+
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [strain_factor_raw_aux_ker]
+    type = DynamicStrainGPBlendedMixingLengthAux
+    variable = strain_factor_raw_aux_var
+    output_quantity = strain_factor_raw
+
+    expression_file = closure_expr.txt
+
+    wall_distance = yw_aux_var
+
+    dudx = dudx_aux_var
+    dudy = dudy_aux_var
+    dvdx = dvdx_aux_var
+    dvdy = dvdy_aux_var
+
+    kappa = 0.41
+    kappa_cap = 0.09
+    delta0 = 1.0
+
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [strain_factor_clipped_aux_ker]
+    type = DynamicStrainGPBlendedMixingLengthAux
+    variable = strain_factor_clipped_aux_var
+    output_quantity = strain_factor_clipped
+
+    expression_file = closure_expr.txt
+
+    wall_distance = yw_aux_var
+
+    dudx = dudx_aux_var
+    dudy = dudy_aux_var
+    dvdx = dvdx_aux_var
+    dvdy = dvdy_aux_var
+
+    kappa = 0.41
+    kappa_cap = 0.09
+    delta0 = 1.0
+
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [strain_factor_clip_delta_aux_ker]
+    type = DynamicStrainGPBlendedMixingLengthAux
+    variable = strain_factor_clip_delta_aux_var
+    output_quantity = strain_factor_clip_delta
+
+    expression_file = closure_expr.txt
+
+    wall_distance = yw_aux_var
+
+    dudx = dudx_aux_var
+    dudy = dudy_aux_var
+    dvdx = dvdx_aux_var
+    dvdy = dvdy_aux_var
+
+    kappa = 0.41
+    kappa_cap = 0.09
+    delta0 = 1.0
+
+    execute_on = 'INITIAL NONLINEAR FINAL'
+  []
+
+  [strain_invariant_aux_ker]
+    type = DynamicStrainGPBlendedMixingLengthAux
+    variable = strain_invariant_aux_var
+    output_quantity = strain_invariant
+
+    expression_file = closure_expr.txt
+
+    wall_distance = yw_aux_var
+
+    dudx = dudx_aux_var
+    dudy = dudy_aux_var
+    dvdx = dvdx_aux_var
+    dvdy = dvdy_aux_var
+
+    kappa = 0.41
+    kappa_cap = 0.09
+    delta0 = 1.0
+
+    execute_on = 'INITIAL NONLINEAR FINAL'
   []
 []
 
@@ -205,10 +384,24 @@ velocity_interp_method = 'rc'
   []
 []
 
+[FunctorMaterials]
+  [grad_u_mat]
+    type = ADGenericFunctorGradientMaterial
+    prop_names = 'grad_u'
+    prop_values = 'u'
+  []
+
+  [grad_v_mat]
+    type = ADGenericFunctorGradientMaterial
+    prop_names = 'grad_v'
+    prop_values = 'v'
+  []
+[]
+
 [VectorPostprocessors]
   [vpp]
     type = ElementValueSampler
-    variable = 'u v'
+    variable = 'u v strain_factor_raw_aux_var strain_factor_clipped_aux_var'
     sort_by = x
   []
 []

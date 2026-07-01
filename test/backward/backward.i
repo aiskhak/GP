@@ -1,8 +1,9 @@
 # global parameters
-mu    = 3.333333e-3	# 1/3000
-mesh  = '../../../../mesh/TAMU_2D_RANS_1.msh'
-
+mu = 2.531645569620253e-3   # 1/395, using u_tau = 1 and h = 1
 rho = 1
+
+mesh = '../../mesh/BFS_Ret395_ER2_uniform.msh'
+
 advected_interp_method = 'upwind'
 velocity_interp_method = 'rc'
 
@@ -20,23 +21,16 @@ velocity_interp_method = 'rc'
 []
 
 [Mesh]
-  coord_type = 'RZ'
-  rz_coord_axis = x
   [./mesh_file]
     type = FileMeshGenerator
     file = ${mesh}
-  []
-  [./scale]
-    type = TransformGenerator
-    input = mesh_file
-    transform = SCALE
-    vector_value ='0.05249344 0.05249344 0.05249344'  # 1/19.05
   []
 []
 
 [Problem]
   fv_bcs_integrity_check = false
-  restart_file_base = tamu_2d_fv_gp_out_cp/LATEST
+  restart_file_base = bfs_2d_fv_gp_out_cp/LATEST
+  allow_initial_conditions_with_restart = true
 []
 
 [Variables]
@@ -58,10 +52,15 @@ velocity_interp_method = 'rc'
     fv     = true
   []
 
-  [yw_aux_var]
+  [eddy_viscosity_aux_var]
     order  = CONSTANT
     family = MONOMIAL
     fv     = true
+  []
+
+  [yw_aux_var]
+    order = CONSTANT
+    family = MONOMIAL
   []
 
   [dudx_aux_var]
@@ -80,25 +79,7 @@ velocity_interp_method = 'rc'
     type = MooseVariableFVReal
   []
 
-  [strain_factor_raw_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_factor_clipped_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_factor_clip_delta_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-
-  [strain_invariant_aux_var]
+  [strain_mag_aux_var]
     order  = CONSTANT
     family = MONOMIAL
     fv     = true
@@ -106,10 +87,12 @@ velocity_interp_method = 'rc'
 []
 
 [Functions]
-  [./u_in]
-    type = ParsedFunction
-    expression = -1*(8/7)*(1-y/0.5)^(1/7)
-  [../]
+  [u_in]
+    type = PiecewiseLinear
+    data_file = 'dns_inlet_u_xminus5p98.csv'
+    format = columns
+    axis = y
+  []
 []
 
 [FVKernels]
@@ -197,7 +180,7 @@ velocity_interp_method = 'rc'
 [AuxKernels]
   [yw_aux_ker]
     type = WallDistanceAux
-    walls = 'wall'
+    walls = 'top_wall bottom_wall step_wall'
     variable = yw_aux_var
     execute_on = 'INITIAL'
   []
@@ -234,13 +217,20 @@ velocity_interp_method = 'rc'
     execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
   []
 
+  [strain_mag_aux_ker]
+    type = StrainRotationFromGradAux
+    variable = strain_mag_aux_var
+    dudx = dudx_aux_var
+    dudy = dudy_aux_var
+    dvdx = dvdx_aux_var
+    dvdy = dvdy_aux_var
+    quantity = strain_mag
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
+  []
+
   [mixing_length_gp_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
+    type = BlendedFunctionalKappaMixingLengthAux
     variable = mixing_length_gp_aux_var
-    output_quantity = mixing_length
-
-    expression_file = closure_expr.txt
-
     wall_distance = yw_aux_var
 
     dudx = dudx_aux_var
@@ -252,147 +242,27 @@ velocity_interp_method = 'rc'
     kappa_cap = 0.09
     delta0 = 1.0
 
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
+    activation_eta_y = 0.5
+    correction_amplitude = 0.8
+    gp_raw = 0.05
+
+    # Additional strain-based multiplier:
+    # F(S*) = C0 + C1*S* + C2*S*^2, S* = |S|/strain_ref
+    strain_ref = 13.0
+    C0 = 1.05
+    C1 = -0.05
+    C2 = 0.0
+
+    execute_on = 'INITIAL TIMESTEP_BEGIN'
   []
-
-  [strain_factor_raw_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_raw_aux_var
-    output_quantity = strain_factor_raw
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_factor_clipped_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_clipped_aux_var
-    output_quantity = strain_factor_clipped
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_factor_clip_delta_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_factor_clip_delta_aux_var
-    output_quantity = strain_factor_clip_delta
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_invariant_aux_ker]
-    type = DynamicStrainGPBlendedMixingLengthAux
-    variable = strain_invariant_aux_var
-    output_quantity = strain_invariant
-
-    expression_file = closure_expr.txt
-
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-[]
-
-[FVBCs]
-  [inlet-u]
-    type     = INSFVInletVelocityBC
-    boundary = 'inlet'
-    variable = u
-    functor = 'u_in'
-  []
-  [inlet-v]
-    type     = INSFVInletVelocityBC
-    boundary = 'inlet'
-    variable = v
-    functor = 0
-  []
-  [no-slip-wall-u]
-    type     = INSFVNoSlipWallBC
-    boundary = 'wall'
-    variable = u
-    function = 0
-  []
-  [no-slip-wall-v]
-    type     = INSFVNoSlipWallBC
-    boundary = 'wall'
-    variable = v
-    function = 0
-  []
-  [outlet-p]
-    type     = INSFVOutletPressureBC
-    boundary = 'outlet'
-    variable = pressure
-    function = 0
-  []
-  [axis-u]
-    type     = INSFVSymmetryVelocityBC
-    boundary = 'SYM'
-    variable = u
-    u        = u
-    v        = v
-    mu       = ${mu}
-    momentum_component = x
-  []
-  [axis-v]
-    type     = INSFVSymmetryVelocityBC
-    boundary = 'SYM'
-    variable = v
-    u        = u
-    v        = v
-    mu       = ${mu}
-    momentum_component = y
-  []
-  [axis-p]
-    type     = INSFVSymmetryPressureBC
-    boundary = 'SYM'
-    variable = pressure
+  
+  [eddy_viscosity_aux_ker]
+    type = INSFVMixingLengthTurbulentViscosityAux
+    variable = eddy_viscosity_aux_var
+    mixing_length = mixing_length_gp_aux_var
+    u = u
+    v = v
+    execute_on = 'TIMESTEP_END FINAL'
   []
 []
 
@@ -410,10 +280,101 @@ velocity_interp_method = 'rc'
   []
 []
 
+[Postprocessors]
+  [eta_y_scale_pp]
+    type = ElementExtremeValue
+    variable = yw_aux_var
+    value_type = max
+    execute_on = 'INITIAL'
+  []
+[]
+
+[ICs]
+  [u_ic]
+    type = FunctionIC
+    variable = u
+    function = u_in
+  []
+
+  [v_ic]
+    type = ConstantIC
+    variable = v
+    value = 0
+  []
+
+  [p_ic]
+    type = ConstantIC
+    variable = pressure
+    value = 0
+  []
+[]
+
+[FVBCs]
+  [inlet-u]
+    type     = INSFVInletVelocityBC
+    boundary = 'inlet'
+    variable = u
+    functor = 'u_in'
+  []
+  [inlet-v]
+    type     = INSFVInletVelocityBC
+    boundary = 'inlet'
+    variable = v
+    functor = 0
+  []
+	[top-wall-u]
+	  type     = INSFVNoSlipWallBC
+	  boundary = 'top_wall'
+	  variable = u
+	  function = 0
+	[]
+
+	[top-wall-v]
+	  type     = INSFVNoSlipWallBC
+	  boundary = 'top_wall'
+	  variable = v
+	  function = 0
+	[]
+
+	[bottom-wall-u]
+	  type     = INSFVNoSlipWallBC
+	  boundary = 'bottom_wall'
+	  variable = u
+	  function = 0
+	[]
+
+	[bottom-wall-v]
+	  type     = INSFVNoSlipWallBC
+	  boundary = 'bottom_wall'
+	  variable = v
+	  function = 0
+	[]
+
+	[step-wall-u]
+	  type     = INSFVNoSlipWallBC
+	  boundary = 'step_wall'
+	  variable = u
+	  function = 0
+	[]
+
+	[step-wall-v]
+	  type     = INSFVNoSlipWallBC
+	  boundary = 'step_wall'
+	  variable = v
+	  function = 0
+	[]
+  [outlet-p]
+    type     = INSFVOutletPressureBC
+    boundary = 'outlet'
+    variable = pressure
+    function = 0
+  []
+[]
+
 [VectorPostprocessors]
   [vpp]
     type = ElementValueSampler
-    variable = 'u v strain_factor_raw_aux_var strain_factor_clipped_aux_var'
+    variable = 'u v pressure mixing_length_gp_aux_var eddy_viscosity_aux_var yw_aux_var dudx_aux_var dudy_aux_var dvdx_aux_var dvdy_aux_var strain_mag_aux_var'
     sort_by = x
   []
 []
@@ -435,12 +396,12 @@ velocity_interp_method = 'rc'
     growth_factor = 1.25
     optimal_iterations = 8
     linear_iteration_ratio = 150
-    dt = 0.5
+    dt = 1e-4
     cutback_factor = 0.75
     cutback_factor_at_failure = 0.75
   [../]
-  dtmin = 1e-6
-  dtmax = 200
+  dtmin = 1e-8
+  dtmax = 50
   nl_rel_tol = 1e-6
   nl_abs_tol = 1e-6
   nl_max_its = 50
@@ -455,19 +416,19 @@ velocity_interp_method = 'rc'
 
 [Outputs]
   print_linear_residuals = false
-#  [exodus]
-#    type = Exodus
-#    execute_on = FINAL
-#	file_base = tamu_2d_fv_gp_out
-#  []
+  [exodus]
+    type = Exodus
+    execute_on = FINAL
+	file_base = bfs_2d_fv_gp_out
+  []
   [./csv]
     type = CSV
 	execute_on = FINAL
-	file_base = tamu_2d_fv_gp_csv
+	file_base = bfs_2d_fv_gp_csv
   []
   [./out]
     type = Checkpoint
     execute_on = FINAL
-    file_base = tamu_2d_fv_gp_out
+    file_base = bfs_2d_fv_gp_out
   []
 []
