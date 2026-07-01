@@ -1,0 +1,33 @@
+Abort is in progress...hit ctrl-c again to forcibly terminate
+
+[unset]: launcher not compatible with PMI1 client
+[unset]: launcher not compatible with PMI1 client
+Abort(203024911): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(71): MPI_Init_thread(argc=0x7ffe7266453c, argv=0x7ffe72664530, required=0, provided=0x7ffe7266454c) failed
+MPII_Init_thread(203)...: 
+MPIR_pmi_init(150)......: 
+pmi1_init(14)...........: PMI_Init returned -1
+[unset]: launcher not compatible with PMI1 client
+Abort(404351503): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(71): MPI_Init_thread(argc=0x7ffcb94e9cfc, argv=0x7ffcb94e9cf0, required=0, provided=0x7ffcb94e9d0c) failed
+MPII_Init_thread(203)...: 
+MPIR_pmi_init(150)......: 
+pmi1_init(14)...........: PMI_Init returned -1
+[unset]: launcher not compatible with PMI1 client
+Abort(807004687): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(71): MPI_Init_thread(argc=0x7ffddf88329c, argv=0x7ffddf883290, required=0, provided=0x7ffddf8832ac) failed
+MPII_Init_thread(203)...: 
+MPIR_pmi_init(150)......: 
+pmi1_init(14)...........: PMI_Init returned -1
+Abort(471460367): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(71): MPI_Init_thread(argc=0x7ffc8ebb81ec, argv=0x7ffc8ebb81e0, required=0, provided=0x7ffc8ebb81fc) failed
+MPII_Init_thread(203)...: 
+MPIR_pmi_init(150)......: 
+pmi1_init(14)...........: PMI_Init returned -1
+--------------------------------------------------------------------------
+prterun detected that one or more processes exited with non-zero status,
+thus causing the job to be terminated. The first process to do so was:
+
+   Process name: [prterun-icr-helios-4141982@1,1] Exit code:    15
+--------------------------------------------------------------------------
+Finished Executing!!!
