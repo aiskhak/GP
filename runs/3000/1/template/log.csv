@@ -1,33 +1,80 @@
-Abort is in progress...hit ctrl-c again to forcibly terminate
 
-[unset]: launcher not compatible with PMI1 client
-[unset]: launcher not compatible with PMI1 client
-Abort(203024911): Fatal error in internal_Init_thread: Other MPI error, error stack:
-internal_Init_thread(71): MPI_Init_thread(argc=0x7ffe7266453c, argv=0x7ffe72664530, required=0, provided=0x7ffe7266454c) failed
-MPII_Init_thread(203)...: 
-MPIR_pmi_init(150)......: 
-pmi1_init(14)...........: PMI_Init returned -1
-[unset]: launcher not compatible with PMI1 client
-Abort(404351503): Fatal error in internal_Init_thread: Other MPI error, error stack:
-internal_Init_thread(71): MPI_Init_thread(argc=0x7ffcb94e9cfc, argv=0x7ffcb94e9cf0, required=0, provided=0x7ffcb94e9d0c) failed
-MPII_Init_thread(203)...: 
-MPIR_pmi_init(150)......: 
-pmi1_init(14)...........: PMI_Init returned -1
-[unset]: launcher not compatible with PMI1 client
-Abort(807004687): Fatal error in internal_Init_thread: Other MPI error, error stack:
-internal_Init_thread(71): MPI_Init_thread(argc=0x7ffddf88329c, argv=0x7ffddf883290, required=0, provided=0x7ffddf8832ac) failed
-MPII_Init_thread(203)...: 
-MPIR_pmi_init(150)......: 
-pmi1_init(14)...........: PMI_Init returned -1
-Abort(471460367): Fatal error in internal_Init_thread: Other MPI error, error stack:
-internal_Init_thread(71): MPI_Init_thread(argc=0x7ffc8ebb81ec, argv=0x7ffc8ebb81e0, required=0, provided=0x7ffc8ebb81fc) failed
-MPII_Init_thread(203)...: 
-MPIR_pmi_init(150)......: 
-pmi1_init(14)...........: PMI_Init returned -1
---------------------------------------------------------------------------
-prterun detected that one or more processes exited with non-zero status,
-thus causing the job to be terminated. The first process to do so was:
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/3000/1/template/tamu_2d_fv_gp.i:39.1:
+The following occurred in the Problem 'MOOSE Problem' of type FEProblem.
 
-   Process name: [prterun-icr-helios-4141982@1,1] Exit code:    15
---------------------------------------------------------------------------
+Using /homes/aiskhak/projects/GP/runs/3000/1/template/tamu_2d_fv_gp_out_cp/0019 for restart.[39m
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/3000/1/template/tamu_2d_fv_gp.i:143.3:
+The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
+
+AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/3000/1/template/elem_id.csv[39m
+Framework Information:
+MOOSE Version:           git commit 28092e1647 on 2026-02-01
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Wed Jul  1 13:01:22 2026
+Executable Timestamp:    Mon Jun 29 17:27:18 2026
+
+Input File(s):
+  /homes/aiskhak/projects/GP/runs/3000/1/template/tamu_2d_fv_gp.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Outputs/out
+  # Checkpoints Kept:      2
+  Execute On:              FINAL 
+
+Parallelism:
+  Num Processors:          4
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 6103
+    Local:                 1563
+    Min/Max/Avg:           1412/1626/1525
+  Elems:                   
+    Total:                 1462
+    Local:                 365
+    Min/Max/Avg:           365/366/365
+  Num Subdomains:          1
+  Num Partitions:          4
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                4386
+  Num Local DOFs:          1095
+  Variables:               { "u" "v" "pressure" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Auxiliary System:
+  Num DOFs:                1462
+  Num Local DOFs:          365
+  Variables:               "mixing_length_gp_aux_var" 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Steady
+  Solver Mode:             NEWTON 
+  PETSc Preconditioner:    lu mat_superlu_dist_fact: SamePattern  mat_superlu_dist_replacetinypivot: true 
+  MOOSE Preconditioner:    SMP (auto) 
+
+Performing automatic scaling calculation
+
+ 0 Nonlinear |R| = [32m4.397581e-04[39m
+ 1 Nonlinear |R| = [32m8.752752e-07[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  v: [31m7.831912e-07[39m
 Finished Executing!!!

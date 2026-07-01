@@ -2,6 +2,8 @@
 
 # salloc -p ksu-mne-train.q --nodelist=warlock35 --nodes=1 --ntasks=128 --mem=700G --time=72:00:00
 
+# salloc \ -p ksu-mne-train.q \ --nodelist=warlock34,warlock35,warlock36,warlock37 \ --nodes=4 \ --ntasks-per-node=128 \ --mem=700G \ --exclusive \ --time=72:00:00
+
 # CHECK FILES
 '''
 for RE in 3000 3413 5963 7912 9000 10622 12819 14000; do
@@ -34,6 +36,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 # ============================================================
 # USER SETTINGS
 # ============================================================
+CORE_LIMIT = 511 #127
 RUN_TEMPLATE_FIRST = False
 
 RE_LIST = ["3000", "3413", "5963", "7912", "9000", "10622", "12819", "14000"]
@@ -55,7 +58,6 @@ RESULTS_FILE = f"gp_results_{RUN_TAG}.csv"
 DETAILS_FILE = f"gp_results_{RUN_TAG}_details.csv"
 METADATA_FILE = f"gp_results_{RUN_TAG}_metadata.json"
 FINAL_BEST_FILE = f"gp_results_{RUN_TAG}_final_best.json"
-CORE_LIMIT = 127
 SOLVER_TIMEOUT = 2700.0  # seconds
 
 # One stochastic mini-batch per generation.

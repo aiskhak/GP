@@ -1,4 +1,4 @@
 #!/bin/bash
 source ~/miniforge/bin/activate moose
-stdbuf -oL -eL /homes/aiskhak/miniforge/envs/moose/bin/mpiexec -n 12 /homes/aiskhak/projects/fv_app/fv_app-opt -i tamu_2d_fv_gp_unsteady.i > log.csv 2>&1
+stdbuf -oL -eL srun --exclusive --exact --mpi=pmi2 -n 12 -c 1 /homes/aiskhak/projects/fv_app/fv_app-opt -i tamu_2d_fv_gp_unsteady.i > log.csv 2>&1
 echo "Finished Executing!!!" >> log.csv
