@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --partition=ksu-mne-train.q
-#SBATCH --job-name=fv_app_3
+#SBATCH --job-name=fv_app_2
 #SBATCH --output=out.%j
 #SBATCH --error=err.%j
 #SBATCH --nodes=1
-#SBATCH --ntasks=12
+#SBATCH --ntasks=4
 ##SBATCH --nodelist=warlock34
-#SBATCH --time=0-10:00:00
+##SBATCH --time=0-24:00:00
 #SBATCH --mem=32G
 
 module purge

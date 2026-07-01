@@ -36,7 +36,7 @@ velocity_interp_method = 'rc'
 
 [Problem]
   fv_bcs_integrity_check = false
-  restart_file_base = tamu_2d_fv_out_cp/LATEST
+  #restart_file_base = tamu_2d_fv_out_cp/LATEST
 []
 
 [Variables]
@@ -57,26 +57,33 @@ velocity_interp_method = 'rc'
     family = MONOMIAL
     fv     = true
   []
-  [eddy_viscosity_aux_var]
-    order  = CONSTANT
-    family = MONOMIAL
-    fv     = true
-  []
-  [elvol_aux_var]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [yw_aux_var]	# distance to the nearest wall
-    order = CONSTANT
-    family = MONOMIAL
-  []
+[mu_t_out]
+  order  = CONSTANT
+  family = MONOMIAL
+  fv     = true
+[]
+[mu_eff_out]
+  order  = CONSTANT
+  family = MONOMIAL
+  fv     = true
+[]
+[elvol_aux_var]
+  order = CONSTANT
+  family = MONOMIAL
+  fv = true
+[]
+[yw_aux_var]
+  order = CONSTANT
+  family = MONOMIAL
+  fv = true
+[]
 []
 
 [Functions]
-  [./u_in]
-    type = ParsedFunction
-    expression = -1*(8/7)*(1-y/0.5)^(1/7)
-  [../]
+    [u_in]
+      type = ParsedFunction
+      expression = -1*(60/49)*(1-y/0.5)^(1/7) # -u_avg*(60/49)*(1-r/R)^(1/7), u_avg=1, R=0.5
+    []
 []
 
 [FVKernels]
@@ -102,21 +109,15 @@ velocity_interp_method = 'rc'
     velocity_interp_method = ${velocity_interp_method}
     rho = ${rho}
   []
-  [u_viscosity]
-    type = INSFVMomentumDiffusion
-    variable = u
-    mu = ${mu}
-    momentum_component = 'x'
-  []
-  [u_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress
-    variable = u
-    rho = ${rho}
-    mixing_length = mixing_length_aux_var
-    momentum_component = 'x'
-    u = u
-    v = v
-  []
+[u_viscosity]
+  type = INSFVMomentumDiffusion
+  variable = u
+  mu = mu_eff
+  momentum_component = 'x'
+  complete_expansion = true
+  u = u
+  v = v
+[]
   [u_pressure]
     type = INSFVMomentumPressure
     variable = u
@@ -138,21 +139,22 @@ velocity_interp_method = 'rc'
     velocity_interp_method = ${velocity_interp_method}
     rho = ${rho}
   []
-  [v_viscosity]
-    type = INSFVMomentumDiffusion
-    variable = v
-    mu = ${mu}
-    momentum_component = 'y'
-  []
-  [v_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress
-    variable = v
-    rho = ${rho}
-    mixing_length = mixing_length_aux_var
-    momentum_component = 'y'
-    u = u
-    v = v
-  []
+[v_viscosity]
+  type = INSFVMomentumDiffusion
+  variable = v
+  mu = mu_eff
+  momentum_component = 'y'
+  complete_expansion = true
+  u = u
+  v = v
+[]
+[v_viscosity_rz]
+  type = INSFVMomentumViscousSourceRZ
+  variable = v
+  mu = mu_eff
+  momentum_component = 'y'
+  complete_expansion = true
+[]
   [v_pressure]
     type = INSFVMomentumPressure
     variable = v
@@ -162,20 +164,26 @@ velocity_interp_method = 'rc'
 []
 
 [AuxKernels]
-  [mixing_len_aux_ker]
-    type = WallDistanceMixingLengthAux
-    walls = 'wall'
-    variable = mixing_length_aux_var
-    von_karman_const = 0.41
-    delta = 0.5
-  []
-  [eddy_viscosity_aux_ker]
-    type = INSFVMixingLengthTurbulentViscosityAux
-    variable = eddy_viscosity_aux_var
-    mixing_length = mixing_length_aux_var
-    u = u
-    v = v
-  []
+[mixing_len_aux_ker]
+  type = WallDistanceMixingLengthAux
+  walls = 'wall'
+  variable = mixing_length_aux_var
+  von_karman_const = 0.41
+  delta = 0.5
+  execute_on = 'initial'
+[]
+[mu_t_out_aux]
+  type = FunctorAux
+  variable = mu_t_out
+  functor = mu_t
+  execute_on = 'initial timestep_end final'
+[]
+[mu_eff_out_aux]
+  type = FunctorAux
+  variable = mu_eff_out
+  functor = mu_eff
+  execute_on = 'initial timestep_end final'
+[]
   [elvol_aux_ker]
     type = VolumeAux
     variable = elvol_aux_var
@@ -220,24 +228,24 @@ velocity_interp_method = 'rc'
     variable = pressure
     function = 0
   []
-  [axis-u]
-    type     = INSFVSymmetryVelocityBC
-    boundary = 'SYM'
-    variable = u
-    u        = u
-    v        = v
-    mu       = ${mu}
-    momentum_component = x
-  []
-  [axis-v]
-    type     = INSFVSymmetryVelocityBC
-    boundary = 'SYM'
-    variable = v
-    u        = u
-    v        = v
-    mu       = ${mu}
-    momentum_component = y
-  []
+[axis-u]
+  type     = INSFVSymmetryVelocityBC
+  boundary = 'SYM'
+  variable = u
+  u        = u
+  v        = v
+  mu       = mu_eff
+  momentum_component = x
+[]
+[axis-v]
+  type     = INSFVSymmetryVelocityBC
+  boundary = 'SYM'
+  variable = v
+  u        = u
+  v        = v
+  mu       = mu_eff
+  momentum_component = y
+[]
   [axis-p]
     type     = INSFVSymmetryPressureBC
     boundary = 'SYM'
@@ -245,12 +253,25 @@ velocity_interp_method = 'rc'
   []
 []
 
-[VectorPostprocessors]
-  [vpp]
-    type = ElementValueSampler
-    variable = 'u v eddy_viscosity_aux_var'
-    sort_by = x
+[FunctorMaterials]
+  [mixing_length_viscosity]
+    type = INSFVMixingLengthEffectiveViscosityFunctorMaterialRZ
+    property_name = mu_eff
+    turbulent_viscosity_property_name = mu_t
+    molecular_viscosity = ${mu}
+    rho = ${rho}
+    mixing_length = mixing_length_aux_var
+    u = u
+    v = v
   []
+[]
+
+[VectorPostprocessors]
+[vpp]
+  type = ElementValueSampler
+  variable = 'u v pressure mixing_length_aux_var mu_t_out mu_eff_out'
+  sort_by = x
+[]
   [elv]
     type = ElementValueSampler
     variable = 'elvol_aux_var yw_aux_var'

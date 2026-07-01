@@ -1,0 +1,1320 @@
+#include "recycle.usr"
+#define INTP_NMAX 50000 /* number of sample points */
+c-----------------------------------------------------------------------
+      subroutine avg_custom
+      include 'SIZE'
+      include 'TOTAL'
+
+c Arrays following the NekRS reference frame
+
+c First order
+      real*8 u_nek(lx1,ly1,lz1,lelt),v_nek(lx1,ly1,lz1,lelt),
+     & w_nek(lx1,ly1,lz1,lelt)
+
+c Second order
+      real*8 uu_nek(lx1,ly1,lz1,lelt),vv_nek(lx1,ly1,lz1,lelt),
+     & ww_nek(lx1,ly1,lz1,lelt), uv_nek(lx1,ly1,lz1,lelt),
+     & uw_nek(lx1,ly1,lz1,lelt), vw_nek(lx1,ly1,lz1,lelt)
+
+c Arrays following the experiment reference frame
+
+c First order
+      real*8 u_exp(lx1,ly1,lz1,lelt),v_exp(lx1,ly1,lz1,lelt),
+     & w_exp(lx1,ly1,lz1,lelt)
+
+c Second order
+      real*8 uu_exp(lx1,ly1,lz1,lelt),vv_exp(lx1,ly1,lz1,lelt),
+     & ww_exp(lx1,ly1,lz1,lelt), uv_exp(lx1,ly1,lz1,lelt),
+     & uw_exp(lx1,ly1,lz1,lelt), vw_exp(lx1,ly1,lz1,lelt)
+
+c Angle for frame transformation
+      real alpha,cosa,sina,cosa2,sina2,cosina
+
+      integer e, ndir, nfil, ftot, ndir_shit, ndir_init, ndir_final
+
+c Initizalizing arrays and alpha
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         u_nek(i,j,k,e)  = 0.0
+         v_nek(i,j,k,e)  = 0.0
+         w_nek(i,j,k,e)  = 0.0
+         uu_nek(i,j,k,e) = 0.0
+         vv_nek(i,j,k,e) = 0.0
+         ww_nek(i,j,k,e) = 0.0
+         uv_nek(i,j,k,e) = 0.0
+         uw_nek(i,j,k,e) = 0.0
+         vw_nek(i,j,k,e) = 0.0
+         u_exp(i,j,k,e)  = 0.0
+         v_exp(i,j,k,e)  = 0.0
+         w_exp(i,j,k,e)  = 0.0
+         uu_exp(i,j,k,e) = 0.0
+         vv_exp(i,j,k,e) = 0.0
+         ww_exp(i,j,k,e) = 0.0
+         uv_exp(i,j,k,e) = 0.0
+         uw_exp(i,j,k,e) = 0.0
+         vw_exp(i,j,k,e) = 0.0
+      enddo
+      enddo
+      enddo
+      enddo
+
+      ndir = 35
+      nfil = 1
+      ftot = ndir*nfil
+      ndir_shift = 0
+      ndir_init = ndir_shift + 1
+      ndir_final= ndir_init + ndir - 1
+
+      do iiq=ndir_init,ndir_final
+      do iip=1,nfil
+
+      call blank(initc(1),70)
+      write(initc(1),7)iiq,iip
+
+   7       format('./runs/run_dir'
+     &     ,i2.2,'/avgmichigan0.f',i5.5)
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         u_nek(i,j,k,e)=u_nek(i,j,k,e)+vx(i,j,k,e)/(ftot)
+         v_nek(i,j,k,e)=v_nek(i,j,k,e)+vy(i,j,k,e)/(ftot)
+         w_nek(i,j,k,e)=w_nek(i,j,k,e)+vz(i,j,k,e)/(ftot)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      enddo
+      enddo
+
+c Adjusting the frame to the experiment
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         u_exp(i,j,k,e)=u_nek(i,j,k,e)
+         v_exp(i,j,k,e)=v_nek(i,j,k,e)
+         w_exp(i,j,k,e)=w_nek(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      call outpost2(u_exp,v_exp,w_exp,pr,t,ldimt,'avg')
+
+      do iiq=ndir_init,ndir_final
+      do iip=1,nfil
+
+      call blank(initc(1),70)
+      write(initc(1),8)iiq,iip
+
+   8       format('./runs/run_dir'
+     &     ,i2.2,'/rmsmichigan0.f',i5.5)
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         uu_nek(i,j,k,e)=uu_nek(i,j,k,e)+vx(i,j,k,e)/(ftot)
+         vv_nek(i,j,k,e)=vv_nek(i,j,k,e)+vy(i,j,k,e)/(ftot)
+         ww_nek(i,j,k,e)=ww_nek(i,j,k,e)+vz(i,j,k,e)/(ftot)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      enddo
+      enddo
+
+      do iiq=ndir_init,ndir_final
+      do iip=1,nfil
+
+      call blank(initc(1),70)
+      write(initc(1),9)iiq,iip
+
+   9       format('./runs/run_dir'
+     &     ,i2.2,'/rm2michigan0.f',i5.5)
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         uv_nek(i,j,k,e)=uv_nek(i,j,k,e)+vx(i,j,k,e)/(ftot)
+         uw_nek(i,j,k,e)=uw_nek(i,j,k,e)+vy(i,j,k,e)/(ftot)
+         vw_nek(i,j,k,e)=vw_nek(i,j,k,e)+vz(i,j,k,e)/(ftot)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      enddo
+      enddo
+
+c Adjusting the frame to the experiment
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         uu_exp(i,j,k,e)=uu_nek(i,j,k,e)
+     &                  -u_nek(i,j,k,e)*u_nek(i,j,k,e)
+         vv_exp(i,j,k,e)=vv_nek(i,j,k,e)
+     &                  -v_nek(i,j,k,e)*v_nek(i,j,k,e)
+         ww_exp(i,j,k,e)=ww_nek(i,j,k,e)
+     &                  -w_nek(i,j,k,e)*w_nek(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      call outpost2(uu_exp,vv_exp,ww_exp,pr,t,ldimt,'rms')
+
+c Adjusting the frame to the experiment
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         uv_exp(i,j,k,e)=uv_nek(i,j,k,e)
+     &                  -u_nek(i,j,k,e)*v_nek(i,j,k,e)
+         uw_exp(i,j,k,e)=uw_nek(i,j,k,e)
+     &                  -u_nek(i,j,k,e)*w_nek(i,j,k,e)
+         vw_exp(i,j,k,e)=vw_nek(i,j,k,e)
+     &                  -v_nek(i,j,k,e)*w_nek(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      call outpost2(uv_exp,uw_exp,vw_exp,pr,t,ldimt,'rm2')
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine uservp(i,j,k,eg) ! set variable properties
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer i,j,k,e,eg
+
+      udiff  = 0.0
+      utrans = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userf(i,j,k,eg) ! set acceleration term
+c
+c     Note: this is an acceleration term, NOT a force!
+c     Thus, ffx will subsequently be multiplied by rho(x,t).
+c
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer i,j,k,e,eg
+
+      ffx = 0.0
+      ffy = 0.0
+      ffz = 0.0 !1.9e-2
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userq(i,j,k,eg) ! set source term
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer i,j,k,e,eg
+
+      qvol = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userbc(i,j,k,f,eg) ! set up boundary conditions
+c     NOTE ::: This routine MAY NOT be called by every process
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      integer i,j,k,f,e,eg
+
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine useric (ix,iy,iz,ieg)
+
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+c Initialize with low value everywhere
+
+      ux   = 0.0
+      uy   = 0.0001
+      uz   = 0.0
+      temp = 0.0
+
+c Triggering turbulence at the recycling region from the inlet
+
+      YLENGTH = 30.0
+      R_dome_inlet = 85.0*0.5
+      R_dome_inlet = R_dome_inlet/17.5
+
+      x_inlet=R_dome_inlet*cos(pi/2)
+      z_inlet=R_dome_inlet*sin(pi/2)
+
+      xr = (x-x_inlet)*2.0
+      zr = (z-z_inlet)*2.0
+      rr = xr*xr + zr*zr
+      if (rr.gt.0) rr=sqrt(rr)
+      th = atan2(zr,xr)
+      yo = 3.0*2.0*pi*y/YLENGTH
+
+      if (y.lt.2.0) then
+        if (rr.lt.1.0) then
+          uy = 6.*(1-rr**6)/5.
+        endif
+      endif
+
+c     Assign a wiggly shear layer near the wall
+      amp_y    = 0.35  ! Fraction of 2pi for y-based phase modification
+      freq_y   = 4     ! Number of wiggles in axial- (y-) direction
+      freq_t   = 9     ! Frequency of wiggles in azimuthal-direction
+
+      amp_tht  = 5     ! Amplification factor for clipped sine function
+      amp_clip = 0.2   ! Clipped amplitude
+
+      blt      = 0.07  ! Fraction of boundary layer with momentum deficit
+
+      phase_y = amp_y*(2*pi)*sin(freq_y*yo)
+
+      arg_tht = freq_t*th + phase_y
+      amp_sin = 5*sin(arg_tht)
+      if (amp_sin.gt. amp_clip) amp_sin =  amp_clip
+      if (amp_sin.lt.-amp_clip) amp_sin = -amp_clip
+
+      if (y.lt.2.0) then
+        if (rr.lt.1.0) then
+          if (rr.gt.(1-blt)) uy = uy + amp_sin
+        endif
+      endif
+
+c     Quick P-independent randomizer
+      big  = 1.e3*eg + 1.e2*ix + 1.e1*iy + 1.e0*iz
+      rand = sin(big)
+
+      if (y.lt.0.0) then
+        if (rr.lt.1.0) then
+          ux   = .05*rand*rand
+          uy   = uy + .1*rand
+          uz   = .10*rand*rand*rand
+          temp = 1.
+        endif
+      endif
+
+c Initialize with low value everywhere
+
+c      ux   = 0.0
+c      uy   = 0.0001
+c      uz   = 0.0
+c      temp = 0.0
+
+c Initialize with 1 just at the recycling region
+
+c      if (y.lt.-5.0) then
+c        if (abs(z).lt.2.0) then
+c          if(abs(x).lt.2.0) then
+c            uy   = 1.0
+c          endif
+c        endif
+c      endif
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat   ! This routine to modify element vertices
+      include 'SIZE'
+      include 'TOTAL'
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat3
+      include 'SIZE'
+      include 'TOTAL'
+
+      common /scrach_o1/
+     & w1(lx1*ly1*lz1*lelv)
+     &,w2(lx1*ly1*lz1*lelv)
+     &,w3(lx1*ly1*lz1*lelv)
+     &,w4(lx1*ly1*lz1*lelv)
+     &,w5(lx1*ly1*lz1*lelv)
+
+      common /scrach_o2/
+     & wd(lx1,ly1,lz1,lelv)
+
+      COMMON /NRSSCPTR/ nrs_scptr(1)
+      integer*8         nrs_scptr
+
+      call distf(wd,1,'W  ',w1,w2,w3,w4,w5)
+
+c      nrs_scptr(1) = loc(ywd)
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat2
+      include 'SIZE'
+      include 'TOTAL'
+      integer e,f
+
+      n = lx1*ly1*lz1*nelv
+      nxz = nx1*nz1
+      nface = 2*ldim
+!     diameter of the inlet pipe is 1.75 in (notice that the geometry file has an additional factor of 10)
+      do i=1,n
+        xm1(i,1,1,1)=xm1(i,1,1,1)/17.5
+        ym1(i,1,1,1)=ym1(i,1,1,1)/17.5
+        zm1(i,1,1,1)=zm1(i,1,1,1)/17.5
+      enddo
+
+      do iel=1,nelv
+      do ifc=1,2*ndim
+         if (bc(5,ifc,iel,1).eq.1) boundaryID(ifc,iel) = 1
+         if (bc(5,ifc,iel,1).eq.2) boundaryID(ifc,iel) = 2
+         if (bc(5,ifc,iel,1).eq.3) boundaryID(ifc,iel) = 3
+c         if (abs(bc(5,ifc,iel,1)-206.0).lt.1e-4) cbc(ifc,iel,1)= 'v  '
+c         if (abs(bc(5,ifc,iel,1)-207.0).lt.1e-4) cbc(ifc,iel,1)= 'W  '
+c         if (abs(bc(5,ifc,iel,1)-208.0).lt.1e-4) cbc(ifc,iel,1)= 'O  '
+      enddo
+      enddo
+
+c      do iel=1,nelv
+c      do ifc=1,2*ndim
+c         if (cbc(ifc,iel,1) .eq. 'v  ') boundaryID(ifc,iel) = 1
+c         if (cbc(ifc,iel,1) .eq. 'W  ') boundaryID(ifc,iel) = 2
+c         if (cbc(ifc,iel,1) .eq. 'O  ') boundaryID(ifc,iel) = 3
+c      enddo
+c      enddo
+
+c      do iel=1,nelv
+c      do ifc=1,2*ndim
+c        id_face=bc(5,ifc,iel,1)
+c        if (id_face.eq.206) then
+c           cbc(ifc,iel,1)='v  '
+c           cbc(ifc,iel,1)='t  '
+c           boundaryID(ifc,iel)=1
+c        elseif (id_face.eq.207) then
+c           cbc(ifc,iel,1)='W  '
+c           cbc(ifc,iel,2)='I  '
+c           boundaryID(ifc,iel)=2
+c        elseif (id_face.eq.208) then
+c           cbc(ifc,iel,1)='O  '
+c           cbc(ifc,iel,2)='I  '
+c           boundaryID(ifc,iel)=3
+c        endif
+c      enddo
+c      enddo
+
+      if (nid.eq.0) write(6,*) 'Starting projection in usrdat2'
+
+      call blank(initc(1),80)
+      write(initc(1),'(A)') 'avgmichigan0.f00001'
+      call setics
+
+      call project_moose_avg
+      call exitti('Projection finished$',0)
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userchk
+      include 'SIZE'
+      include 'TOTAL'
+
+      parameter (ninp=204)
+
+      CHARACTER*14 histfile
+
+      common /myoutflow/ d(lx1,ly1,lz1,lelt),m1(lx1*ly1*lz1,lelt)
+      common /cvelbc/ uin(lx1,ly1,lz1,lelv)
+     $              , vin(lx1,ly1,lz1,lelv)
+     $              , win(lx1,ly1,lz1,lelv)
+     $              , tin(lx1,ly1,lz1,lelt,ldimt)
+
+      common /fluc/ u_wrk(lx1,ly1,lz1,lelt),v_wrk(lx1,ly1,lz1,lelt),
+     & w_wrk(lx1,ly1,lz1,lelt)
+
+      COMMON /NRSSCPTR/ nrs_scptr(1)
+      integer*8         nrs_scptr
+
+      common /scratch_interp/
+     & uvw1(3,ninp),xyz1(3,ninp),uvw2(3,ninp),uvw3(3,ninp),
+     & uvw4(3,ninp),uvw4x(3,ninp),uvw4y(3,ninp),
+     & xyz1x(3,ninp),xyz1y(3,ninp),xyz1w(ninp)
+
+      common /scratch_tp/
+     & xyz1_xL(3,ninp),xyz1_yL(3,ninp),xyz2_zL(3,ninp),
+     & xyz2_yL(3,ninp),xyz3_zL(3,ninp),xyz3_yL(3,ninp)
+
+      common /scratch_interp_ct/
+     & uvw1_ct(3,ninp),uvw2_ct(3,ninp),uvw3_ct(3,ninp),pr_ct(3,ninp),
+     & du(3,ninp),dv(3,ninp),dw(3,ninp)
+
+      common /avg_usr/
+     & vx_avg(lx1,ly1,lz1,lelt),
+     & vy_avg(lx1,ly1,lz1,lelt),
+     & vz_avg(lx1,ly1,lz1,lelt)
+
+      common /var/
+     & var_uu(lx1,ly1,lz1,lelt),
+     & var_vv(lx1,ly1,lz1,lelt),
+     & var_ww(lx1,ly1,lz1,lelt),
+     & var_uv(lx1,ly1,lz1,lelt),
+     & var_wu(lx1,ly1,lz1,lelt),
+     & var_vw(lx1,ly1,lz1,lelt)
+
+      common /scrach_o2/
+     & wd(lx1,ly1,lz1,lelv)
+
+      real dg2(lx1,ly1,lz1,lelv)
+
+      real m1,dx,dy,dz,ubar,tbar,delta_h
+      real, dimension(:,:), allocatable :: x
+
+      integer ifaveraging,ifverify,azin,h,ifspread
+
+      integer e,eg,ex,ey,ez
+      
+      integer iproj
+      save iproj
+      data iproj /0/
+
+c      if (iproj.eq.0) then
+c         iproj = 1
+c
+c         call blank(initc(1),80)
+c         write(initc(1),'(A)') 'avgmichigan0.f00001'
+c         call setics
+
+c         call project_moose_avg
+c         call exitt()
+c      endif
+
+      rq = 2.0
+      uin = 1.0
+
+      ifto = .true.
+c      if (istep.eq.0.or.mod(istep,iostep).eq.0) then
+c        call lambda2(t)   ! Put lambda2 into temperature field
+c        call outpost2(vx,vy,vz,pr,t,ldimt,'lmb')
+c        call exit()
+c      endif
+
+      n=lx1*ly1*lz1*nelt
+
+c      if (istep.eq.0) then
+c      call gfldr('./michigan0.run')
+c      endif
+
+      dx = 0.0
+      dy = 10.0
+      dz = 0.0
+      ubar = 1.0
+
+      call set_inflow_fpt(dx,dy,dz,ubar) ! set recycling velocity
+
+      nrs_scptr(1) = loc(uin)
+      nrs_scptr(2) = loc(vin)
+      nrs_scptr(3) = loc(win)
+
+c      if (istep.eq.0) then
+c        call outpost2(vx,vy,vz,pr,t,ldimt,'int')
+c      endif
+
+      iffluc=0
+      if (iffluc.eq.1) then
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         u_wrk(i,j,k,e)  = vx(i,j,k,e)
+         v_wrk(i,j,k,e)  = vy(i,j,k,e)
+         w_wrk(i,j,k,e)  = vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      call blank(initc(1),80)
+
+      write(initc(1),47) !47 mean avg file
+
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+         u_wrk(i,j,k,e)=u_wrk(i,j,k,e)-vx(i,j,k,e)
+         v_wrk(i,j,k,e)=v_wrk(i,j,k,e)-vy(i,j,k,e)
+         w_wrk(i,j,k,e)=w_wrk(i,j,k,e)-vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      call outpost2(u_wrk,v_wrk,w_wrk,pr,t,ldimt,'flc')
+
+      call exitt()
+
+      endif
+
+      ifaveraging=0
+      if (ifaveraging.eq.1) then
+        call avg_custom()
+c        call exitt()
+      endif
+
+      iftp=0
+      if (iftp.eq.1) then
+      if (mod(istep,10).eq.0) then
+
+      if (istep.eq.0) then
+      open(199, file='gridxL1.txt', status='old', action='read')
+      allocate(x(ninp,3))
+
+      do I=1,ninp,1
+        read(199,*) x(I,:)
+        if (nid.eq.0) write(*,*) x(I,:)
+      enddo
+      close(199)
+
+      do j=1,ninp
+
+      xyz1_xL(1,j)=x(j,1) !Coordinates
+      xyz1_xL(2,j)=x(j,2)
+      xyz1_xL(3,j)=x(j,3)
+
+      enddo
+
+      open(199, file='gridyL1.txt', status='old', action='read')
+
+      do I=1,ninp,1
+        read(199,*) x(I,:)
+        if (nid.eq.0) write(*,*) x(I,:)
+      enddo
+      close(199)
+
+      do j=1,ninp
+
+      xyz1_yL(1,j)=x(j,1) !Coordinates
+      xyz1_yL(2,j)=x(j,2)
+      xyz1_yL(3,j)=x(j,3)
+
+      enddo
+
+      open(199, file='gridzL2.txt', status='old', action='read')
+
+      do I=1,ninp,1
+        read(199,*) x(I,:)
+        if (nid.eq.0) write(*,*) x(I,:)
+      enddo
+      close(199)
+
+      do j=1,ninp
+
+      xyz2_zL(1,j)=x(j,1) !Coordinates
+      xyz2_zL(2,j)=x(j,2)
+      xyz2_zL(3,j)=x(j,3)
+
+      enddo
+
+      open(199, file='gridyL2.txt', status='old', action='read')
+
+      do I=1,ninp,1
+        read(199,*) x(I,:)
+        if (nid.eq.0) write(*,*) x(I,:)
+      enddo
+      close(199)
+
+      do j=1,ninp
+
+      xyz2_yL(1,j)=x(j,1) !Coordinates
+      xyz2_yL(2,j)=x(j,2)
+      xyz2_yL(3,j)=x(j,3)
+
+      enddo
+
+      open(199, file='gridzL3.txt', status='old', action='read')
+
+      do I=1,ninp,1
+        read(199,*) x(I,:)
+        if (nid.eq.0) write(*,*) x(I,:)
+      enddo
+      close(199)
+
+      do j=1,ninp
+
+      xyz3_zL(1,j)=x(j,1) !Coordinates
+      xyz3_zL(2,j)=x(j,2)
+      xyz3_zL(3,j)=x(j,3)
+
+      enddo
+
+      open(199, file='gridyL3.txt', status='old', action='read')
+
+      do I=1,ninp,1
+        read(199,*) x(I,:)
+        if (nid.eq.0) write(*,*) x(I,:)
+      enddo
+      close(199)
+
+      do j=1,ninp
+
+      xyz3_yL(1,j)=x(j,1) !Coordinates
+      xyz3_yL(2,j)=x(j,2)
+      xyz3_yL(3,j)=x(j,3)
+
+      uvw1_ct(1,j)=0.0 !Velocity cartesian (x,y,z)
+      uvw1_ct(2,j)=0.0
+      uvw1_ct(3,j)=0.0
+
+      enddo
+
+      endif
+
+c      call blank(initc(1),80)
+
+c      write(initc(1),47) !47 mean avg file
+
+c      call setics
+
+      call interp_v(uvw1_ct,xyz1_xL,ninp)
+
+      if (nid.eq.0) then
+
+      open(199,file='gridxL1.csv',form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,ninp
+      write(199,15) j,xyz1_xL(1,j),xyz1_xL(2,j),xyz1_xL(3,j),
+     $    uvw1_ct(1,j),uvw1_ct(2,j),uvw1_ct(3,j)
+      enddo
+   15 format(I4,',',F9.5,',',F9.5,',',F9.5,',',F9.5,',',F9.5,
+     $    ',',F9.5)
+      close(199)
+      endif
+
+      do j=1,ninp
+
+      uvw1_ct(1,j)=0.0 !Velocity cartesian (x,y,z)
+      uvw1_ct(2,j)=0.0
+      uvw1_ct(3,j)=0.0
+
+      enddo
+
+      call interp_v(uvw1_ct,xyz1_yL,ninp)
+
+      if (nid.eq.0) then
+
+      open(199,file='gridyL1.csv',form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,ninp
+      write(199,15) j,xyz1_yL(1,j),xyz1_yL(2,j),xyz1_yL(3,j),
+     $    uvw1_ct(1,j),uvw1_ct(2,j),uvw1_ct(3,j)
+      enddo
+      close(199)
+      endif
+
+      do j=1,ninp
+
+      uvw1_ct(1,j)=0.0 !Velocity cartesian (x,y,z)
+      uvw1_ct(2,j)=0.0
+      uvw1_ct(3,j)=0.0
+
+      enddo
+
+      call interp_v(uvw1_ct,xyz2_zL,ninp)
+
+      if (nid.eq.0) then
+
+      open(199,file='gridzL2.csv',form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,ninp
+      write(199,15) j,xyz2_zL(1,j),xyz2_zL(2,j),xyz2_zL(3,j),
+     $    uvw1_ct(1,j),uvw1_ct(2,j),uvw1_ct(3,j)
+      enddo
+      close(199)
+      endif
+
+      do j=1,ninp
+
+      uvw1_ct(1,j)=0.0 !Velocity cartesian (x,y,z)
+      uvw1_ct(2,j)=0.0
+      uvw1_ct(3,j)=0.0
+
+      enddo
+
+      call interp_v(uvw1_ct,xyz2_yL,ninp)
+
+      if (nid.eq.0) then
+
+      open(199,file='gridyL2.csv',form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,ninp
+      write(199,15) j,xyz2_yL(1,j),xyz2_yL(2,j),xyz2_yL(3,j),
+     $    uvw1_ct(1,j),uvw1_ct(2,j),uvw1_ct(3,j)
+      enddo
+      close(199)
+      endif
+
+      do j=1,ninp
+
+      uvw1_ct(1,j)=0.0 !Velocity cartesian (x,y,z)
+      uvw1_ct(2,j)=0.0
+      uvw1_ct(3,j)=0.0
+
+      enddo
+
+      call interp_v(uvw1_ct,xyz3_zL,ninp)
+
+      if (nid.eq.0) then
+
+      open(199,file='gridzL3.csv',form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,ninp
+      write(199,15) j,xyz3_zL(1,j),xyz3_zL(2,j),xyz3_zL(3,j),
+     $    uvw1_ct(1,j),uvw1_ct(2,j),uvw1_ct(3,j)
+      enddo
+      close(199)
+      endif
+
+      do j=1,ninp
+
+      uvw1_ct(1,j)=0.0 !Velocity cartesian (x,y,z)
+      uvw1_ct(2,j)=0.0
+      uvw1_ct(3,j)=0.0
+
+      enddo
+
+      call interp_v(uvw1_ct,xyz3_yL,ninp)
+
+      if (nid.eq.0) then
+
+      open(199,file='gridyL3.csv',form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,ninp
+      write(199,15) j,xyz3_yL(1,j),xyz3_yL(2,j),xyz3_yL(3,j),
+     $    uvw1_ct(1,j),uvw1_ct(2,j),uvw1_ct(3,j)
+      enddo
+      close(199)
+      endif
+
+c      call exitt()
+
+      endif
+      endif
+
+      ifverify=0
+      if (ifverify.eq.1) then
+
+c Initialization:
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        vx_avg(i,j,k,e)=0.0
+        vy_avg(i,j,k,e)=0.0
+        vz_avg(i,j,k,e)=0.0
+        var_uu(i,j,k,e)=0.0
+        var_vv(i,j,k,e)=0.0
+        var_ww(i,j,k,e)=0.0
+        var_uv(i,j,k,e)=0.0
+        var_wu(i,j,j,e)=0.0
+        var_vw(i,j,k,e)=0.0
+      enddo
+      enddo
+      enddo
+      enddo
+
+!Taking the data from the avg (average velocity data) file
+
+      call blank(initc(1),80)
+
+      write(initc(1),47)
+47    format('./avgmichigan0.f00001')
+
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        vx_avg(i,j,k,e)=vx_avg(i,j,k,e)+vx(i,j,k,e)
+        vy_avg(i,j,k,e)=vy_avg(i,j,k,e)+vy(i,j,k,e)
+        vz_avg(i,j,k,e)=vz_avg(i,j,k,e)+vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+!Taking the data from the rms (reynolds stress) file
+      call blank(initc(1),80)
+
+      write(initc(1),48)
+ 48    format('./rmsmichigan0.f00001')
+
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        var_uu(i,j,k,e)=var_uu(i,j,k,e)+vx(i,j,k,e)
+        var_vv(i,j,k,e)=var_vv(i,j,k,e)+vy(i,j,k,e)
+        var_ww(i,j,k,e)=var_ww(i,j,k,e)+vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+!Taking the data from the rms (reynolds stress) file
+      call blank(initc(1),80)
+
+      write(initc(1),49)
+ 49    format('./rm2michigan0.f00001')
+
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        var_uv(i,j,k,e)=var_uv(i,j,k,e)+vx(i,j,k,e)
+        var_wu(i,j,k,e)=var_wu(i,j,k,e)+vy(i,j,k,e)
+        var_vw(i,j,k,e)=var_vw(i,j,k,e)+vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      R_dome_inlet=8.5/(1.75*2.0)
+      alpha = pi/3
+      alpha_per = alpha+pi/2
+      a_coef=TAN(alpha_per)
+      b_coef=R_dome_inlet*(SIN(alpha)-COS(alpha)*a_coef)
+      nline=150
+      nh=4
+      delta_h=0.4
+      Heigth= 1.8
+
+      do h=1,nh
+
+      do j=1,ninp
+
+      uvw1(1,j)=0.0 !Work array
+      uvw1(2,j)=0.0
+      uvw1(3,j)=0.0
+      uvw2(1,j)=0.0 !Velocity
+      uvw2(2,j)=0.0
+      uvw2(3,j)=0.0
+      uvw3(1,j)=0.0 !RMS
+      uvw3(2,j)=0.0
+      uvw3(3,j)=0.0
+      uvw4(1,j)=0.0 !RM2
+      uvw4(2,j)=0.0
+      uvw4(3,j)=0.0
+      uvw4x(1,j)=0.0 !RM2
+      uvw4x(2,j)=0.0
+      uvw4x(3,j)=0.0
+      uvw4y(1,j)=0.0 !RM2
+      uvw4y(2,j)=0.0
+      uvw4y(3,j)=0.0
+
+      enddo
+
+      do j=1,nline
+c      x_j=-2.0+4.0*dble(j-1)/dble(nline-1)
+      x_j=0.0
+      y_j=Heigth
+c      z_j=R_dome_inlet
+      z_j=R_dome_inlet-2.0+4.0*dble(j-1)/dble(nline-1)
+      xyz1(1,j)= x_j  ! x direction - fixed
+      xyz1(2,j)= y_j ! y direction
+      xyz1(3,j)= z_j ! z direction - fixed
+
+      enddo
+
+      call copy(vx,vx_avg,n)
+      call copy(vy,vy_avg,n)
+      call copy(vz,vz_avg,n)
+
+!     Interpolating the average values
+      call interp_v(uvw2,xyz1,nline)
+
+      call copy(vx,var_uu,n)
+      call copy(vy,var_vv,n)
+      call copy(vz,var_ww,n)
+
+!     Interpolating the rms values
+      call interp_v(uvw3,xyz1,nline)
+
+      call copy(vx,var_uv,n)
+      call copy(vy,var_wu,n)
+      call copy(vz,var_vw,n)
+
+!     Interpolating the rm2 values
+      call interp_v(uvw4,xyz1,nline)
+
+      if (nid.eq.0) then
+
+      call blank(histfile,14)
+      write(histfile,45)h
+      open(199,file=histfile,form='formatted',status='unknown')
+      write(199,23) 'i','x','y','z','v_avg',
+     $    'v_rms','uv'
+   23 format(A1,',',A1,',',A1,',',A1,',',A5,
+     $    ',',A5,',',A2)
+      close(199)
+      call blank(histfile,14)
+      write(histfile,45)h
+45    format('nek_2_1_',i1.1,'.csv')
+      open(199,file=histfile,form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,nline
+      write(199,22) j,xyz1(1,j),xyz1(2,j),xyz1(3,j),uvw2(2,j),
+     $    uvw3(2,j),uvw4(1,j)
+      enddo
+   22 format(I4,',',F9.5,',',F9.5,',',F9.5,',',F9.5,
+     $    ',',F9.5,',',F9.5)
+      close(199)
+      endif
+
+      Heigth=Heigth+delta_h
+c      if (h.eq.1) Heigth=Heigth+0.2
+
+      enddo
+
+      call exitt()
+
+      endif
+
+      ifspread=1
+      if (ifspread.eq.1) then
+
+c Initialization:
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        vx_avg(i,j,k,e)=0.0
+        vy_avg(i,j,k,e)=0.0
+        vz_avg(i,j,k,e)=0.0
+        var_uu(i,j,k,e)=0.0
+        var_vv(i,j,k,e)=0.0
+        var_ww(i,j,k,e)=0.0
+      enddo
+      enddo
+      enddo
+      enddo
+
+!Taking the data from the avg (average velocity data) file
+
+      call blank(initc(1),80)
+
+      write(initc(1),47)
+
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        vx_avg(i,j,k,e)=vx_avg(i,j,k,e)+vx(i,j,k,e)
+        vy_avg(i,j,k,e)=vy_avg(i,j,k,e)+vy(i,j,k,e)
+        vz_avg(i,j,k,e)=vz_avg(i,j,k,e)+vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+!Taking the data from the rms (reynolds stress) file
+
+      call blank(initc(1),80)
+
+      write(initc(1),48)
+
+      call setics
+
+      do i=1,lx1
+      do j=1,ly1
+      do k=1,lz1
+      do e=1,lelt
+        var_uu(i,j,k,e)=var_uu(i,j,k,e)+vx(i,j,k,e)
+        var_vv(i,j,k,e)=var_vv(i,j,k,e)+vy(i,j,k,e)
+        var_ww(i,j,k,e)=var_ww(i,j,k,e)+vz(i,j,k,e)
+      enddo
+      enddo
+      enddo
+      enddo
+
+      R_dome_inlet=8.5/(1.75*2.0)
+      nline=150
+      teta=0.0
+      dteta=pi/4.0
+
+      do l=1,5
+
+      do j=1,ninp
+
+      uvw1(1,j)=0.0 !Work array
+      uvw1(2,j)=0.0
+      uvw1(3,j)=0.0
+      uvw2(1,j)=0.0 !Velocity
+      uvw2(2,j)=0.0
+      uvw2(3,j)=0.0
+      uvw3(1,j)=0.0 !RMS
+      uvw3(2,j)=0.0
+      uvw3(3,j)=0.0
+
+      enddo
+
+      do j=1,nline
+      xyz1w(j)=2.0*dble(j-1)/dble(nline-1)
+c      z_j=R_dome_inlet
+      xyz1(1,j)= xyz1w(j)*SIN(teta)  ! x direction
+      xyz1(2,j)= 3.0 ! y direction - fixed
+      xyz1(3,j)= R_dome_inlet+xyz1w(j)*COS(teta) ! z direction
+      enddo
+
+      call copy(vx,vx_avg,n)
+      call copy(vy,vy_avg,n)
+      call copy(vz,vz_avg,n)
+
+!     Interpolating the average values
+      call interp_v(uvw2,xyz1,nline)
+
+      call copy(vx,var_uu,n)
+      call copy(vy,var_vv,n)
+      call copy(vz,var_ww,n)
+
+!     Interpolating the average values
+      call interp_v(uvw3,xyz1,nline)
+
+      if (nid.eq.0) then
+
+      call blank(histfile,14)
+      write(histfile,46)l
+      open(199,file=histfile,form='formatted',status='unknown')
+      write(199,21) 'i','r','v_avg','v_rms'
+   21 format(A1,',',A1,',',A5,',',A5)
+      close(199)
+      call blank(histfile,14)
+      write(histfile,46)l
+46    format('teta_',i1.1,'.csv')
+      open(199,file=histfile,form='formatted',status='old',
+     $    action='write',position='append')
+      do j=1,nline
+      write(199,20) j,xyz1w(j),uvw2(2,j),uvw3(2,j)
+      enddo
+   20 format(I4,',',F9.5,',',F9.5,',',F9.5)
+      close(199)
+      endif
+
+      teta=teta+dteta
+
+      enddo
+
+      call exitt()
+
+      endif
+
+      ifsg=0
+      if (ifsg.eq.1) then
+
+      call set_grid_spacing(dg2)
+      call outpost2(dg2,vy,vz,pr,t,ldimt,'dg2')
+
+      call exitt()
+
+      endif
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine interp_v(uvw,xyz,n)
+c
+c     evaluate velocity for list of points xyz
+c
+      include 'SIZE'
+      include 'TOTAL'
+
+      real uvw(ldim,n),xyz(ldim,n)
+
+      real    rwk(INTP_NMAX,ldim+1) ! r, s, t, dist2
+      integer iwk(INTP_NMAX,3)      ! code, proc, el
+      save    rwk, iwk
+
+      integer intp_h
+      save    intp_h
+
+      common /rwk_intp/
+     $       fwrk(lx1*ly1*lz1*lelt,ldim),
+     $       fpts(ldim*INTP_NMAX),
+     $       pts(ldim*INTP_NMAX)
+
+      integer icalld,e
+      save    icalld
+      data    icalld /0/
+
+      nxyz  = nx1*ny1*nz1
+      ntot  = nxyz*nelt
+
+      if (n.gt.INTP_NMAX) call exitti ('n > INTP_NMAX in interp_v!$',n)
+
+      if (nelgt.ne.nelgv) call exitti
+     $   ('nelgt.ne.nelgv not yet supported in interp_v!$',nelgv)
+
+      do i=1,n                          ! ? not moving -> save?
+         pts(i)     = xyz(1,i)
+         pts(i + n) = xyz(2,i)
+         if (if3d) pts(i + n*2) = xyz(3,i)
+      enddo
+
+      if (icalld.eq.0) then
+        icalld = 1
+        call interp_setup(intp_h,0.0,0,nelt)
+      endif
+
+      ! pack working array
+c      call opcopy(fwrk(1,1),fwrk(1,2),fwrk(1,3),vx,vy,vz)
+      call opcopy(fwrk(1,1),fwrk(1,2),fwrk(1,3),vx,vy,vz)
+      ! interpolate
+      call interp_nfld(fpts,fwrk,ndim,pts(1),pts(1+n),pts(2*n+1),
+     $                 n,iwk,rwk,INTP_NMAX,.true.,intp_h)
+
+      do i=1,n
+         uvw(1,i) = fpts(i)
+         uvw(2,i) = fpts(i + n)
+         if(if3d) uvw(3,i) = fpts(i + n*2)
+      enddo
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine set_grid_spacing(dg2)
+c
+c     Compute D^2, the grid spacing used in the DS sgs model.
+c
+      include 'SIZE'
+      include 'TOTAL'
+      real dg2(lx1,ly1,lz1,lelv)
+      integer e,eg,ex,ey,ez
+      gamma = 1.
+      gamma = gamma/(2*ndim)
+      n = lx1*ly1*lz1*nelv
+      call rone(dg2,n)
+c      return               ! Comment this line for a non-trivial Delta defn
+      do e=1,nelv
+         do k=1,nz1
+           km = max(1  ,k-1)
+           kp = min(nz1,k+1)
+           do j=1,ny1
+             jm = max(1  ,j-1)
+             jp = min(ny1,j+1)
+             do i=1,nx1
+               im = max(1  ,i-1)
+               ip = min(nx1,i+1)
+               di = (xm1(ip,j,k,e)-xm1(im,j,k,e))**2
+     $            + (ym1(ip,j,k,e)-ym1(im,j,k,e))**2
+     $            + (zm1(ip,j,k,e)-zm1(im,j,k,e))**2
+               dj = (xm1(i,jp,k,e)-xm1(i,jm,k,e))**2
+     $            + (ym1(i,jp,k,e)-ym1(i,jm,k,e))**2
+     $            + (zm1(i,jp,k,e)-zm1(i,jm,k,e))**2
+               dk = (xm1(i,j,kp,e)-xm1(i,j,km,e))**2
+     $            + (ym1(i,j,kp,e)-ym1(i,j,km,e))**2
+     $            + (zm1(i,j,kp,e)-zm1(i,j,km,e))**2
+               di = di/(ip-im)
+               dj = dj/(jp-jm)
+               dk = dk/(kp-km)
+               dg2(i,j,k,e) = (di*dj*dk)**gamma
+             enddo
+           enddo
+         enddo
+      enddo
+      call dsavg(dg2)  ! average neighboring elements
+      return
+      end
+
+c-----------------------------------------------------------------------
+      subroutine project_moose_avg
+      include 'SIZE'
+      include 'TOTAL'
+
+      integer nmax
+      parameter (nmax=50000)
+
+      real xyz(ldim,nmax),uvw(ldim,nmax)
+      real vol(nmax),yw(nmax)
+      integer ids(nmax)
+      integer i,n
+
+      n = 0
+
+      if (nid.eq.0) write(6,*) 'Reading moose_cell_centers.dat'
+
+      open(77,file='moose_cell_centers.dat',
+     $     form='formatted',status='old')
+
+      do i=1,nmax
+         read(77,*,end=20) ids(i),xyz(1,i),xyz(2,i),xyz(3,i),
+     $        vol(i),yw(i)
+         n = i
+      enddo
+
+      call exitti('Increase nmax in project_moose_avg$',nmax)
+
+   20 continue
+      close(77)
+
+      if (nid.eq.0) write(6,*) 'Number of MOOSE points = ', n
+
+      call interp_v(uvw,xyz,n)
+
+      if (nid.eq.0) then
+         open(78,file='nek_avg_on_moose.csv',
+     $        form='formatted',status='unknown')
+
+         write(78,'(A)') 'id,x,y,z,volume,yw,U,V,W'
+
+         do i=1,n
+            write(78,900) ids(i),xyz(1,i),xyz(2,i),xyz(3,i),
+     $           vol(i),yw(i),uvw(1,i),uvw(2,i),uvw(3,i)
+         enddo
+
+         close(78)
+         write(6,*) 'Wrote nek_avg_on_moose.csv'
+      endif
+
+  900 format(I12,8(',',1PE23.15))
+
+      return
+      end
+c-----------------------------------------------------------------------
