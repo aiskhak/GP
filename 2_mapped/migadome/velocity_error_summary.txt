@@ -1,0 +1,47 @@
+============================================================
+MiGaDome coarse-grid velocity comparison
+============================================================
+Number of matched cells: 16980
+
+Coordinate mismatch:
+  max |dx|   = 0.000000000000e+00
+  max |dy|   = 0.000000000000e+00
+  max |dz|   = 1.972152263053e-31
+  max dist   = 1.972152263053e-31
+  mean dist  = 1.313897083379e-34
+
+Coordinate check: OK
+
+u-velocity error, CG - HF:
+  HF min/max      = -3.438411555816e-01,  3.418374242382e-01
+  CG min/max      = -3.425935240504e-01,  3.394126659542e-01
+  mean error      = -1.498920564962e-04
+  MAE             =  3.133472313845e-02
+  RMSE            =  5.090634434936e-02
+  max |error|     =  3.544585630853e-01
+  relative RMSE   =  8.001657560911e-01
+
+v-velocity error, CG - HF:
+  HF min/max      = -4.915826394363e-01,  1.310667153724e+00
+  CG min/max      = -1.479283150792e+00,  1.489164645099e+00
+  mean error      = -4.270761364900e-03
+  MAE             =  6.801979489088e-02
+  RMSE            =  1.348620390469e-01
+  max |error|     =  1.089521724494e+00
+  relative RMSE   =  4.524564446420e-01
+
+w-velocity error, CG - HF:
+  HF min/max      = -5.121723702768e-01,  2.843200070294e-01
+  CG min/max      = -5.003594516321e-01,  2.906883355378e-01
+  mean error      =  5.327073381876e-03
+  MAE             =  3.372176541605e-02
+  RMSE            =  5.427620766748e-02
+  max |error|     =  4.317289452751e-01
+  relative RMSE   =  7.280889447101e-01
+
+Vector velocity error:
+  mean |e|        =  9.493429636904e-02
+  RMS  |e|        =  1.540296471128e-01
+  max  |e|        =  1.114039598458e+00
+  mean |U_HF|     =  1.770361422258e-01
+  mean |U_CG|     =  1.609120361638e-01
