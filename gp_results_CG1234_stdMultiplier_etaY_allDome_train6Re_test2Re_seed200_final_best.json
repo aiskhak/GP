@@ -1,0 +1,88 @@
+{
+  "seed": 200,
+  "best_train_mean_normalized_fitness": 0.5684475946187867,
+  "best_test_mean_normalized_fitness": 0.43466819835650017,
+  "best_cand_id": 0,
+  "top_cand_ids": [
+    0,
+    4,
+    5,
+    7
+  ],
+  "top_expressions": {
+    "0": "protected_tanh(neg(0.08485482588769211))",
+    "4": "-0.13896438741656858",
+    "5": "protected_tanh(mul(eta_y, C_m05))",
+    "7": "protected_tanh(C_m1)"
+  },
+  "top_train_mean_normalized_fitness": {
+    "0": 0.5684475946187867,
+    "4": 0.571688319619977,
+    "5": 0.9682554350331127,
+    "7": 1.0031031493382336
+  },
+  "top_test_mean_normalized_fitness": {
+    "0": 0.43466819835650017,
+    "4": 0.43993546735599415,
+    "5": 0.9488162093649961,
+    "7": 0.9964779899541416
+  },
+  "tree_size": 3,
+  "tree_height": 2,
+  "best_expression": "protected_tanh(neg(0.08485482588769211))",
+  "input_variables": [
+    "eta_y"
+  ],
+  "closure_definition": {
+    "eta_y": "yw/DELTA0",
+    "lm_std": "min(KAPPA*yw, KAPPA_CAP*DELTA0)",
+    "raw": "GP expression evaluated using eta_y only",
+    "factor": "factor = 1 for eta_y <= ACTIVATION_ETA_Y; factor = 1 + CORRECTION_AMPLITUDE*tanh((eta_y - ACTIVATION_ETA_Y)*raw) for eta_y > ACTIVATION_ETA_Y",
+    "lm": "lm_std*factor",
+    "KAPPA": 0.41,
+    "KAPPA_CAP": 0.09,
+    "DELTA0": 1.0,
+    "ACTIVATION_ETA_Y": 0.5,
+    "CORRECTION_AMPLITUDE": 0.8
+  },
+  "test_re_list": [
+    "5963",
+    "12819"
+  ],
+  "training_cases": [
+    "RE3000_CG1",
+    "RE3000_CG2",
+    "RE3000_CG3",
+    "RE3000_CG4",
+    "RE3413_CG1",
+    "RE3413_CG2",
+    "RE3413_CG3",
+    "RE3413_CG4",
+    "RE7912_CG1",
+    "RE7912_CG2",
+    "RE7912_CG3",
+    "RE7912_CG4",
+    "RE9000_CG1",
+    "RE9000_CG2",
+    "RE9000_CG3",
+    "RE9000_CG4",
+    "RE10622_CG1",
+    "RE10622_CG2",
+    "RE10622_CG3",
+    "RE10622_CG4",
+    "RE14000_CG1",
+    "RE14000_CG2",
+    "RE14000_CG3",
+    "RE14000_CG4"
+  ],
+  "test_cases": [
+    "RE5963_CG1",
+    "RE5963_CG2",
+    "RE5963_CG3",
+    "RE5963_CG4",
+    "RE12819_CG1",
+    "RE12819_CG2",
+    "RE12819_CG3",
+    "RE12819_CG4"
+  ]
+}

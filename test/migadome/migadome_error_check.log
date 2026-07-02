@@ -1,0 +1,39 @@
+TEST_ROOT:         /homes/aiskhak/projects/GP/test/migadome
+MAPPED_FILE:       /homes/aiskhak/projects/GP/2_mapped/migadome/mapped.csv
+INLET_TUBE_Y_MAX:  1.0
+
+===== Candidate: migadome =====
+VPP: /homes/aiskhak/projects/GP/test/migadome/migadome_3d_ml_csv_vpp_0081.csv
+alignment mode = id_merge
+n_points       = 16980
+x min/max      = -5.522247e+00 5.522247e+00
+y min/max      = -2.931818e+01 4.828156e+00
+z min/max      = -5.389519e+00 5.389519e+00
+lm min/max     = 6.489562e-03 4.500000e-02
+factor min/max = 8.684056e-01 1.000000e+00
+map dist max   = 5.034308e-12
+map dist mean  = 8.578147e-13
+
+Baseline MSE against HF:
+MSE_u_base     = 2.591455895016e-03
+MSE_v_base     = 1.818776957590e-02
+MSE_w_base     = 2.945906718763e-03
+MSE_uvw_base   = 2.372513218968e-02
+
+GP MSE against HF:
+MSE_u_gp       = 2.604565424552e-03
+MSE_v_gp       = 1.825515361297e-02
+MSE_w_gp       = 2.954312689363e-03
+MSE_uvw_gp     = 2.381403172689e-02
+norm           = 1.003747061829e+00
+detail file    = /homes/aiskhak/projects/GP/test/migadome/migadome_hf_baseline_gp_fields.csv
+region file    = /homes/aiskhak/projects/GP/test/migadome/migadome_region_errors.csv
+
+Region error summary:
+  region          n        base_mse        gp_mse          norm
+  inlet_tubes    10044   3.106558e-02   3.108615e-02 1.000662e+00
+  dome            6936   1.309545e-02   1.328330e-02 1.014345e+00
+  all            16980   2.372513e-02   2.381403e-02 1.003747e+00
+IMPROVEMENT  = no
+
+Saved summary: /homes/aiskhak/projects/GP/test/migadome/migadome_candidate_error_summary.csv

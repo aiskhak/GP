@@ -7,6 +7,24 @@ mesh = '../../mesh/BFS_Ret395_ER2_uniform.msh'
 advected_interp_method = 'upwind'
 velocity_interp_method = 'rc'
 
+# GP-corrected mixing-length parameters
+# Same discovered law as Migadome test:
+#   raw = tanh(-0.08485482588769211)
+#   eta_y = yw / D0_eta
+#   lm_gp = lm_std * factor
+#
+# For BFS Retau=395 setup:
+#   h = 1, so use delta_ml = 1.0 for the baseline mixing-length cap
+#   D0_eta = 1.0 for eta_y normalization
+
+kappa_ml = 0.41
+delta_ml = 1.0
+D0_eta = 1.0
+
+activation_eta_y_gp = 0.5
+correction_amplitude_gp = 0.8
+gp_const = 0.08485482588769211
+
 [GlobalParams]
   rhie_chow_user_object = 'rc'
 []
@@ -29,7 +47,7 @@ velocity_interp_method = 'rc'
 
 [Problem]
   fv_bcs_integrity_check = false
-  restart_file_base = bfs_2d_fv_gp_out_cp/LATEST
+  #restart_file_base = bfs_2d_fv_gp_out_cp/LATEST
   allow_initial_conditions_with_restart = true
 []
 
@@ -46,7 +64,22 @@ velocity_interp_method = 'rc'
 []
 
 [AuxVariables]
+  # GP-corrected mixing length used by the Reynolds-stress kernels.
   [mixing_length_gp_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  # Diagnostic: baseline wall-distance mixing length.
+  [mixing_length_std_aux_var]
+    order  = CONSTANT
+    family = MONOMIAL
+    fv     = true
+  []
+
+  # Diagnostic: GP multiplier applied to the baseline mixing length.
+  [gp_factor_aux_var]
     order  = CONSTANT
     family = MONOMIAL
     fv     = true
@@ -59,27 +92,6 @@ velocity_interp_method = 'rc'
   []
 
   [yw_aux_var]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-
-  [dudx_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dudy_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dvdx_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [dvdy_aux_var]
-    type = MooseVariableFVReal
-  []
-
-  [strain_mag_aux_var]
     order  = CONSTANT
     family = MONOMIAL
     fv     = true
@@ -124,15 +136,15 @@ velocity_interp_method = 'rc'
     mu = ${mu}
     momentum_component = 'x'
   []
-  [u_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress_gp
-    variable = u
-    rho = ${rho}
-    mixing_length_gp = mixing_length_gp_aux_var
-    momentum_component = 'x'
-    u = u
-    v = v
-  []
+[u_viscosity_rans]
+  type = INSFVMixingLengthReynoldsStress
+  variable = u
+  rho = ${rho}
+  mixing_length = mixing_length_gp_aux_var
+  momentum_component = 'x'
+  u = u
+  v = v
+[]
   [u_pressure]
     type = INSFVMomentumPressure
     variable = u
@@ -160,15 +172,15 @@ velocity_interp_method = 'rc'
     mu = ${mu}
     momentum_component = 'y'
   []
-  [v_viscosity_rans]
-    type = INSFVMixingLengthReynoldsStress_gp
-    variable = v
-    rho = ${rho}
-    mixing_length_gp = mixing_length_gp_aux_var
-    momentum_component = 'y'
-    u = u
-    v = v
-  []
+[v_viscosity_rans]
+  type = INSFVMixingLengthReynoldsStress
+  variable = v
+  rho = ${rho}
+  mixing_length = mixing_length_gp_aux_var
+  momentum_component = 'y'
+  u = u
+  v = v
+[]
   [v_pressure]
     type = INSFVMomentumPressure
     variable = v
@@ -178,84 +190,49 @@ velocity_interp_method = 'rc'
 []
 
 [AuxKernels]
+  # Wall distance used for eta_y and diagnostics
   [yw_aux_ker]
     type = WallDistanceAux
     walls = 'top_wall bottom_wall step_wall'
     variable = yw_aux_var
-    execute_on = 'INITIAL'
-  []
-
-  [dudx_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dudx_aux_var
-    functor = grad_u
-    component = 0
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [dudy_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dudy_aux_var
-    functor = grad_u
-    component = 1
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [dvdx_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dvdx_aux_var
-    functor = grad_v
-    component = 0
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [dvdy_aux_ker]
-    type = ADFunctorVectorElementalAux
-    variable = dvdy_aux_var
-    functor = grad_v
-    component = 1
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [strain_mag_aux_ker]
-    type = StrainRotationFromGradAux
-    variable = strain_mag_aux_var
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-    quantity = strain_mag
-    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END FINAL'
-  []
-
-  [mixing_length_gp_aux_ker]
-    type = BlendedFunctionalKappaMixingLengthAux
-    variable = mixing_length_gp_aux_var
-    wall_distance = yw_aux_var
-
-    dudx = dudx_aux_var
-    dudy = dudy_aux_var
-    dvdx = dvdx_aux_var
-    dvdy = dvdy_aux_var
-
-    kappa = 0.41
-    kappa_cap = 0.09
-    delta0 = 1.0
-
-    activation_eta_y = 0.5
-    correction_amplitude = 0.8
-    gp_raw = 0.05
-
-    # Additional strain-based multiplier:
-    # F(S*) = C0 + C1*S* + C2*S*^2, S* = |S|/strain_ref
-    strain_ref = 13.0
-    C0 = 1.05
-    C1 = -0.05
-    C2 = 0.0
-
     execute_on = 'INITIAL TIMESTEP_BEGIN'
   []
-  
+
+  # Baseline standard mixing length:
+  # lm_std = WallDistanceMixingLengthAux(kappa_ml, delta_ml)
+  # For BFS, delta_ml = 1.0 because h = 1.
+  [mixing_len_std_aux_ker]
+    type = WallDistanceMixingLengthAux
+    walls = 'top_wall bottom_wall step_wall'
+    variable = mixing_length_std_aux_var
+    von_karman_const = ${kappa_ml}
+    delta = ${delta_ml}
+    execute_on = 'INITIAL TIMESTEP_BEGIN'
+  []
+
+  # GP multiplier:
+  # raw = tanh(-gp_const)
+  # eta_y = yw / D0_eta
+  # factor = 1 for eta_y < 0.5
+  # factor = 1 + 0.8*tanh((eta_y - 0.5)*raw) otherwise
+  [gp_factor_aux_ker]
+    type = ParsedAux
+    variable = gp_factor_aux_var
+    coupled_variables = 'yw_aux_var'
+    expression = 'if(yw_aux_var/${D0_eta} < ${activation_eta_y_gp}, 1.0, 1.0 + ${correction_amplitude_gp}*tanh((yw_aux_var/${D0_eta} - ${activation_eta_y_gp})*tanh(-${gp_const})))'
+    execute_on = 'INITIAL TIMESTEP_BEGIN'
+  []
+
+  # Final GP-corrected mixing length:
+  # lm_gp = lm_std * factor
+  [mixing_length_gp_aux_ker]
+    type = ParsedAux
+    variable = mixing_length_gp_aux_var
+    coupled_variables = 'mixing_length_std_aux_var gp_factor_aux_var'
+    expression = 'mixing_length_std_aux_var * gp_factor_aux_var'
+    execute_on = 'INITIAL TIMESTEP_BEGIN'
+  []
+
   [eddy_viscosity_aux_ker]
     type = INSFVMixingLengthTurbulentViscosityAux
     variable = eddy_viscosity_aux_var
@@ -263,20 +240,6 @@ velocity_interp_method = 'rc'
     u = u
     v = v
     execute_on = 'TIMESTEP_END FINAL'
-  []
-[]
-
-[FunctorMaterials]
-  [grad_u_mat]
-    type = ADGenericFunctorGradientMaterial
-    prop_names = 'grad_u'
-    prop_values = 'u'
-  []
-
-  [grad_v_mat]
-    type = ADGenericFunctorGradientMaterial
-    prop_names = 'grad_v'
-    prop_values = 'v'
   []
 []
 
@@ -374,7 +337,7 @@ velocity_interp_method = 'rc'
 [VectorPostprocessors]
   [vpp]
     type = ElementValueSampler
-    variable = 'u v pressure mixing_length_gp_aux_var eddy_viscosity_aux_var yw_aux_var dudx_aux_var dudy_aux_var dvdx_aux_var dvdy_aux_var strain_mag_aux_var'
+    variable = 'u v pressure mixing_length_gp_aux_var mixing_length_std_aux_var gp_factor_aux_var eddy_viscosity_aux_var yw_aux_var'
     sort_by = x
   []
 []

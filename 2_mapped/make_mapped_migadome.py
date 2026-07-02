@@ -22,7 +22,7 @@ CG_FILE = os.path.join(
 )
 
 OUT_DIR = os.path.join(PROJECT_ROOT, "2_mapped", "migadome")
-OUT_FILE = os.path.join(OUT_DIR, "mapped_velocity_compare.csv")
+OUT_FILE = os.path.join(OUT_DIR, "mapped.csv")
 SUMMARY_FILE = os.path.join(OUT_DIR, "velocity_error_summary.txt")
 
 # Coordinate tolerance for checking that both files use same cell centers

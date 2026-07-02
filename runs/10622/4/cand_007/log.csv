@@ -1,0 +1,104 @@
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/10622/4/cand_007/tamu_2d_fv_gp.i:39.1:
+The following occurred in the Problem 'MOOSE Problem' of type FEProblem.
+
+Using /homes/aiskhak/projects/GP/runs/10622/4/cand_007/tamu_2d_fv_gp_out_cp/0002 for restart.[39m
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/10622/4/cand_007/tamu_2d_fv_gp.i:143.3:
+The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
+
+AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/10622/4/cand_007/elem_id.csv[39m
+Currently Setting Up
+  Finished Initializing                                                                  [[33m  2.40 s[39m] [[33m  398 MB[39m]
+Finished Setting Up                                                                      [[33m  5.16 s[39m] [[33m  398 MB[39m]
+Framework Information:
+MOOSE Version:           git commit 28092e1647 on 2026-02-01
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Thu Jul  2 12:29:06 2026
+Executable Timestamp:    Mon Jun 29 17:27:18 2026
+
+Input File(s):
+  /homes/aiskhak/projects/GP/runs/10622/4/cand_007/tamu_2d_fv_gp.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Outputs/out
+  # Checkpoints Kept:      2
+  Execute On:              FINAL 
+
+Parallelism:
+  Num Processors:          12
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 376305
+    Local:                 31761
+    Min/Max/Avg:           31012/31761/31358
+  Elems:                   
+    Total:                 93568
+    Local:                 7815
+    Min/Max/Avg:           7570/7827/7797
+  Num Subdomains:          1
+  Num Partitions:          12
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                280704
+  Num Local DOFs:          23445
+  Variables:               { "u" "v" "pressure" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Auxiliary System:
+  Num DOFs:                93568
+  Num Local DOFs:          7815
+  Variables:               "mixing_length_gp_aux_var" 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Steady
+  Solver Mode:             NEWTON 
+  PETSc Preconditioner:    lu mat_superlu_dist_fact: SamePattern  mat_superlu_dist_replacetinypivot: true 
+  MOOSE Preconditioner:    SMP (auto) 
+
+Performing automatic scaling calculation
+
+Currently Executing
+    Computing Automatic Scaling
+      Computing Jacobian
+        Finished Computing Rhie-Chow coefficients                                        [[33m  0.73 s[39m] [[33m  748 MB[39m]
+      Finished Computing Jacobian                                                        [[33m  1.33 s[39m] [[33m  807 MB[39m]
+    Finished Computing Automatic Scaling                                                 [[33m  1.34 s[39m] [[33m  807 MB[39m]
+ 0 Nonlinear |R| = [32m4.696373e-03[39m
+    Computing Jacobian...........................................                        [[33m223.17 s[39m] [[33m  910 MB[39m]
+ 1 Nonlinear |R| = [32m4.239309e-03[39m
+ 2 Nonlinear |R| = [32m3.833434e-03[39m
+ 3 Nonlinear |R| = [32m3.462761e-03[39m
+ 4 Nonlinear |R| = [32m3.073821e-03[39m
+ 5 Nonlinear |R| = [32m2.661771e-03[39m
+ 6 Nonlinear |R| = [32m2.248842e-03[39m
+ 7 Nonlinear |R| = [32m1.834236e-03[39m
+ 8 Nonlinear |R| = [32m1.408826e-03[39m
+ 9 Nonlinear |R| = [32m9.674781e-04[39m
+10 Nonlinear |R| = [32m7.822679e-04[39m
+11 Nonlinear |R| = [32m5.854640e-05[39m
+12 Nonlinear |R| = [32m1.377681e-06[39m
+13 Nonlinear |R| = [32m3.285276e-09[39m
+[32m Solve Converged![39m
+  Finished Solving                                                                       [[33m451.28 s[39m] [[33m 1131 MB[39m]
+
+Outlier Variable Residual Norms:
+  u: [31m2.946915e-09[39m
+Finished Executing                                                                       [[33m454.65 s[39m] [[33m 1132 MB[39m]
+Finished Executing!!!

@@ -1,0 +1,98 @@
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/14000/2/cand_002/tamu_2d_fv_gp.i:39.1:
+The following occurred in the Problem 'MOOSE Problem' of type FEProblem.
+
+Using /homes/aiskhak/projects/GP/runs/14000/2/cand_002/tamu_2d_fv_gp_out_cp/0020 for restart.[39m
+
+[36m
+*** Info ***
+/homes/aiskhak/projects/GP/runs/14000/2/cand_002/tamu_2d_fv_gp.i:143.3:
+The following occurred in the AuxKernel 'mixing_length_gp_aux_ker' of type AuxVarFromCSVFile.
+
+AuxVarFromCSVFile: using cached element map file /homes/aiskhak/projects/GP/runs/14000/2/cand_002/elem_id.csv[39m
+Framework Information:
+MOOSE Version:           git commit 28092e1647 on 2026-02-01
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Thu Jul  2 08:37:16 2026
+Executable Timestamp:    Mon Jun 29 17:27:18 2026
+
+Input File(s):
+  /homes/aiskhak/projects/GP/runs/14000/2/cand_002/tamu_2d_fv_gp.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Outputs/out
+  # Checkpoints Kept:      2
+  Execute On:              FINAL 
+
+Parallelism:
+  Num Processors:          4
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 23901
+    Local:                 6209
+    Min/Max/Avg:           5834/6209/5975
+  Elems:                   
+    Total:                 5848
+    Local:                 1462
+    Min/Max/Avg:           1462/1462/1462
+  Num Subdomains:          1
+  Num Partitions:          4
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                17544
+  Num Local DOFs:          4386
+  Variables:               { "u" "v" "pressure" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Auxiliary System:
+  Num DOFs:                5848
+  Num Local DOFs:          1462
+  Variables:               "mixing_length_gp_aux_var" 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Steady
+  Solver Mode:             NEWTON 
+  PETSc Preconditioner:    lu mat_superlu_dist_fact: SamePattern  mat_superlu_dist_replacetinypivot: true 
+  MOOSE Preconditioner:    SMP (auto) 
+
+Performing automatic scaling calculation
+
+ 0 Nonlinear |R| = [32m1.594514e-01[39m
+ 1 Nonlinear |R| = [32m1.475473e-01[39m
+ 2 Nonlinear |R| = [32m1.322487e-01[39m
+ 3 Nonlinear |R| = [32m1.194786e-01[39m
+ 4 Nonlinear |R| = [32m1.083415e-01[39m
+ 5 Nonlinear |R| = [32m9.795277e-02[39m
+ 6 Nonlinear |R| = [32m8.839810e-02[39m
+ 7 Nonlinear |R| = [32m7.963812e-02[39m
+ 8 Nonlinear |R| = [32m6.005447e-02[39m
+ 9 Nonlinear |R| = [32m4.491586e-02[39m
+10 Nonlinear |R| = [32m2.715803e-02[39m
+11 Nonlinear |R| = [32m1.543350e-02[39m
+12 Nonlinear |R| = [32m1.094601e-02[39m
+13 Nonlinear |R| = [32m3.062947e-03[39m
+14 Nonlinear |R| = [32m3.242473e-04[39m
+15 Nonlinear |R| = [32m1.169034e-05[39m
+16 Nonlinear |R| = [32m4.230142e-08[39m
+[32m Solve Converged![39m
+Currently Executing
+  Finished Solving                                                                       [[33m 21.18 s[39m] [[33m  291 MB[39m]
+
+Outlier Variable Residual Norms:
+  u: [33m3.692720e-08[39m
+Finished Executing                                                                       [[33m 21.67 s[39m] [[33m  291 MB[39m]
+Finished Executing!!!
