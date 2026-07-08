@@ -1,0 +1,6 @@
+{
+  "file-series-version" : "1.0",
+  "files" : [
+    { "name" : "test1_sst_simpleFoam_qs_20000.vtm", "time" : 20000 }
+  ]
+}

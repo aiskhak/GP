@@ -1,0 +1,20 @@
+OpenFOAM simpleFoam incompressible k-omega SST case.
+
+Final accepted field: 20000
+
+Velocity change from 18000 to 20000:
+Ux relative_L2_change   = 7.471681e-03
+Uy relative_L2_change   = 6.182399e-03
+Uvec relative_L2_change = 6.808849e-03
+Umag relative_L2_change = 6.539445e-03
+
+max_abs_dUx             = 9.785800e-04
+max_abs_dUy             = 1.766343e-03
+max_abs_dUmag           = 1.769612e-03
+
+mean_Umag_20000         = 2.115164e-02
+max_Umag_20000          = 5.934967e-02
+
+Conclusion:
+The velocity field is accepted as a practical quasi-steady reference.
+The turbulence variables were still changing more noticeably, so this should not be described as a fully converged turbulence-field reference.

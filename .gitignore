@@ -1,64 +1,11 @@
 *_cp/
 
 # MOOSE checkpoint/restart folders
-*_cp/
 *_out_cp/
 *_gp_out_cp/
-
-# MOOSE checkpoint/restart folders
-*_cp/
-*_out_cp/
-*_gp_out_cp/
-
-# MOOSE checkpoint/restart folders
-*_cp/
-*_out_cp/
-*_gp_out_cp/
-
 # Nek / build / temporary files
 *cp
 *.e
-
-# Large Nek/MOOSE generated data
-*.f000*
-*.re2
-*.ma2
-nek5000
-obj/
-proj*.out
-proj*.err
-build.log
-
-# Large Nek/MOOSE generated data
-*.f000*
-*.re2
-*.ma2
-nek5000
-obj/
-proj*.out
-proj*.err
-build.log
-
-# Large Nek/MOOSE generated data
-*.f000*
-*.re2
-*.ma2
-nek5000
-obj/
-proj*.out
-proj*.err
-build.log
-
-# Large Nek/MOOSE generated data
-*.f000*
-*.re2
-*.ma2
-nek5000
-obj/
-proj*.out
-proj*.err
-build.log
-
 # Large Nek/MOOSE generated data
 *.f000*
 *.re2
@@ -69,6 +16,14 @@ proj*.out
 proj*.err
 build.log
 *.dat
-
 # Keep exact MiGaDome interpolation target points
 !0_data_les/migadome/interpolation/nek/moose_cell_centers.dat
+# --- GP candidate run folders ---
+/runs/**/cand_*/
+# --- MOOSE / generated simulation outputs ---
+*.e-s*
+**/*_cp/
+**/*_out_cp/
+# --- Python temporary files ---
+__pycache__/
+*.pyc

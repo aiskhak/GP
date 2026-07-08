@@ -1,0 +1,46 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d2-20251219 OPENFOAM=2512 version=2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : postProcess -func yPlus -latestTime
+Date   : Jul 07 2026
+Time   : 16:12:36
+Host   : warlock34
+PID    : 1128715
+I/O    : uncollated
+Case   : /homes/aiskhak/projects/GP/openfoam_test/test1_rans_block_graded_simpleFoam
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 20000
+
+Time = 20000
+
+Reading fields:
+
+Executing functionObjects
+--> FOAM Warning : 
+    From virtual bool Foam::functionObjects::yPlus::execute()
+    in file yPlus/yPlus.C at line 173
+    Unable to find turbulence model in the database: yPlus will not be calculated
+--> FOAM Warning : 
+    From virtual bool Foam::functionObjects::yPlus::execute()
+    in file yPlus/yPlus.C at line 179
+    Please try to use the solver option -postProcess, e.g.: <solver> -postProcess -func yPlus
+yPlus yPlus write:
+    writing field yPlus
+    patch walls y+ : min = 0, max = 0, average = 0
+
+End
+

@@ -641,7 +641,8 @@
     "lambda_raw": 1e-06,
     "kappa": 0.41,
     "kappa_cap": 0.09,
-    "delta0": 1.0,
+    "ml_delta": 0.5,
+    "D0_eta": 1.0,
     "activation_eta_y": 0.5,
     "correction_amplitude": 0.8,
     "max_tree_size": 24,
@@ -660,11 +661,12 @@
   },
   "closure_mapping": {
     "input_variables": {
-      "eta_y": "yw/DELTA0"
+      "eta_y": "yw/D0_ETA"
     },
-    "h_wall": "read but disabled in this first eta_y-only rediscovery run",
-    "DELTA0": 1.0,
-    "lm_std": "min(KAPPA*yw, KAPPA_CAP*DELTA0)",
+    "h_wall": "read but disabled in this eta_y-only rediscovery run",
+    "D0_ETA": 1.0,
+    "ML_DELTA": 0.5,
+    "lm_std": "min(KAPPA*yw, KAPPA_CAP*ML_DELTA)",
     "raw": "GP expression evaluated using eta_y only",
     "factor": "factor = 1 for eta_y <= ACTIVATION_ETA_Y; factor = 1 + CORRECTION_AMPLITUDE*tanh((eta_y - ACTIVATION_ETA_Y)*raw) for eta_y > ACTIVATION_ETA_Y",
     "lm": "lm_std*factor",

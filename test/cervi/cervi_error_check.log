@@ -1,0 +1,49 @@
+TEST_ROOT:    /homes/aiskhak/projects/GP/test/cervi
+MAPPED_FILE:  /homes/aiskhak/projects/GP/2_mapped/cervi/03_ml_dx025_delta0p1/mapped.csv
+
+Mapped columns:
+['x_cg', 'y_cg', 'u_dns', 'v_dns', 'yw', 'nut', 'u_baseline', 'v_baseline', 'map_dist']
+Mapped points: 1856
+
+===== Candidate: cervi =====
+VPP: /homes/aiskhak/projects/GP/test/cervi/cervi_ml_dx025_gp_vpp_0069.csv
+ELV: /homes/aiskhak/projects/GP/test/cervi/cervi_ml_dx025_gp_elv_0069.csv
+VPP->ELV dist min/mean/max = 0.000000e+00 0.000000e+00 0.000000e+00
+alignment mode = nearest_neighbor
+n_points       = 1856
+x min/max      = 1.250000e-02 1.387500e+00
+y min/max      = -3.875000e-01 9.875000e-01
+yw min/max     = 1.250000e-02 4.875000e-01
+lm_std min/max = 5.125000e-03 9.000000e-03
+lm_gp min/max  = 5.125000e-03 1.620000e-02
+factor min/max = 1.000000e+00 1.800000e+00
+nut min/max    = 7.417621e-07 1.292124e-04
+map dist max   = 4.021156e-13
+map dist mean  = 3.422591e-14
+
+Baseline MSE against OpenFOAM:
+MSE_u_base       = 2.523579594403e-05
+MSE_v_base       = 2.685662012404e-05
+MSE_uv_base      = 5.209241606807e-05
+baseline rel MSE = 5.954205606895e-02
+
+GP MSE against OpenFOAM:
+MSE_u_gp         = 2.492233028197e-05
+MSE_v_gp         = 2.820238189817e-05
+MSE_uv_gp        = 5.312471218014e-05
+GP rel MSE       = 6.072197893727e-02
+norm GP/base     = 1.019816629559e+00
+detail file      = /homes/aiskhak/projects/GP/test/cervi/cervi_hf_baseline_gp_fields.csv
+region file      = /homes/aiskhak/projects/GP/test/cervi/cervi_region_errors.csv
+
+Region error summary:
+  region          n        base_mse        gp_mse          norm      gp_rel_mse
+  all             1856   5.209242e-05   5.312471e-05 1.019817e+00 6.072198e-02
+  main_tank       1600   5.414938e-05   5.534296e-05 1.022042e+00 9.187751e-02
+  inlet_duct       128   4.970009e-05   4.945018e-05 9.949716e-01 1.955970e-02
+  outlet_duct      128   2.877266e-05   2.907118e-05 1.010375e+00 1.106121e-02
+  lower_tank       800   4.147676e-05   4.299586e-05 1.036625e+00 5.251739e-02
+  upper_tank       800   6.682200e-05   6.769005e-05 1.012990e+00 1.753564e-01
+IMPROVEMENT  = no
+
+Saved summary: /homes/aiskhak/projects/GP/test/cervi/cervi_candidate_error_summary.csv

@@ -1,47 +1,44 @@
 {
   "seed": 200,
-  "best_train_mean_normalized_fitness": 0.5684475946187867,
-  "best_test_mean_normalized_fitness": 0.43466819835650017,
+  "best_train_mean_normalized_fitness": 0.47392313685959014,
+  "best_test_mean_normalized_fitness": 0.3862441937385931,
   "best_cand_id": 0,
   "top_cand_ids": [
     0,
-    4,
-    5,
+    8,
     7
   ],
   "top_expressions": {
-    "0": "protected_tanh(neg(0.08485482588769211))",
-    "4": "-0.13896438741656858",
-    "5": "protected_tanh(mul(eta_y, C_m05))",
-    "7": "protected_tanh(C_m1)"
+    "0": "eta_y",
+    "8": "protected_div(-0.2700668217426976, eta_y)",
+    "7": "C_m05"
   },
   "top_train_mean_normalized_fitness": {
-    "0": 0.5684475946187867,
-    "4": 0.571688319619977,
-    "5": 0.9682554350331127,
-    "7": 1.0031031493382336
+    "0": 0.47392313685959014,
+    "8": 1.2907312183678334,
+    "7": 2.132446773602176
   },
   "top_test_mean_normalized_fitness": {
-    "0": 0.43466819835650017,
-    "4": 0.43993546735599415,
-    "5": 0.9488162093649961,
-    "7": 0.9964779899541416
+    "0": 0.3862441937385931,
+    "8": 1.3502518222387205,
+    "7": 2.389694312088161
   },
-  "tree_size": 3,
-  "tree_height": 2,
-  "best_expression": "protected_tanh(neg(0.08485482588769211))",
+  "tree_size": 1,
+  "tree_height": 0,
+  "best_expression": "eta_y",
   "input_variables": [
     "eta_y"
   ],
   "closure_definition": {
-    "eta_y": "yw/DELTA0",
-    "lm_std": "min(KAPPA*yw, KAPPA_CAP*DELTA0)",
+    "eta_y": "yw/D0_ETA",
+    "lm_std": "min(KAPPA*yw, KAPPA_CAP*ML_DELTA)",
     "raw": "GP expression evaluated using eta_y only",
     "factor": "factor = 1 for eta_y <= ACTIVATION_ETA_Y; factor = 1 + CORRECTION_AMPLITUDE*tanh((eta_y - ACTIVATION_ETA_Y)*raw) for eta_y > ACTIVATION_ETA_Y",
     "lm": "lm_std*factor",
     "KAPPA": 0.41,
     "KAPPA_CAP": 0.09,
-    "DELTA0": 1.0,
+    "ML_DELTA": 0.5,
+    "D0_ETA": 1.0,
     "ACTIVATION_ETA_Y": 0.5,
     "CORRECTION_AMPLITUDE": 0.8
   },

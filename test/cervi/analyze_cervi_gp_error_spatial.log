@@ -1,0 +1,59 @@
+
+===== Signed GP impact =====
+err2_gp_minus_baseline < 0 means GP improves locally
+err2_gp_minus_baseline > 0 means GP worsens locally
+
+     region    n     base_mse       gp_mse        ratio    mean_delta  improved_frac  worsened_frac  sum_improvement  sum_worsening
+        all 1856 5.209242e-05 5.312471e-05 1.019817e+00  1.032296e-06   5.080819e-01   4.919181e-01    -6.430059e-03   8.346000e-03
+  main_tank 1600 5.414938e-05 5.534296e-05 1.022042e+00  1.193574e-06   4.912500e-01   5.087500e-01    -6.182543e-03   8.092262e-03
+ inlet_duct  128 4.970009e-05 4.945018e-05 9.949716e-01 -2.499097e-07   6.328125e-01   3.671875e-01    -4.167249e-05   9.684042e-06
+outlet_duct  128 2.877266e-05 2.907118e-05 1.010375e+00  2.985234e-07   5.937500e-01   4.062500e-01    -2.058434e-04   2.440544e-04
+ lower_tank  800 4.147676e-05 4.299586e-05 1.036625e+00  1.519104e-06   4.875000e-01   5.125000e-01    -2.196335e-03   3.411618e-03
+ upper_tank  800 6.682200e-05 6.769005e-05 1.012990e+00  8.680449e-07   4.950000e-01   5.050000e-01    -3.986208e-03   4.680644e-03
+
+===== Largest local worsenings =====
+x=0.98750, y=0.71250, derr=6.539698e-05, err_base=3.862402e-04, err_gp=4.516372e-04, Uhf=1.032119e-02, Ub=2.521359e-02, Ugp=2.653781e-02, factor=1.0000, yw=0.0125
+x=0.28750, y=0.13750, derr=6.057842e-05, err_base=4.980250e-05, err_gp=1.103809e-04, Uhf=4.211941e-03, Ub=3.737945e-03, Ugp=7.083251e-03, factor=1.7047, yw=0.1375
+x=0.98750, y=0.76250, derr=5.568479e-05, err_base=1.464443e-04, err_gp=2.021291e-04, Uhf=1.175985e-02, Ub=2.557573e-03, Ugp=3.981862e-03, factor=1.0000, yw=0.0125
+x=0.28750, y=0.16250, derr=5.552530e-05, err_base=2.422479e-05, err_gp=7.975010e-05, Uhf=3.811411e-03, Ub=2.595672e-03, Ugp=6.259013e-03, factor=1.7755, yw=0.1625
+x=0.28750, y=0.11250, derr=5.296060e-05, err_base=6.933166e-05, err_gp=1.222923e-04, Uhf=4.162618e-03, Ub=4.873323e-03, Ugp=7.581224e-03, factor=1.5367, yw=0.1125
+x=0.98750, y=0.73750, derr=4.973521e-05, err_base=2.391198e-04, err_gp=2.888550e-04, Uhf=7.052715e-03, Ub=1.115025e-02, Ugp=1.249039e-02, factor=1.0000, yw=0.0125
+x=0.31250, y=0.21250, derr=4.569527e-05, err_base=1.492079e-05, err_gp=6.061606e-05, Uhf=4.730698e-03, Ub=8.574231e-03, Ugp=1.245640e-02, factor=1.7993, yw=0.2140
+x=0.31250, y=0.23750, derr=4.355896e-05, err_base=7.515059e-06, err_gp=5.107402e-05, Uhf=3.873118e-03, Ub=6.424779e-03, Ugp=1.066934e-02, factor=1.7999, yw=0.2388
+x=0.33750, y=0.28750, derr=4.077306e-05, err_base=1.157328e-05, err_gp=5.234634e-05, Uhf=7.978671e-03, Ub=1.137492e-02, Ugp=1.514600e-02, factor=1.8000, yw=0.2918
+x=0.76250, y=0.48750, derr=4.072160e-05, err_base=1.806918e-04, err_gp=2.214134e-04, Uhf=5.740716e-02, Ub=4.439384e-02, Ugp=4.288084e-02, factor=1.7999, yw=0.2375
+x=0.31250, y=0.18750, derr=4.052305e-05, err_base=1.977254e-05, err_gp=6.029558e-05, Uhf=6.611106e-03, Ub=1.105502e-02, Ugp=1.437512e-02, factor=1.7957, yw=0.1892
+x=0.73750, y=0.46250, derr=3.992545e-05, err_base=1.662103e-04, err_gp=2.061357e-04, Uhf=5.777169e-02, Ub=4.517878e-02, Ugp=4.368128e-02, factor=1.8000, yw=0.2625
+x=0.98750, y=0.68750, derr=3.963920e-05, err_base=1.320179e-04, err_gp=1.716571e-04, Uhf=3.500067e-02, Ub=4.190690e-02, Ugp=4.273682e-02, factor=1.0000, yw=0.0280
+x=0.28750, y=0.18750, derr=3.958356e-05, err_base=5.044135e-06, err_gp=4.462769e-05, Uhf=3.369151e-03, Ub=2.080710e-03, Ugp=5.334109e-03, factor=1.7952, yw=0.1875
+x=0.81250, y=0.51250, derr=3.881607e-05, err_base=2.143357e-04, err_gp=2.531518e-04, Uhf=5.627150e-02, Ub=4.213030e-02, Ugp=4.072651e-02, factor=1.7957, yw=0.1892
+
+===== Largest local improvements =====
+x=0.16250, y=0.98750, derr=-3.514415e-05, err_base=1.264555e-04, err_gp=9.131131e-05, Uhf=1.021730e-02, Ub=1.586610e-03, Ugp=1.498746e-03, factor=1.0000, yw=0.0125
+x=0.51250, y=0.93750, derr=-3.138977e-05, err_base=1.565046e-04, err_gp=1.251148e-04, Uhf=1.397943e-02, Ub=2.646146e-02, Ugp=2.510471e-02, factor=1.0859, yw=0.0625
+x=0.53750, y=0.93750, derr=-3.107847e-05, err_base=1.384385e-04, err_gp=1.073600e-04, Uhf=1.406296e-02, Ub=2.576506e-02, Ugp=2.430949e-02, factor=1.0859, yw=0.0625
+x=0.48750, y=0.93750, derr=-3.094403e-05, err_base=1.733886e-04, err_gp=1.424445e-04, Uhf=1.385007e-02, Ub=2.701013e-02, Ugp=2.576013e-02, factor=1.0859, yw=0.0625
+x=0.56250, y=0.93750, derr=-2.995928e-05, err_base=1.182017e-04, err_gp=8.824241e-05, Uhf=1.417101e-02, Ub=2.492920e-02, Ugp=2.337447e-02, factor=1.0859, yw=0.0625
+x=0.46250, y=0.93750, derr=-2.856010e-05, err_base=1.851882e-04, err_gp=1.566281e-04, Uhf=1.373155e-02, Ub=2.733985e-02, Ugp=2.624129e-02, factor=1.0859, yw=0.0625
+x=0.58750, y=0.93750, derr=-2.808160e-05, err_base=9.827744e-05, err_gp=7.019584e-05, Uhf=1.423093e-02, Ub=2.396003e-02, Ugp=2.231248e-02, factor=1.0859, yw=0.0625
+x=0.48750, y=0.91250, derr=-2.807957e-05, err_base=1.570325e-04, err_gp=1.289530e-04, Uhf=1.157275e-02, Ub=2.406472e-02, Ugp=2.284456e-02, factor=1.3017, yw=0.0875
+x=0.46250, y=0.91250, derr=-2.794366e-05, err_base=1.700197e-04, err_gp=1.420760e-04, Uhf=1.153467e-02, Ub=2.456451e-02, Ugp=2.342163e-02, factor=1.3017, yw=0.0875
+x=0.56250, y=0.06250, derr=-2.768954e-05, err_base=1.602195e-04, err_gp=1.325300e-04, Uhf=1.839182e-02, Ub=6.704596e-03, Ugp=7.385457e-03, factor=1.0794, yw=0.0625
+x=0.51250, y=0.91250, derr=-2.738265e-05, err_base=1.424582e-04, err_gp=1.150755e-04, Uhf=1.160380e-02, Ub=2.345013e-02, Ugp=2.217207e-02, factor=1.3017, yw=0.0875
+x=0.56250, y=0.96250, derr=-2.734379e-05, err_base=1.062289e-04, err_gp=7.888508e-05, Uhf=1.685154e-02, Ub=2.712446e-02, Ugp=2.567153e-02, factor=1.0000, yw=0.0375
+x=0.43750, y=0.91250, derr=-2.703445e-05, err_base=1.800334e-04, err_gp=1.529989e-04, Uhf=1.148112e-02, Ub=2.489877e-02, Ugp=2.384450e-02, factor=1.3017, yw=0.0875
+x=0.58750, y=0.11250, derr=-2.686322e-05, err_base=8.866284e-05, err_gp=6.179962e-05, Uhf=1.750275e-02, Ub=8.245257e-03, Ugp=9.648905e-03, factor=1.5367, yw=0.1125
+x=0.53750, y=0.91250, derr=-2.663194e-05, err_base=1.271797e-04, err_gp=1.005478e-04, Uhf=1.161881e-02, Ub=2.273105e-02, Ugp=2.137605e-02, factor=1.3017, yw=0.0875
+Wrote figs_error_diagnostics/err2_gp_minus_baseline.png
+Wrote figs_error_diagnostics/err2_baseline.png
+Wrote figs_error_diagnostics/err2_gp.png
+Wrote figs_error_diagnostics/gp_factor.png
+Wrote figs_error_diagnostics/lm_std.png
+Wrote figs_error_diagnostics/lm_gp.png
+Wrote figs_error_diagnostics/umag_hf.png
+Wrote figs_error_diagnostics/umag_baseline_minus_hf.png
+Wrote figs_error_diagnostics/umag_gp_minus_hf.png
+Wrote figs_error_diagnostics/gp_velocity_change_over_error_delta.png
+
+Saved summary: figs_error_diagnostics/regional_signed_gp_impact.csv
+Figures are in: figs_error_diagnostics

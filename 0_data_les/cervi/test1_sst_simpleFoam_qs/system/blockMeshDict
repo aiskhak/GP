@@ -1,0 +1,296 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+/*--------------------------------------------------------------------*\
+|  Geometry parameters – edit these six lines to reshape the ducts     |
+\*--------------------------------------------------------------------*/
+
+cavitySize          1.0;    // square reservoir edge
+
+inletPosMinX        0.30;   // inlet left  edge  (x-coordinate, 0 ≤ … ≤ cavitySize)
+inletWidth          0.20;   // inlet internal width  (Δx   , ≤ cavitySize)
+inletLength         0.40;   // inlet depth           ( Δy  , > 0  ⇒ extends downwards)
+
+outletPosMinY       0.50;   // outlet lower edge (y-coordinate, 0 ≤ … ≤ cavitySize)
+outletWidth         0.20;   // outlet internal height (Δy , ≤ cavitySize)
+outletLength        0.40;   // outlet extrusion length in +x direction
+
+/*--------------------------------------------------------------------*\
+|  Meshing control                                                    |
+|  ------------------------------------------------------------------ |
+|  Provide either a target cellSize  [m]  OR a cellsPerUnit density.   |
+|  Only one of the following two lines should be uncommented.          |
+\*--------------------------------------------------------------------*/
+
+cellSize            0.005;    // approximate edge length of a cell
+cellsPerUnit      20;      // ≙ 1/cellSize  (alternative)
+
+/*--------------------------------------------------------------------*\
+|  Derived locations (do not touch)                                    |
+\*--------------------------------------------------------------------*/
+
+inletPosMaxX       #eval "$inletPosMinX + $inletWidth";
+inletPosMinY       #eval "-$inletLength";
+
+outletPosMaxY      #eval "$outletPosMinY + $outletWidth";
+outletPosMinX      #eval "$cavitySize";
+outletPosMaxX      #eval "$cavitySize + $outletLength";
+
+/*--------------------------------------------------------------------*\
+|  Coordinate lines (five in x, five in y, two in z)                   |
+\*--------------------------------------------------------------------*/
+
+x0                 0;
+x1                 #eval "$inletPosMinX";
+x2                 #eval "$inletPosMaxX";
+x3                 #eval "$cavitySize";
+x4                 #eval "$outletPosMaxX";
+
+y0                 #eval "$inletPosMinY";
+y1                 0;
+y2                 #eval "$outletPosMinY";
+y3                 #eval "$outletPosMaxY";
+y4                 #eval "$cavitySize";
+
+z0                  0;
+z1                  0.1;
+
+/*--------------------------------------------------------------------*\
+|  Derived cell numbers (automatically enforce uniform Δx = Δy = Δz)   |
+\*--------------------------------------------------------------------*/
+
+cellsPerUnit       #calc "1.0/$cellSize";
+
+/*---  along x -------------------------------------------------------*/
+
+nx01   #calc "max(1,int( round(($x1 - $x0)*$cellsPerUnit) ))";   // x0–x1
+nx12   #calc "max(1,int( round(($x2 - $x1)*$cellsPerUnit) ))";   // x1–x2
+nx23   #calc "max(1,int( round(($x3 - $x2)*$cellsPerUnit) ))";   // x2–x3
+nx34   #calc "max(1,int( round(($x4 - $x3)*$cellsPerUnit) ))";   // x3–x4
+
+/*---  along y -------------------------------------------------------*/
+
+ny01   #calc "max(1,int( round(($y1 - $y0)*$cellsPerUnit) ))";   // y0–y1
+ny12   #calc "max(1,int( round(($y2 - $y1)*$cellsPerUnit) ))";   // y1–y2
+ny23   #calc "max(1,int( round(($y3 - $y2)*$cellsPerUnit) ))";   // y2–y3
+ny34   #calc "max(1,int( round(($y4 - $y3)*$cellsPerUnit) ))";   // y3–y4
+
+/*---  along z -------------------------------------------------------*/
+
+nz     1;
+
+/*--------------------------------------------------------------------*\
+|  Vertices (row-wise: y0→y4, x0→x4, then duplicate at z = z1)         |
+\*--------------------------------------------------------------------*/
+
+vertices
+(
+    #eval "vector($x0, $y0, $z0)" #eval "vector($x1, $y0, $z0)" #eval "vector($x2, $y0, $z0)" #eval "vector($x3, $y0, $z0)" #eval "vector($x4, $y0, $z0)"
+    #eval "vector($x0, $y1, $z0)" #eval "vector($x1, $y1, $z0)" #eval "vector($x2, $y1, $z0)" #eval "vector($x3, $y1, $z0)" #eval "vector($x4, $y1, $z0)"
+    #eval "vector($x0, $y2, $z0)" #eval "vector($x1, $y2, $z0)" #eval "vector($x2, $y2, $z0)" #eval "vector($x3, $y2, $z0)" #eval "vector($x4, $y2, $z0)"
+    #eval "vector($x0, $y3, $z0)" #eval "vector($x1, $y3, $z0)" #eval "vector($x2, $y3, $z0)" #eval "vector($x3, $y3, $z0)" #eval "vector($x4, $y3, $z0)"
+    #eval "vector($x0, $y4, $z0)" #eval "vector($x1, $y4, $z0)" #eval "vector($x2, $y4, $z0)" #eval "vector($x3, $y4, $z0)" #eval "vector($x4, $y4, $z0)"
+
+    #eval "vector($x0, $y0, $z1)" #eval "vector($x1, $y0, $z1)" #eval "vector($x2, $y0, $z1)" #eval "vector($x3, $y0, $z1)" #eval "vector($x4, $y0, $z1)"
+    #eval "vector($x0, $y1, $z1)" #eval "vector($x1, $y1, $z1)" #eval "vector($x2, $y1, $z1)" #eval "vector($x3, $y1, $z1)" #eval "vector($x4, $y1, $z1)"
+    #eval "vector($x0, $y2, $z1)" #eval "vector($x1, $y2, $z1)" #eval "vector($x2, $y2, $z1)" #eval "vector($x3, $y2, $z1)" #eval "vector($x4, $y2, $z1)"
+    #eval "vector($x0, $y3, $z1)" #eval "vector($x1, $y3, $z1)" #eval "vector($x2, $y3, $z1)" #eval "vector($x3, $y3, $z1)" #eval "vector($x4, $y3, $z1)"
+    #eval "vector($x0, $y4, $z1)" #eval "vector($x1, $y4, $z1)" #eval "vector($x2, $y4, $z1)" #eval "vector($x3, $y4, $z1)" #eval "vector($x4, $y4, $z1)"
+);
+
+/*--------------------------------------------------------------------*\
+|  Blocks  – cell numbers now driven by the nx…/ny…/nz parameters      |
+\*--------------------------------------------------------------------*/
+
+blocks
+(
+    // Consistent grading rule:
+    // x grading is identical within each vertical column.
+    // y grading is identical within each horizontal row.
+    //
+    // x columns:
+    //   x0-x1: refine near left wall
+    //   x1-x2: refine near both inlet side walls
+    //   x2-x3: refine near right wall
+    //
+    // y rows:
+    //   y1-y2: refine near bottom wall
+    //   y2-y3: refine near both outlet duct walls
+    //   y3-y4: refine near top wall
+
+    // y1-y2
+    hex (5 6 11 10 30 31 36 35)   (#eval "$nx01" #eval "$ny12" #eval "$nz")
+    simpleGrading (6 6 1)
+
+    hex (6 7 12 11 31 32 37 36)   (#eval "$nx12" #eval "$ny12" #eval "$nz")
+    simpleGrading
+    (
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        6
+        1
+    )
+
+    hex (7 8 13 12 32 33 38 37)   (#eval "$nx23" #eval "$ny12" #eval "$nz")
+    simpleGrading (0.1666667 6 1)
+
+    // y2-y3
+    hex (10 11 16 15 35 36 41 40) (#eval "$nx01" #eval "$ny23" #eval "$nz")
+    simpleGrading
+    (
+        6
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        1
+    )
+
+    hex (11 12 17 16 36 37 42 41) (#eval "$nx12" #eval "$ny23" #eval "$nz")
+    simpleGrading
+    (
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        1
+    )
+
+    hex (12 13 18 17 37 38 43 42) (#eval "$nx23" #eval "$ny23" #eval "$nz")
+    simpleGrading
+    (
+        0.1666667
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        1
+    )
+
+    // y3-y4
+    hex (15 16 21 20 40 41 46 45) (#eval "$nx01" #eval "$ny34" #eval "$nz")
+    simpleGrading (6 0.1666667 1)
+
+    hex (16 17 22 21 41 42 47 46) (#eval "$nx12" #eval "$ny34" #eval "$nz")
+    simpleGrading
+    (
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        0.1666667
+        1
+    )
+
+    hex (17 18 23 22 42 43 48 47) (#eval "$nx23" #eval "$ny34" #eval "$nz")
+    simpleGrading (0.1666667 0.1666667 1)
+
+    // outlet block, must match y2-y3 row grading
+    hex (13 14 19 18 38 39 44 43) (#eval "$nx34" #eval "$ny23" #eval "$nz")
+    simpleGrading
+    (
+        1
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        1
+    )
+
+    // inlet block, must match x1-x2 column grading
+    hex (1 2 7 6 26 27 32 31)     (#eval "$nx12" #eval "$ny01" #eval "$nz")
+    simpleGrading
+    (
+        (
+            (0.25 0.45 6)
+            (0.50 0.10 1)
+            (0.25 0.45 0.1666667)
+        )
+        1
+        1
+    )
+);
+
+/*--------------------------------------------------------------------*\
+|  Boundary patches – unchanged                                        |
+\*--------------------------------------------------------------------*/
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (1 2 27 26)
+        );
+    }
+
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (14 19 44 39)
+        );
+    }
+
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (5 6 11 10)   (30 31 36 35)
+            (6 7 12 11)   (31 32 37 36)
+            (7 8 13 12)   (32 33 38 37)
+            (10 11 16 15) (35 36 41 40)
+            (11 12 17 16) (36 37 42 41)
+            (12 13 18 17) (37 38 43 42)
+            (15 16 21 20) (40 41 46 45)
+            (16 17 22 21) (41 42 47 46)
+            (17 18 23 22) (42 43 48 47)
+            (13 14 19 18) (38 39 44 43)
+            (1 2 7 6)     (26 27 32 31)
+        );
+    }
+);
+
+defaultPatch
+{
+    type wall;
+    name walls;
+}
+
+mergePatchPairs ();
+
+// ************************************************************************* //

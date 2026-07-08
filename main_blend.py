@@ -103,7 +103,14 @@ LAMBDA_SIZE = 1.0e-5
 # Standard Escudier mixing-length constants
 KAPPA = 0.41
 KAPPA_CAP = 0.09
-DELTA0 = 1.0
+
+# Mixing-length model outer scale:
+# scaled inlet diameter = 1, radius = 0.5
+ML_DELTA = 0.5
+
+# GP nondimensionalization scale:
+# eta_y = yw / D0_ETA
+D0_ETA = 1.0
 
 # New correction framework:
 # lm = lm_std * factor
@@ -189,7 +196,8 @@ def write_metadata_file(case_data, train_case_data, test_case_data):
             "lambda_raw": LAMBDA_RAW,
             "kappa": KAPPA,
             "kappa_cap": KAPPA_CAP,
-            "delta0": DELTA0,
+            "ml_delta": ML_DELTA,
+            "D0_eta": D0_ETA,
             "activation_eta_y": ACTIVATION_ETA_Y,
             "correction_amplitude": CORRECTION_AMPLITUDE,
             "max_tree_size": 24,
@@ -205,11 +213,12 @@ def write_metadata_file(case_data, train_case_data, test_case_data):
         },
         "closure_mapping": {
             "input_variables": {
-                "eta_y": "yw/DELTA0",
+                "eta_y": "yw/D0_ETA",
             },
-            "h_wall": "read but disabled in this first eta_y-only rediscovery run",
-            "DELTA0": DELTA0,
-            "lm_std": "min(KAPPA*yw, KAPPA_CAP*DELTA0)",
+            "h_wall": "read but disabled in this eta_y-only rediscovery run",
+            "D0_ETA": D0_ETA,
+            "ML_DELTA": ML_DELTA,
+            "lm_std": "min(KAPPA*yw, KAPPA_CAP*ML_DELTA)",
             "raw": "GP expression evaluated using eta_y only",
             "factor": (
                 "factor = 1 for eta_y <= ACTIVATION_ETA_Y; "
@@ -434,7 +443,8 @@ def build_lm_from_yw_raw(raw, yw, eta_y):
     Build candidate mixing length as a bounded multiplicative correction
     to the standard Escudier mixing length.
 
-    lm_std = min(KAPPA*yw, KAPPA_CAP*DELTA0)
+    lm_std = min(KAPPA*yw, KAPPA_CAP*ML_DELTA)
+    eta_y = yw/D0_ETA
 
     For eta_y <= ACTIVATION_ETA_Y:
         factor = 1
@@ -454,7 +464,7 @@ def build_lm_from_yw_raw(raw, yw, eta_y):
     if np.any(~np.isfinite(raw)):
         raise ValueError("Non-finite raw closure values")
 
-    lm_std = np.minimum(KAPPA * yw, KAPPA_CAP * DELTA0)
+    lm_std = np.minimum(KAPPA * yw, KAPPA_CAP * ML_DELTA)
 
     factor = np.ones_like(yw, dtype=np.float64)
 
@@ -1178,18 +1188,19 @@ def main():
         # Grid-size dependence is disabled in this run, so h_wall is not used.
         h_wall = 0.0
 
-        # For the new correction framework, eta_y is nondimensionalized
-        # by the physical reference scale delta0, not by max(yw).
-        L_outer = DELTA0
+        # For the GP correction framework, eta_y is nondimensionalized
+        # by the inlet diameter/reference length, not by max(yw).
+        L_outer = D0_ETA
 
-        eta_y = yw / DELTA0
+        eta_y = yw / D0_ETA
 
         # Grid-size dependence is intentionally disabled in this first run.
         eta_h_scalar = 0.0
         eta_h = np.zeros_like(yw, dtype=np.float64)
 
         print(f"h_wall = {h_wall:.12e}", flush=True)
-        print(f"DELTA0 = {DELTA0:.12e}", flush=True)
+        print(f"ML_DELTA = {ML_DELTA:.12e}", flush=True)
+        print(f"D0_ETA   = {D0_ETA:.12e}", flush=True)
         print(f"eta_h = {eta_h_scalar:.12e}  # disabled", flush=True)
         print(f"eta_y min/max = {eta_y.min():.12e}, {eta_y.max():.12e}", flush=True)
 
@@ -1534,8 +1545,8 @@ def main():
         "best_expression": str(best),
         "input_variables": ["eta_y"],
         "closure_definition": {
-            "eta_y": "yw/DELTA0",
-            "lm_std": "min(KAPPA*yw, KAPPA_CAP*DELTA0)",
+            "eta_y": "yw/D0_ETA",
+            "lm_std": "min(KAPPA*yw, KAPPA_CAP*ML_DELTA)",
             "raw": "GP expression evaluated using eta_y only",
             "factor": (
                 "factor = 1 for eta_y <= ACTIVATION_ETA_Y; "
@@ -1545,7 +1556,8 @@ def main():
             "lm": "lm_std*factor",
             "KAPPA": KAPPA,
             "KAPPA_CAP": KAPPA_CAP,
-            "DELTA0": DELTA0,
+            "ML_DELTA": ML_DELTA,
+            "D0_ETA": D0_ETA,
             "ACTIVATION_ETA_Y": ACTIVATION_ETA_Y,
             "CORRECTION_AMPLITUDE": CORRECTION_AMPLITUDE,
         },
